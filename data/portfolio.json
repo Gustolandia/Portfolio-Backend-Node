@@ -1,0 +1,1605 @@
+{
+  "pages": {
+    "home": {
+      "title": "Full Stack Engineer | Software Architect | Data Analyst",
+      "description": "Welcome to my professional website! I am a seasoned Full Stack Developer and Software Architect with experience at top-tier companies like Datto, TikTok, and Accenture. My work spans from transitioning Datto's Portal website to React, enhancing TikTok's content accuracy with advanced analytics, to streamlining tasks at Accenture with custom Chrome extensions. Academically, I hold a Bachelor's in Physics from Universidade do Porto, graduating third out of 50 students, and specialized in Nuclear Fusion Science at the University of Stuttgart and Université de Lorraine, excelling in advanced plasma physics and research. Transitioning to software development, I topped my class in a FullStack Bootcamp at EPICODE, earned a Higher Diploma in Computing with top honors from Atlantic Technological University, and achieved an MSc in Software Design with Cloud Native Computing from the Technological University of the Shannon, mastering microservices architecture and container deployment. My projects showcase skills in cloud storage, microservices, real-time data, and responsive web design. Feel free to explore my work and contact me here or on LinkedIn.",
+      "imageUrl": "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/239368700_6669288189763963_3250199883287898218_n%20(1).jpg?updatedAt=1717595252143"
+    },
+    "experience": {
+      "title": "Professional Experience",
+      "description": "With a strong foundation in Full Stack Development and Software Architecture, I have contributed to top-tier companies such as Datto, TikTok, and Accenture. My work has involved developing innovative software solutions, enhancing user interfaces, and optimizing system performance. At Datto, I led the transition to React for the Portal website and crafted reusable components for a DattoUI Storybook. At TikTok, I significantly improved content accuracy and integrity by implementing advanced data analytics and optimizing system performance. At Accenture, I designed and deployed Chrome extensions and JavaScript automation scripts to streamline content verification tasks. Explore my professional journey to see how my skills and contributions have consistently exceeded expectations and delivered high-quality results.",
+      "imageUrl": "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/238765395_6659303810762401_5497579976259752615_n.jpg?updatedAt=1718246865269"
+    },
+    "education": {
+      "title": "Higher Education",
+      "description": "My academic journey began with a Bachelor's degree in Physics from Universidade do Porto, where I laid a solid foundation in classical mechanics, electromagnetism, and quantum mechanics, graduating with the third best grade out of 50 students. I then pursued Engineering Physics with a focus on Nuclear Fusion Science at the University of Stuttgart and Universite de Lorraine, where I excelled in advanced plasma physics, numerical analysis, and cutting-edge research. Transitioning into software development, I completed a Bootcamp in FullStack Development at EPICODE, followed by a Higher Diploma in Science of Computing from Atlantic Technological University, both with top honors. Most recently, I achieved an MSc in Software Design with Cloud Native Computing from the Technological University of the Shannon, where I mastered microservices architecture, container deployment, and full-stack development, culminating in a successful work placement at Datto. This diverse academic background has equipped me with a unique blend of physics expertise and software development skills, driving my continued success in both fields.",
+      "imageUrl": "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/2.jpg?updatedAt=1718246271947"
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Explore my projects that span across various domains and technologies. My portfolio includes a range of innovative applications and comprehensive studies, demonstrating my proficiency in both front-end and back-end development, as well as data analysis and scientific research. Key areas covered include cloud storage solutions, microservices architecture, real-time data handling, user authentication, and responsive web design using technologies such as React, Spring Boot, Vue.js, Node.js, and PHP. Additionally, I have experience in advanced data analytics, visualization techniques, and the implementation of Agile methodologies in software development. These projects highlight my ability to integrate various tools and frameworks, manage complex systems, and deliver high-quality software solutions.",
+      "imageUrl": "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/348941758_747924850451072_8667307110220728782_n.jpg?updatedAt=1718246272102"
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Feel free to contact me here or on LinkedIn.",
+      "imageUrl": "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/275422095_7871262119566558_1330687517521712161_n%20(1).jpg?updatedAt=1718246272074"
+    }
+  },
+  "jobs": [
+    {
+      "title": "Full Stack Developer",
+      "company": "Datto (Kaseya)",
+      "duration": "Jul 2023 - Jan 2024",
+      "location": "Cracow, Poland",
+      "start": "2023-07-01",
+      "end": "2024-01-01",
+      "imageUrls": [
+        "https://embed-ssl.wistia.com/deliveries/650d67bfc4713b81b26a3e2aed693a33.webp?image_crop_resized=1280x720",
+        "https://www.officemap.pl/application/assets/img/offices/high-5ive-2/high-five-2-6.jpeg"
+      ],
+      "imageTitles": [
+        "Datto Logo",
+        "Kaseya Office"
+      ],
+      "duties": [
+        "Created a Dropbox clone using Symfony (PHP), Lexik JWT, Doctrine ORM for MySQL connectivity on a VM with ZFS filesystem for the backend, and React with Bootstrap for the front end.",
+        "Collaborated on the transition towards React of the Portal website and crafted reusable components for a DattoUI Storybook, enhancing the UI for customer’s BCDR process management and streamlining UI development.",
+        "Authored unit tests using Jest for both Portal and DattoUI components, enhancing code reliability and aiding continuous integration, increasing test coverage from 80% to 90%.",
+        "Engaged in daily standups and bi-weekly demos in an Agile (Scrum) environment, fostering team collaboration and continuous project feedback.",
+        "Resolved spikes and bugs in the Portal website, undertaking a thorough analysis and improvement of the codebase.",
+        "Optimized application performance by implementing caching mechanisms and conducting load testing.",
+        "Designed and integrated RESTful APIs to enhance interoperability between front-end and back-end systems.",
+        "Implemented CI/CD pipelines using Jenkins and Docker to streamline the deployment process and ensure rapid delivery of updates.",
+        "Developed and maintained detailed technical documentation for new features and system enhancements."
+      ],
+      "skills": [
+        "Symfony",
+        "React",
+        "Bootstrap",
+        "Doctrine ORM",
+        "MySQL",
+        "Jest",
+        "Agile (Scrum)",
+        "JavaScript",
+        "PHP",
+        "ZFS",
+        "Ubuntu Server",
+        "API Development",
+        "CI/CD",
+        "Git",
+        "Unit Testing",
+        "Microservices",
+        "Cloud Storage Solutions",
+        "Docker",
+        "Jenkins",
+        "RESTful APIs",
+        "Performance Optimization",
+        "Caching Mechanisms",
+        "Load Testing",
+        "Technical Documentation",
+        "HTML5",
+        "CSS3",
+        "Webpack",
+        "Redux",
+        "TypeScript",
+        "Sass",
+        "Node.js",
+        "Express.js",
+        "Continuous Integration",
+        "Continuous Deployment",
+        "MongoDB",
+        "Kubernetes",
+        "Serverless Architectures",
+        "OAuth",
+        "GraphQL",
+        "TDD (Test-Driven Development)"
+      ],
+      "mapLocation": "High 5ive TWO, Krakow, Poland"
+    },
+    {
+      "title": "Research Intern",
+      "company": "Technological University of the Shannon",
+      "duration": "Jan 2023 - Jul 2023",
+      "location": "Athlone, Ireland",
+      "start": "2023-01-01",
+      "end": "2023-07-01",
+      "imageUrls": [
+        "https://media.licdn.com/dms/image/C4E1BAQFEln7gN4Mv5A/company-background_10000/0/1633103779215/tusmidlands_cover?e=2147483647&v=beta&t=qNcaWOrccR6wZ07bYzzY6Ts3A2p0RNkucfPUzZ2xhIA",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TUS_Athlone_Engineering_%26_Science_Building%2C_2022-12-20.jpg/1200px-TUS_Athlone_Engineering_%26_Science_Building%2C_2022-12-20.jpg"
+      ],
+      "imageTitles": [
+        "TUS Logo",
+        "TUS Engineering & Science Building"
+      ],
+      "duties": [
+        "Developed CarSurfing, a cloud-based carpooling service using microservice architecture to ensure scalability and accessibility.",
+        "Utilized Java and Spring Boot within Docker environments for efficient service scalability and management.",
+        "Managed database interactions with SQL and MySQL under AWS cloud infrastructure, ensuring reliable data handling and storage.",
+        "Implemented a continuous integration and continuous deployment (CI/CD) pipeline using GitHub and Jenkins for streamlined deployment processes.",
+        "Conducted in-depth performance testing and optimization of microservices to ensure high availability and responsiveness.",
+        "Collaborated with a cross-functional team to design and develop a user-friendly front-end using Vue.js and Tailwind CSS.",
+        "Integrated third-party services such as Google Maps to enhance the functionality and user experience of the application.",
+        "Provided detailed documentation and user training to facilitate smooth onboarding and usage of the CarSurfing platform."
+      ],
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "Docker",
+        "SQL",
+        "MySQL",
+        "AWS",
+        "CI/CD",
+        "GitHub",
+        "Jenkins",
+        "Performance Testing",
+        "Microservices",
+        "Vue.js",
+        "Tailwind CSS",
+        "Google Maps API",
+        "Technical Documentation",
+        "User Training",
+        "Cross-Functional Collaboration",
+        "Cloud Computing",
+        "Continuous Deployment",
+        "Data Management",
+        "Service Scalability"
+      ],
+      "mapLocation": "TUS: Midlands Engineering & Science Building, Athlone, Ireland"
+    },
+    {
+      "title": "Senior Sampling Quality Analyst",
+      "company": "TikTok",
+      "duration": "Oct 2020 - Jun 2023",
+      "location": "Dublin, Ireland",
+      "start": "2020-10-01",
+      "end": "2023-06-01",
+      "imageUrls": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-Bk3F5U7mVnpbV2awvXrVYppJI6al_Qb-ig&s",
+        "https://cdn-images.wework.com/images/81BE62CA-BD12-11E9-8DF0-0A80A47AA582/81be62ca-bd12-11e9-8df0-0a80a47aa582_0.jpg?width=540"
+      ],
+      "imageTitles": [
+        "TikTok Logo",
+        "TikTok Office"
+      ],
+      "duties": [
+        "Oversaw and enhanced critical tracking systems and dashboards, leveraging advanced data visualization techniques to support strategic decision-making.",
+        "Acted as the primary liaison for high-importance accounts, significantly enhancing client relations, retention, and satisfaction.",
+        "Resolved complex system issues by optimizing performance and implementing efficiency improvements, ensuring seamless operational functionality.",
+        "Led the English hashtag analysis team, achieving a substantial increase in content quality metrics over a three-year period.",
+        "Performed advanced data analytics using Python and SQL to refine and streamline content review processes and policies.",
+        "Facilitated key communications and policy updates with global vendors, maintaining high quality standards and ensuring compliance with company guidelines.",
+        "Collaborated with cross-functional teams to develop and implement quality assurance protocols, enhancing overall content integrity and user experience."
+      ],
+      "skills": [
+        "Data Analytics",
+        "Python",
+        "SQL",
+        "Client Relations",
+        "System Optimization",
+        "Data Visualization",
+        "Quality Assurance",
+        "Dashboard Development",
+        "Content Review",
+        "Policy Implementation",
+        "Cross-Functional Collaboration",
+        "Vendor Management",
+        "Strategic Decision-Making",
+        "Problem-Solving",
+        "Performance Enhancement",
+        "Communication Skills",
+        "Project Management",
+        "Process Improvement",
+        "Technical Documentation"
+      ],
+      "mapLocation": "WeWork 5 Harcourt Road, Dublin, Ireland"
+    },
+    {
+      "title": "JavaScript Automation Engineer & Process Improvement Specialist",
+      "company": "Accenture (Client: Google)",
+      "duration": "Jan 2019 - Aug 2019",
+      "location": "Cracow, Poland",
+      "start": "2019-01-01",
+      "end": "2019-08-01",
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2560px-Accenture.svg.png",
+        "https://officepoland.pl/wp-content/uploads/1095-biuro-do-wynajecia-krakow-pradnik-czerwony-tertium-business-park-1-a-01-officepoland-pl.jpg"
+      ],
+      "imageTitles": [
+        "Accenture Logo",
+        "Tertium Business Park - Google Office"
+      ],
+      "duties": [
+        "Developed advanced JavaScript automation scripts for analysing DOM structures and simulating in-browser events, significantly enhancing web safety, compliance, and performance.",
+        "Designed and deployed robust Chrome extensions to automate and streamline content verification tasks, improving efficiency and accuracy in large-scale web projects.",
+        "Mentored new hires and junior developers in web technologies, fostering skill development and enhancing the team's overall performance and knowledge base.",
+        "Identified and addressed workflow inefficiencies through detailed process analysis, implementing solutions that resulted in improved operational workflows and project delivery timelines.",
+        "Collaborated with cross-functional teams to ensure seamless integration of automation tools and processes, enhancing overall project quality and client satisfaction.",
+        "Implemented and maintained automated testing frameworks to ensure the reliability and quality of web applications, reducing manual testing efforts and enhancing deployment efficiency."
+      ],
+      "skills": [
+        "JavaScript",
+        "Automation",
+        "Chrome Extensions",
+        "Web Safety",
+        "Mentoring",
+        "Process Improvement",
+        "DOM Manipulation",
+        "In-Browser Event Simulation",
+        "Content Verification",
+        "Operational Efficiency",
+        "Cross-Functional Collaboration",
+        "Automated Testing",
+        "Selenium",
+        "Puppeteer",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "Agile Methodologies",
+        "Jenkins",
+        "Team Leadership",
+        "Problem-Solving",
+        "Project Management",
+        "Technical Documentation",
+        "Code Review",
+        "Performance Optimization",
+        "Client Relations",
+        "Data Analysis"
+      ],
+      "mapLocation": "Tertium Business Park, Cracow, Poland"
+    },
+    {
+      "title": "Senior JavaScript Automation Engineer & Process Improvement Specialist",
+      "company": "Arvato Finance (Client: Google)",
+      "duration": "Jun 2017 - Dec 2018",
+      "location": "Cracow, Poland",
+      "start": "2018-06-01",
+      "end": "2018-12-01",
+      "imageUrls": [
+        "https://finance.arvato.com/49df2d/globalassets/01-images/01-homepage/logo-financial-solutions-original-rgb.jpg?width=950&mode=min",
+        "https://pasaz13.home.pl/images/p133.jpg",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Arvato1.jpg?updatedAt=1718244314227",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Arvato2.jpg?updatedAt=1718244314225"
+      ],
+      "imageTitles": [
+        "Arvato Logo",
+        "Google Office Entrance",
+        "Arvato Christmas Party",
+        "Arvato Laser Tag Team Building"
+      ],
+      "duties": [
+        "Developed advanced JavaScript scripts and Chrome extensions for automated detection and removal of hidden scripts in websites and mobile apps, significantly improving web security.",
+        "Led cross-functional collaboration with UI/UX designers, backend developers, and project managers to ensure seamless integration and implementation of JavaScript functionalities in high-impact Google projects.",
+        "Achieved a quality assurance score exceeding 98% through the implementation of performance enhancements and strict compliance with web safety standards.",
+        "Streamlined development processes and reduced project turnaround times by implementing best practices in automation and process improvement.",
+        "Conducted comprehensive code reviews and provided mentorship to junior developers, fostering a culture of continuous improvement and technical excellence."
+      ],
+      "skills": [
+        "JavaScript",
+        "Chrome Extensions",
+        "UI/UX Collaboration",
+        "Quality Assurance",
+        "Web Safety",
+        "Automation",
+        "Process Improvement",
+        "Cross-Functional Team Leadership",
+        "Performance Optimization",
+        "Code Reviews",
+        "Mentorship",
+        "Software Development Life Cycle (SDLC)",
+        "Project Management",
+        "Agile Methodologies",
+        "Problem-Solving",
+        "Technical Documentation",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "Debugging",
+        "Version Control (Git)",
+        "Customer Requirements Analysis"
+      ],
+      "mapLocation": "Google, Cracow, Poland"
+    },
+    {
+      "title": "System Analyst & Back-end Developer",
+      "company": "Vertu",
+      "duration": "Apr 2016 - May 2017",
+      "location": "Athens, Greece",
+      "start": "2016-04-01",
+      "end": "2017-05-01",
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/e/ec/Vertu_England_Logo.png",
+        "https://spaces.imgix.net/mediaFiles/Ni8wL2QvZi82MGRmZTkzMzE4YzhiZjBjZGY0OTAyZGMzNTE4YWUwY2ZkMjUzY2I5X1NwYWNlc19Mb25kb25DaXR5Um9hZF9Gb2N1c0FyZWF3aXRoUGVvcGxlLmpwZy9kb3dubG9hZA?w=910&h=420&q=30&auto=format,compress"
+      ],
+      "imageTitles": [
+        "Vertu Logo",
+        "Vertu Office"
+      ],
+      "duties": [
+        "Conducted in-depth analysis of customer interaction data with Vertu's luxury phone services, using SQL for data extraction, Python with NumPy and SciPy for advanced analysis, and MATLAB for simulation and modelling, dissecting user behaviour across over 5,000 customer accounts. These insights led to targeted system enhancements that significantly elevated the user experience.",
+        "Crafted comprehensive system documentation and interactive Excel dashboards for monitoring Vertu’s luxury service usage, delivering detailed monthly reports to stakeholders, and providing training support to internal teams. This enhanced customer service delivery and stakeholder communication.",
+        "Managed AWS cloud infrastructures and Linux server environments to support high-availability mobile applications, ensuring optimal performance and scalability to meet rigorous service-level agreements.",
+        "Utilized Java Spring to develop robust backend analysis tools, facilitating the comprehensive examination of customer interaction data. Additionally, developed JavaScript-driven Chrome extensions to automate routine internal system analysis tasks, enhancing operational efficiency.",
+        "Led the integration of cutting-edge technologies and best practices into the system development lifecycle, contributing to improved system reliability and performance.",
+        "Collaborated with cross-functional teams to align technical solutions with business objectives, ensuring cohesive and effective project execution.",
+        "Provided expert guidance on data-driven decision-making processes, leveraging advanced analytics to inform strategic planning and operational improvements."
+      ],
+      "skills": [
+        "SQL",
+        "Python",
+        "NumPy",
+        "SciPy",
+        "MATLAB",
+        "Java Spring",
+        "JavaScript",
+        "Chrome Extensions",
+        "AWS",
+        "Linux",
+        "Customer Service",
+        "Data Analysis",
+        "Simulation",
+        "System Documentation",
+        "Excel Dashboards",
+        "Stakeholder Communication",
+        "Training Support",
+        "High-Availability Systems",
+        "Operational Efficiency",
+        "Cross-Functional Collaboration",
+        "Technical Leadership",
+        "Data-Driven Decision Making",
+        "Strategic Planning",
+        "Project Management",
+        "Problem-Solving",
+        "Numerical Analysis",
+        "Microsoft Office",
+        "MySQL",
+        "Public Speaking",
+        "English"
+      ],
+      "mapLocation": "Marikas Kotopouli 1, Athina 104 31, Greece"
+    },
+    {
+      "title": "Technical Support Engineer",
+      "company": "Teleperformance (Client: Microsoft)",
+      "duration": "Oct 2015 - May 2016",
+      "location": "Athens, Greece",
+      "start": "2015-10-01",
+      "end": "2016-05-01",
+      "imageUrls": [
+        "https://jobsteleperformance.com/wp-content/uploads/2023/07/GMT_Logos-Teleperformance_RGB_July-2023_purple-gradient.png",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Athens1.jpg?updatedAt=1718242558658"
+      ],
+      "imageTitles": [
+        "Teleperformance Logo",
+        "Teleperformance Microsoft Office with Dimitri Paschou"
+      ],
+      "duties": [
+        "Diagnosed and resolved complex technical issues with Microsoft products by creating and running advanced SQL queries to retrieve and analyze critical data.",
+        "Supported both Linux and Windows server operations in Microsoft environments, ensuring system availability and addressing intricate configurations and software issues.",
+        "Delivered exceptional bilingual customer service in English and French, translating technical jargon into comprehensible guidance, resolving issues efficiently to maintain high customer satisfaction and minimize downtime.",
+        "Enhanced system performance and streamlined user support by developing and refining JavaScript scripts for automated task handling and issue resolution.",
+        "Created and optimized Microsoft Office-based support processes, contributing to operational efficiency and effective knowledge management.",
+        "Assisted in the training and mentoring of new team members, sharing best practices and technical expertise to improve team performance."
+      ],
+      "skills": [
+        "SQL",
+        "Linux",
+        "Windows Server",
+        "Customer Service",
+        "JavaScript",
+        "Microsoft Office",
+        "Technical Troubleshooting",
+        "Bilingual Communication",
+        "System Optimization",
+        "Automated Task Handling",
+        "Data Analysis",
+        "Configuration Management",
+        "Technical Mentoring",
+        "Problem Resolution",
+        "Knowledge Management",
+        "Network Support",
+        "Software Support",
+        "System Performance Tuning",
+        "Technical Documentation"
+      ],
+      "mapLocation": "Teleperformance, Athens, Greece"
+    },
+    {
+      "title": "Research Intern",
+      "company": "Institut Jean Lamour (IJL)",
+      "duration": "Mar 2015 - Oct 2015",
+      "location": "Nancy, Grand Est, France",
+      "start": "2015-03-01",
+      "end": "2015-10-01",
+      "imageUrls": [
+        "https://ijl.univ-lorraine.fr/sites/default/files/commun/Espace%20media/logo_IJL_Noir.jpg",
+        "https://www.centre-est.cnrs.fr/sites/delegation_dr6/files/inline-images/cnrs_20180015_0093%20%281%29.jpg"
+      ],
+      "imageTitles": [
+        "Institut Jean Lamour Logo",
+        "IJL Laboratory (ultra-high vacuum deposition and analysis of nanomaterials)"
+      ],
+      "duties": [
+        "Led synthetic diagnostic studies on reflectometry, utilizing Python and MATLAB to analyze and simulate plasma turbulence in magnetic fusion devices, significantly enhancing the understanding of plasma behavior.",
+        "Collaborated with a multidisciplinary team of researchers to develop innovative diagnostic techniques, improving the accuracy and efficiency of plasma turbulence measurements.",
+        "Implemented advanced data analysis algorithms to process large datasets from reflectometry experiments, optimizing the simulation models and contributing to cutting-edge research in magnetic fusion.",
+        "Authored comprehensive research reports and presented findings at international conferences, showcasing the advancements in reflectometry and plasma turbulence diagnostics.",
+        "Engaged in continuous learning and professional development, mastering new techniques and tools to support high-impact research projects."
+      ],
+      "skills": [
+        "Reflectometry",
+        "Plasma Turbulence",
+        "Python",
+        "MATLAB",
+        "Data Analysis",
+        "Simulation",
+        "Scientific Programming",
+        "Research Reporting",
+        "Algorithm Development",
+        "Data Visualization",
+        "Collaborative Research",
+        "Magnetic Fusion",
+        "Advanced Diagnostics",
+        "High-Performance Computing",
+        "Numerical Modeling"
+      ],
+      "mapLocation": "Institut Jean Lamour, Nancy, Grand Est, France"
+    },
+    {
+      "title": "Research Intern",
+      "company": "Commissariat à l'Énergie Atomique et aux Énergies Alternatives (CEA) Cadarache",
+      "duration": "Jan 2015 - Apr 2015",
+      "location": "Aix-en-Provence, France",
+      "start": "2015-01-01",
+      "end": "2015-04-01",
+      "imageUrls": [
+        "https://www.pagesjaunes.fr/media/agc/e5/75/40/00/00/d8/26/d8/6e/51/5d35e575400000d826d86e51/5d35e575400000d826d86e52.png",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/CEA1.jpg?updatedAt=1718241249730",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/CEA3.jpg?updatedAt=1718241249713",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/CEA2.jpg?updatedAt=1718241249749",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/photo_reflect_CEA.jpg?updatedAt=1718110856586"
+      ],
+      "imageTitles": [
+        "CEA Cadarache Logo",
+        "Tore Supra Tokamak and the research group",
+        "ITER site",
+        "Bump-On-Tail Instability group, from left to right, Gustavo Pedro Ricou, Iaroslav Morgal, Jeffery Zielinski",
+        "The reflectometry group, with our supervisor Dr. Frederic Clairet"
+      ],
+      "duties": [
+        "Led reflectometry research studies on the Tore Supra Tokamak, under the supervision of Dr. Frederic Clairet, analyzing plasma density profiles and fluctuations to advance the understanding of plasma behavior.",
+        "Developed and optimized Python script, under the supervision of Dr. Yanick Sarazin, to process and visualize data from Fortran-based Bump-On-Tail Instability simulations, enhancing data accuracy and efficiency.",
+        "Collaborated with senior researchers to refine diagnostic techniques and improve plasma control methodologies, contributing to significant advancements in fusion energy research.",
+        "Authored detailed technical reports and presented findings to the scientific community, demonstrating innovative solutions and methodologies in plasma diagnostics.",
+        "Engaged in cross-disciplinary team projects, leveraging expertise in reflectometry and numerical simulations to support various experimental setups and research objectives."
+      ],
+      "skills": [
+        "Reflectometry",
+        "Tore Supra Tokamak",
+        "Python",
+        "Fortran",
+        "Plasma Physics",
+        "Data Analysis",
+        "Numerical Simulations",
+        "Scientific Programming",
+        "Research Reporting",
+        "Technical Presentation",
+        "Team Collaboration",
+        "Experimental Physics",
+        "NumPy",
+        "SciPy",
+        "MATLAB",
+        "High-Performance Computing",
+        "Data Visualization",
+        "Algorithm Optimization"
+      ],
+      "mapLocation": "CEA Cadarache, Aix-en-Provence, France"
+    },
+    {
+      "title": "Research Intern",
+      "company": "Institute of Plasma Physics of the Czech Academy of Sciences",
+      "duration": "Nov 2014 - Jan 2015",
+      "location": "Prague, Czech Republic",
+      "start": "2014-11-01",
+      "end": "2015-01-01",
+      "imageUrls": [
+        "https://www.ipp.cas.cz/miranda2/export/sitesavcr/ufp/o-ufp/visual_identity/IPP_-RGB-_EN_White_Horisontal_Long.png",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Compass_Tokamak.jpg?updatedAt=1718114690268",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Prague2.jpg?updatedAt=1718240349384",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Prague1.jpg?updatedAt=1718240349313"
+      ],
+      "imageTitles": [
+        "Institute of Plasma Physics Logo",
+        "COMPASS Tokamak and Gustavo Pedro Ricou",
+        "COMPASS Tokamak, Ahmed Omar and Gustavo Pedro Ricou",
+        "Gustavo Pedro Ricou and the GOLEM Tokamak (the oldest operational tokamak in the world)"
+      ],
+      "duties": [
+        "Conducted comprehensive research on plasma disruptions in the COMPASS Tokamak under the guidance of renowned supervisors J. Havlicek, O. Hronova, and A. Dvornova.",
+        "Analyzed disruption events using advanced data analysis techniques in Python to improve diagnostic processes and plasma control methods.",
+        "Developed and implemented data acquisition and processing scripts to study the Greenwald density limit and magnetic island formations.",
+        "Collaborated with a team of researchers to perform high-precision experiments, contributing to significant advancements in understanding plasma instabilities.",
+        "Prepared detailed research reports and presentations, highlighting key findings and potential areas for future research."
+      ],
+      "skills": [
+        "Plasma Physics",
+        "Data Analysis",
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Tokamak Operations",
+        "Magnetic Diagnostics",
+        "Greenwald Limit Studies",
+        "Magnetic Island Analysis",
+        "Signal Processing",
+        "High-Precision Measurement",
+        "Automated Control Systems",
+        "Research Reporting",
+        "Scientific Communication"
+      ],
+      "mapLocation": "Institute of Plasma Physics, Prague, Czech Republic"
+    },
+    {
+      "title": "Research Assistant - Student Job",
+      "company": "Institut für Grenzflächenverfahrenstechnik und Plasmatechnologie, Universität Stuttgart",
+      "duration": "Dec 2013 - Aug 2014",
+      "location": "Stuttgart, Germany",
+      "start": "2013-12-01",
+      "end": "2014-08-01",
+      "imageUrls": [
+        "https://www.igvp.uni-stuttgart.de/system/modules/de.stuttgart.uni.v3.basics/resources/img/svg/logo-inverted-de.svg",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart7.jpg?updatedAt=1718236580569",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart2.jpg?updatedAt=1718218279068",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart5.jpg?updatedAt=1718218279070"
+      ],
+      "imageTitles": [
+        "Institut für Grenzflächenverfahrenstechnik und Plasmatechnologie, Universität Stuttgart Logo",
+        "Entrance hall to the institute",
+        "From left to right, Gustavo Pedro Ricou, Guillermo Suarez, Egor Seliunin and Pranay Valson, at Institut für Grenzflächenverfahrenstechnik und Plasmatechnologie, Universität Stuttgart",
+        "In Pont-à-Mousson, France, with our supervisor Dr. Carsten Lechte."
+      ],
+      "duties": [
+        "Collaborated with Dr. Carsten Lechte, Leader of Microwave Technology Group, to enhance and refine educational content for Numerical Plasma Physics courses.",
+        "Transcribed complex course notes into LaTeX using Lyx, ensuring clarity and precision in mathematical notation and scientific diagrams.",
+        "Developed comprehensive educational materials, including detailed graphs and diagrams, to support the understanding of numerical solutions of ODEs and PDEs related to plasma physics.",
+        "Created programmatic data visualizations and simulations using Python to illustrate concepts such as plasma turbulence and wave propagation.",
+        "Improved the quality and accessibility of course content, benefiting future cohorts of students in their study of Numerical Plasma Physics.",
+        "Implemented best practices in scientific programming and data visualization to create engaging and informative educational resources."
+      ],
+      "skills": [
+        "LaTeX",
+        "Lyx",
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Numerical Analysis",
+        "Scientific Programming",
+        "Data Visualization",
+        "Graphical Design",
+        "Mathematical Notation",
+        "ODEs",
+        "PDEs",
+        "Plasma Physics",
+        "Plasma Turbulence",
+        "Wave Propagation",
+        "Educational Material Development",
+        "Attention to Detail",
+        "Content Clarity Enhancement"
+      ],
+      "mapLocation": "Institut für Grenzflächenverfahrenstechnik und Plasmatechnologie, Stuttgart, Germany"
+    },
+    {
+      "title": "Tutor",
+      "company": "AEFCUP - Associação de Estudantes da FCUP",
+      "duration": "Jan 2010 - Sep 2013",
+      "location": "Porto, Portugal",
+      "start": "2010-01-01",
+      "end": "2013-09-01",
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/f/fd/Log%C3%B3tipo_da_AEFCUP.png",
+        "https://upload.wikimedia.org/wikipedia/commons/4/41/DCC_e_sede_AEFCUP.jpg"
+      ],
+      "imageTitles": [
+        "AEFCUP Logo",
+        "AEFCUP Building"
+      ],
+      "duties": [
+        "Tutored over 100 science and engineering students in mathematics, programming (Python), and physics, consistently enhancing their academic performance and problem-solving skills.",
+        "Developed personalized tutoring plans tailored to each student's learning style, resulting in significant improvement in their grades and understanding of complex concepts.",
+        "Received continuous referrals through word-of-mouth, thanks to the high success rate and satisfaction of students.",
+        "Achieved a remarkable track record with no student failing an exam under my guidance.",
+        "Organized and conducted group study sessions and exam preparation workshops, fostering a collaborative learning environment.",
+        "Created comprehensive study materials and resources that were widely used and appreciated by students for exam preparations.",
+        "Provided mentorship and academic counseling, helping students set and achieve their educational goals.",
+        "Utilized innovative teaching methods and tools to make learning engaging and effective."
+      ],
+      "skills": [
+        "Tutoring",
+        "Mathematics",
+        "Python",
+        "Physics",
+        "Problem-Solving",
+        "Personalized Learning Plans",
+        "Academic Mentorship",
+        "Collaborative Learning",
+        "Study Material Creation",
+        "Innovative Teaching Methods",
+        "Student Engagement",
+        "Exam Preparation",
+        "Mentorship",
+        "Educational Counseling",
+        "Communication Skills",
+        "Linear Algebra",
+        "Calculus",
+        "Electromagnetism",
+        "Classical Mechanics",
+        "Quantum Mechanics",
+        "Statistics",
+        "Differential Equations",
+        "Analytical Geometry"
+      ],
+      "mapLocation": "FCUP Department of Computer Sciences, Porto, Portugal"
+    },
+    {
+      "title": "Research Intern",
+      "company": "IFIMUP - Instituto de Física de Materiais Avançados, Nanotecnologia e Fotónica",
+      "duration": "Sep 2011 - Feb 2012",
+      "location": "Porto, Portugal",
+      "start": "2011-09-01",
+      "end": "2012-02-01",
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/IFIMUP-IN.gif/799px-IFIMUP-IN.gif",
+        "https://media.licdn.com/dms/image/C4D1BAQFV7mRrIIvL1A/company-background_10000/0/1596216762409/ifimup_cover?e=2147483647&v=beta&t=AOaefzBY5hZceE0EyAqa9bTcu6UH2H-oSwYna6JvS9M",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/LabView2.png?updatedAt=1718115470572",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/LabView.png?updatedAt=1718115470441"
+      ],
+      "imageTitles": [
+        "IFIMUP Logo",
+        "IFIMUP Laboratory",
+        "Some of the control dashboards developed",
+        "Automation work"
+      ],
+      "duties": [
+        "Managed automatic control and data acquisition systems for the study of electrical susceptibility and thermally stimulated currents in ceramics and polarizable films, significantly advancing the research capabilities of the institute.",
+        "Developed a comprehensive system for automatic data control and acquisition using NI LabVIEW, integrating various instruments for precise measurements and data logging.",
+        "Conducted experimental setups and measurements in advanced materials research, focusing on ceramics and polarizable films.",
+        "Collaborated with senior researchers to optimize experimental protocols and improve data accuracy.",
+        "Presented research findings at internal seminars and contributed to academic publications.",
+        "Maintained and calibrated laboratory equipment to ensure accurate and reliable measurements.",
+        "Provided technical support and training to new interns and students on data acquisition systems and experimental techniques."
+      ],
+      "skills": [
+        "NI LabVIEW",
+        "G",
+        "Data Acquisition",
+        "Electrical Susceptibility",
+        "Thermally Stimulated Currents",
+        "Ceramics",
+        "Polarizable Films",
+        "Impedance Analysis",
+        "Signal Processing",
+        "High-Precision Measurement",
+        "Automated Control Systems",
+        "Experimental Design",
+        "Data Analysis",
+        "Scientific Research",
+        "Team Collaboration",
+        "Technical Writing",
+        "Public Speaking",
+        "Lab Equipment Maintenance",
+        "Research Presentation",
+        "Project Management",
+        "Problem Solving",
+        "Attention to Detail"
+      ],
+      "mapLocation": "Departamento de Física e Astronomia FCUP, Porto, Portugal"
+    }
+  ],
+  "education": [
+    {
+      "degree": "MSc in Software Design with Cloud Native Computing (NFQ level 9 - EQF Level 7)",
+      "institution": "Technological University of the Shannon",
+      "duration": "Sep 2022 - Nov 2023",
+      "location": "Athlone, Ireland",
+      "grade": "First Class Honours (GPA 4.0)",
+      "start": "2022-09-01",
+      "end": "2023-11-01",
+      "imageUrls": [
+        "https://media.licdn.com/dms/image/C4E1BAQFEln7gN4Mv5A/company-background_10000/0/1633103779215/tusmidlands_cover?e=2147483647&v=beta&t=qNcaWOrccR6wZ07bYzzY6Ts3A2p0RNkucfPUzZ2xhIA",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/TUS_Athlone_Engineering_%26_Science_Building%2C_2022-12-20.jpg/1200px-TUS_Athlone_Engineering_%26_Science_Building%2C_2022-12-20.jpg"
+      ],
+      "imageTitles": [
+        "TUS Logo",
+        "TUS Engineering & Science Building"
+      ],
+      "courses": [
+        "Applied Scripting Languages (Python)",
+        "Container Design and Deployment (AWS, Docker, Kubernetes, Docker Swarm)",
+        "Continuous Build and Delivery (SCRUM, Git, Maven, Jenkins, SonarQube, JUnit tests, BDD with Karate testing framework, Integration Tests, Contract Testing, Ansible, AWS, Docker)",
+        "Engineering Team Project (Java Spring, Eureka discovery service, JWT authentication, fully deployed pipeline)",
+        "Microservices architecture (RESTful web services, Springboot, Spring Data, Spring Cloud Config, Eureka Discovery Service, Hystrix Resiliency Patterns, API Gateways, Sleuth and Zipkin tracing, Oauth2 and JWT)",
+        "Objected Oriented Programming I (Java)",
+        "Objected Oriented Programming II (Java)",
+        "Research Methods and Professional Placement (6 sigma)",
+        "Work Placement - Graduation Project at Datto (Kaseya) - Krakow"
+      ],
+      "skills": [
+        "Spring Boot",
+        "Spring Framework",
+        "MySQL",
+        "Kubernetes",
+        "JUnit",
+        "Amazon Web Services (AWS)",
+        "SQL",
+        "Numerical Analysis",
+        "Full-Stack Development",
+        "Docker Products",
+        "Java",
+        "Public Speaking",
+        "Computer Science",
+        "Linux",
+        "Python",
+        "Object-Oriented Programming (OOP)",
+        "Scrum",
+        "Microservices",
+        "RESTful Web Services",
+        "Spring Data",
+        "Spring Cloud Config",
+        "Eureka Discovery Service",
+        "Hystrix Resiliency Patterns",
+        "API Gateways",
+        "Sleuth",
+        "Zipkin Tracing",
+        "OAuth2",
+        "JWT Authentication",
+        "BDD with Karate Testing Framework",
+        "Integration Tests",
+        "Contract Testing",
+        "Ansible",
+        "CI/CD Pipelines",
+        "Cloud Native Computing",
+        "Container Orchestration",
+        "Serverless Architecture",
+        "DevOps",
+        "Agile Methodologies",
+        "Software Design Patterns",
+        "Continuous Deployment",
+        "Continuous Integration",
+        "Test-Driven Development (TDD)",
+        "Behavior-Driven Development (BDD)",
+        "System Architecture",
+        "API Development",
+        "Data Analytics",
+        "Machine Learning",
+        "Cloud Computing",
+        "Infrastructure as Code (IaC)",
+        "Version Control (Git)"
+      ],
+      "mapLocation": "TUS: Midlands Engineering & Science Building, Athlone, Ireland"
+    },
+    {
+      "degree": "Higher Diploma in Science of Computing (NFQ level 8 - EQF Level 6)",
+      "institution": "Atlantic Technological University",
+      "duration": "Sep 2021 - Oct 2022",
+      "location": "Letterkenny, Ireland",
+      "grade": "First Class Honours (GPA 4.0)",
+      "start": "2021-09-01",
+      "end": "2022-06-01",
+      "imageUrls": [
+        "https://international-sustainable-campus-network.org/wp-content/uploads/2021/06/Atlantic-Technological-University_sm.png",
+        "https://donegal.ie/media/1214/large-hero-lyit.jpg"
+      ],
+      "imageTitles": [
+        "Atlantic Technological University Logo",
+        "Atlantic Technological University"
+      ],
+      "courses": [
+        "Computer Systems (Unix System Admin)",
+        "Database Technology (SQL)",
+        "Software Development (JAVA)",
+        "Software Development & Testing (JAVA)",
+        "Software Engineering & Quality Assessment",
+        "Internet Applications Development (HTML, CSS, PHP)"
+      ],
+      "skills": [
+        "MySQL",
+        "SQL",
+        "CSS",
+        "HTML",
+        "Full-Stack Development",
+        "Java",
+        "Computer Science",
+        "Linux",
+        "English",
+        "Object-Oriented Programming (OOP)",
+        "Scrum",
+        "PHP",
+        "JavaScript",
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "RESTful API Development",
+        "GraphQL",
+        "Agile Methodologies",
+        "Version Control (Git, GitHub, GitLab)",
+        "Unit Testing (JUnit, Mockito)",
+        "Integration Testing",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "DevOps Practices",
+        "Cloud Computing (Google Cloud Platform - GCP)",
+        "Containerization (Docker, Kubernetes)",
+        "Microservices Architecture",
+        "Data Structures and Algorithms",
+        "Software Design Patterns",
+        "Web Development",
+        "Responsive Web Design",
+        "Cross-Browser Compatibility",
+        "Web Performance Optimization",
+        "Security Best Practices",
+        "Database Management",
+        "ORM (Hibernate, JPA)",
+        "Software Documentation",
+        "Technical Writing",
+        "API Documentation",
+        "Debugging and Troubleshooting",
+        "Problem Solving",
+        "Analytical Thinking",
+        "Team Collaboration",
+        "Project Management Tools (JIRA, Trello)",
+        "Time Management",
+        "Effective Communication",
+        "Critical Thinking",
+        "Presentation Skills",
+        "Networking Concepts",
+        "Virtualization (VMware, VirtualBox)",
+        "Shell Scripting (Bash)",
+        "Automated Testing",
+        "Behavior-Driven Development (BDD)",
+        "Test-Driven Development (TDD)",
+        "Code Review",
+        "Refactoring",
+        "Performance Testing",
+        "Load Testing",
+        "Penetration Testing",
+        "Ethical Hacking",
+        "User Experience (UX) Design",
+        "User Interface (UI) Design",
+        "Graphic Design Tools (Adobe Photoshop, Illustrator)",
+        "Mobile Application Development (Android, iOS)",
+        "API Development and Integration",
+        "Middleware Technologies",
+        "Enterprise Application Development",
+        "Big Data Technologies (Hadoop, Spark)",
+        "Data Visualization",
+        "Machine Learning Basics",
+        "Artificial Intelligence Basics",
+        "Software Prototyping",
+        "Innovation and Creativity",
+        "Research and Development (R&D)",
+        "Leadership and Mentoring"
+      ],
+      "mapLocation": "Atlantic Technological University - Donegal Letterkenny Campus, Letterkenny, Ireland"
+    },
+    {
+      "degree": "Bootcamp - Node.js FullStack Development",
+      "institution": "EPICODE",
+      "duration": "Apr 2020 - Oct 2020",
+      "location": "Remote",
+      "start": "2020-04-01",
+      "end": "2020-10-01",
+      "imageUrls": [
+        "https://epicode.pl/wp-content/uploads/2019/07/logo.png"
+      ],
+      "imageTitles": [
+        "EPICODE Logo"
+      ],
+      "courses": [
+        "HTML/CSS",
+        "JavaScript",
+        "Bootstrap",
+        "React (with Redux and Hooks)",
+        "AJAX, HTTP, ES6",
+        "Express and Express middlewares",
+        "Relational and non-relational databases (MongoDB and PostgreSQL)",
+        "Authentication",
+        "Cloud (focused on Microsoft Azure services)"
+      ],
+      "skills": [
+        "HTML5",
+        "CSS3",
+        "JavaScript (ES6+)",
+        "React.js (Hooks, Redux)",
+        "Bootstrap (Framework)",
+        "AJAX",
+        "HTTP/HTTPS",
+        "RESTful APIs",
+        "Express.js",
+        "Node.js",
+        "MongoDB",
+        "PostgreSQL",
+        "SQL",
+        "NoSQL",
+        "Authentication (JWT, OAuth)",
+        "Microsoft Azure",
+        "Cloud Computing",
+        "Docker",
+        "Kubernetes",
+        "Microservices",
+        "API Development",
+        "Version Control (Git)",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "Agile Methodologies (Scrum)",
+        "Unit Testing (Jest, Mocha, Chai)",
+        "Integration Testing",
+        "Responsive Web Design",
+        "Full-Stack Development",
+        "Server-Side Rendering",
+        "GraphQL",
+        "Public Speaking",
+        "English",
+        "Team Collaboration",
+        "Problem Solving",
+        "Debugging",
+        "Software Architecture",
+        "Performance Optimization"
+      ]
+    },
+    {
+      "degree": "Engineering Physics - Nuclear Fusion Science",
+      "institution": "Universite de Lorraine",
+      "duration": "Sep 2014 - Sep 2015",
+      "location": "Nancy, France",
+      "start": "2014-09-01",
+      "end": "2015-09-01",
+      "imageUrls": [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Logo_Universit%C3%A9_de_Lorraine.svg/2560px-Logo_Universit%C3%A9_de_Lorraine.svg.png",
+        "https://fst.univ-lorraine.fr/sites/fst.univ-lorraine.fr/files/images/fst-yp-batiment-victor-grignard.jpg",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Nancy1.jpg?updatedAt=1718197069728",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Nancy3.jpg?updatedAt=1718197069617",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Nancy2.jpg?updatedAt=1718197069822"
+      ],
+      "imageTitles": [
+        "Universite de Lorraine Logo",
+        "Campus de la Faculté des Sciences et Technologies",
+        "From left to right, Bezia Lemma, Gustavo Pedro Ricou, Artur Vander Sande, Guillermo Suarez and Arvydas Šepetys",
+        "Photo from Hotel de Ville, Place Stanislas",
+        "Christmas in Strasbourg"
+      ],
+      "activities": [
+        "Handball",
+        "Basketball",
+        "Football",
+        "Volleyball"
+      ],
+      "courses": [
+        "Advanced Condensed Matter Physics",
+        "Advanced Physical Laboratory",
+        "Advanced Statistical Physics",
+        "Fusion Research",
+        "German for Foreigners Intensive Course",
+        "Numerical Plasma Physics I",
+        "Numerical Plasma Physics II",
+        "Plasma applications part I: Plasma Technology",
+        "Plasma Physics I",
+        "Plasma Physics II",
+        "Solid State Spectroscopy",
+        "Extra-course: Advanced Quantum Theory",
+        "Advanced Plasma Physics Research",
+        "Diagnostics for fluctuations and advanced data processing methods",
+        "French Language and Culture",
+        "Plasma Turbulence, Transport and Heating",
+        "Plasma-Wall Interactions",
+        "Tokamaks: Operation and Research"
+      ],
+      "skills": [
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Matlab",
+        "SQL",
+        "Microsoft Excel",
+        "Data Analysis and Visualization",
+        "Advanced Python Development",
+        "Scientific Computing",
+        "Scientific Research",
+        "Numerical Analysis",
+        "Advanced Statistical Techniques",
+        "Quantum Mechanics",
+        "Electromagnetism",
+        "Condensed Matter Physics",
+        "Plasma Physics",
+        "Materials Science",
+        "Plasma Diagnostics",
+        "Technical Reporting and Presentation",
+        "Research Methodologies",
+        "Problem Solving",
+        "Collaborative Research",
+        "Scientific Writing",
+        "Project Management",
+        "Interdisciplinary Collaboration",
+        "French",
+        "Physics"
+      ],
+      "mapLocation": "Faculté des Sciences et Technologies, Nancy, France"
+    },
+    {
+      "degree": "Engineering Physics - Nuclear Fusion Science",
+      "institution": "Universität Stuttgart",
+      "duration": "Sep 2013 - Sep 2014",
+      "location": "Stuttgart, Germany",
+      "start": "2013-09-01",
+      "end": "2014-09-01",
+      "imageUrls": [
+        "https://www.beschaeftigte.uni-stuttgart.de/uni-services/oeffentlichkeitsarbeit/corporate-design/cd-dateien/01_Logo/png/unistuttgart_logo_englisch_cmyk_invertiert.png",
+        "https://www.f08.uni-stuttgart.de/en/study_programs/physics/images/V57_Universitaet_Stuttgart.jpg?__scale=w:1000,h:1000,q:100,t:3",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart2.jpg?updatedAt=1718218279068",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart1.jpg?updatedAt=1718218279075",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart6.jpg?updatedAt=1718218278979",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Stuttgart3.jpg?updatedAt=1718218278966"
+      ],
+      "imageTitles": [
+        "Universität Stuttgart Logo",
+        "Faculty 8 - Physics and Mathematics, Universität Stuttgart",
+        "From left to right, Gustavo Pedro Ricou, Guillermo Suarez, Egor Seliunin and Pranay Valson, at  Institut für Grenzflächenverfahrenstechnik und Plasmatechnologie, Universität Stuttgart",
+        "On the back row, left to right, Mikko Poikkimäki, Johan Zet Briones Paz, Gennadii Laskin, Pranay Valson, Heino Soo, Gustavo Pedro Ricou, Kim Hun-ho, Shreyas Muralidhar, Kushal Ramakrishna, Anurag Kanase, Theodoros Tsatsoulis, Sergio Cruz. On front row, Mahsa Sahebdivani, Jiyeong Kim-Poikkimäki, Namrata Gurung. At the Internationalen Zentrum (IZ) auf dem Campus Stuttgart-Vaihingen",
+        "From left to right, Nicole Chia, Gustavo Pedro Ricou and Dionne Lee, at Straußäcker 3, Vaihingen-Stuttgart",
+        "Field study of the German Language Class."
+      ],
+      "activities": [
+        "Handball",
+        "Basketball",
+        "Football",
+        "Volleyball",
+        "President of the Fiscal Council - Physis - Portuguese Association of Physics Students (organizer of the National Encounter of Physics Students)"
+      ],
+      "courses": [
+        "Advanced Condensed Matter Physics",
+        "Advanced Physical Laboratory",
+        "Advanced Statistical Physics",
+        "Fusion Research",
+        "German for Foreigners Intensive Course",
+        "Numerical Plasma Physics I",
+        "Numerical Plasma Physics II",
+        "Plasma applications part I: Plasma Technology",
+        "Plasma Physics I",
+        "Plasma Physics II",
+        "Solid State Spectroscopy",
+        "Extra-course: Advanced Quantum Theory",
+        "Advanced Plasma Physics Research",
+        "Diagnostics for fluctuations and advanced data processing methods",
+        "French Language and Culture",
+        "Plasma Turbulence, Transport and Heating",
+        "Plasma-Wall Interactions",
+        "Tokamaks: Operation and Research"
+      ],
+      "skills": [
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Matlab",
+        "SQL",
+        "Microsoft Excel",
+        "Microsoft Office",
+        "Data Analysis and Visualization",
+        "Scientific Computing",
+        "Advanced Statistical Techniques",
+        "Numerical Analysis",
+        "Research",
+        "Mathematical Modeling",
+        "Simulation and Modeling",
+        "Plasma Physics",
+        "Materials Science",
+        "Experimental Physics",
+        "Condensed Matter Physics",
+        "Plasma Diagnostics",
+        "Technical Reporting and Presentation",
+        "Scientific Writing",
+        "Project Management",
+        "Leadership",
+        "Public Speaking",
+        "English",
+        "Physics"
+      ],
+      "mapLocation": "Fachbereich Mathematik, Stuttgart, Germany"
+    },
+    {
+      "degree": "Bachelor's degree in Physics (EQF level 6)",
+      "institution": "Universidade do Porto",
+      "duration": "Sep 2008 - Sep 2013",
+      "location": "Porto, Portugal",
+      "grade": "15 (GPA 3.6 - Third best out of 50)",
+      "start": "2008-09-01",
+      "end": "2013-09-01",
+      "imageUrls": [
+        "https://www.agrisource.org/medias/642db231-737d-41e0-b472-e6b6825dc595.jpg",
+        "https://www.fc.up.pt/dfa/wp-content/uploads/Interior_DFA-DGAOT.jpg",
+        "https://scontent.flcj1-1.fna.fbcdn.net/v/t31.18172-8/322711_260299597354143_1277466697_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=7TaFj4gN5zkQ7kNvgF2iHMY&_nc_ht=scontent.flcj1-1.fna&oh=00_AYBBPWyAe_5GOdQtEQ2UR7HVfnp_sZEuYs7UlC7Aty3bxQ&oe=669185FA",
+        "https://scontent.flcj1-1.fna.fbcdn.net/v/t31.18172-8/328653_258355837548519_1123884662_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=jS-TCV2igsAQ7kNvgEUraY_&_nc_ht=scontent.flcj1-1.fna&oh=00_AYDY0z88SRWRSKgvNcObdgIXghlV-v3q_9ceO7Vh88Fgnw&oe=66917552",
+        "https://scontent.flcj1-1.fna.fbcdn.net/v/t31.18172-8/334682_260293227354780_501645160_o.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=L2CAfu2Vi_kQ7kNvgHsn2Oa&_nc_ht=scontent.flcj1-1.fna&oh=00_AYBFGtrxC_hguSCDro8UBNngpyy6uH6q2XxegD9LcwMsbA&oe=6691852E",
+        "https://scontent.flcj1-1.fna.fbcdn.net/v/t31.18172-8/903889_537759279608172_1445402916_o.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=uzFUthY8KkwQ7kNvgGl_t0N&_nc_ht=scontent.flcj1-1.fna&oh=00_AYBjzFM-tMWHfTa2iJMa-VZon7DeONe3g5mxJKSoDffxTA&oe=66918441",
+        "https://scontent.flcj1-1.fna.fbcdn.net/v/t31.18172-8/882796_537764422940991_376112769_o.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=3NPDMS8qTYIQ7kNvgGMiZIZ&_nc_ht=scontent.flcj1-1.fna&oh=00_AYAMsB7oqxzanP8V7IKQoyGgtQT5lUU6jf9uqwMv7F7bfA&oe=66917EB9",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Porto1.jpg?updatedAt=1718223743468",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Porto2.jpg?updatedAt=1718223967566"
+      ],
+      "imageTitles": [
+        "Universidade do Porto (Faculty of Sciences) Logo",
+        "Interior of the Department of Physics and Astronomy of the Faculty of Sciences of the University of Porto",
+        "From left to right, Jose Pedro Vieira, Pedro Sarmento, Daniel Passos, Joao Moura, Gustavo Pedro Ricou, Flavio de Sousa Coelho. On the bottom, Mafalda Monteiro. At the Department of Physics of the Faculty of Sciencs of the University of Porto, during the National Encounter of Physics Students 2011, Chess tournament.",
+        "Group picture of the National Encounter of Physics Students at the University of Porto 2011",
+        "Graphene Lecture, National Encounter of Physics Students at the University of Porto 2011, Gustavo Pedro Ricou and Mafalda Maia",
+        "Group picture of the National Encounter of Physics Students at the University of Evora 2012",
+        "Winners of the Pubs Rally at the National Encounter of Physics Students at the University of Coimbra 2013",
+        "Jazz Nights, organized by the Cultural Department of the Faculty of Sciences Student Association",
+        "Volleyball Game (our victory), at the Faculty of Sports of the University of Porto"
+      ],
+      "activities": [
+        "Direction of AEFCUP - Student Association (Department of Education's Policy and Cultural Department)",
+        "Basketball Team",
+        "Volleyball Team",
+        "General Secretary - Physis - Portuguese Association of Physics Students (organizer of the National Encounter of Physics Students)"
+      ],
+      "courses": [
+        "Classical Mechanics",
+        "Electromagnetism",
+        "Fundamentals of Chemistry",
+        "Linear Algebra",
+        "Infinitesimal Calculus I",
+        "Infinitesimal Calculus II",
+        "Introduction to Programming (Python)",
+        "Physics Laboratory I",
+        "Communication Techniques",
+        "Structure and Reactivity in Inorganic Chemistry",
+        "Thermal Physics",
+        "Waves and Continuous Media",
+        "Complements of Classical Physics",
+        "Electronics",
+        "Physics Laboratory II",
+        "Vector Analysis",
+        "Infinitesimal Analysis",
+        "Probability and Statistics",
+        "Introduction to Modern Physics and Astrophysics",
+        "Quantum Mechanics",
+        "Electrodynamics and Relativity",
+        "Statistical and Computational Physics",
+        "Elasticity and Fluid Dynamics",
+        "Condensed Matter Physics",
+        "Physics Laboratory III",
+        "Optics",
+        "Simulation",
+        "Nuclear Chemistry and Radio Chemistry"
+      ],
+      "skills": [
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Matlab",
+        "LabVIEW",
+        "SQL",
+        "Linux",
+        "Microsoft Excel",
+        "Microsoft Office",
+        "Data Analysis and Visualization",
+        "Numerical Analysis",
+        "Scientific Computing",
+        "Advanced Statistical Techniques",
+        "Physics",
+        "Plasma Physics",
+        "Condensed Matter Physics",
+        "Electronics",
+        "Quantum Mechanics",
+        "Experimental Physics",
+        "Mathematical Modeling",
+        "Technical Reporting and Presentation",
+        "Scientific Writing",
+        "Project Management",
+        "Leadership",
+        "Public Speaking",
+        "Academic Tutoring",
+        "Research",
+        "Portuguese",
+        "English"
+      ],
+      "mapLocation": "Departamento de Física e Astronomia FCUP, Porto, Portugal"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Dropbox clone - Filebox",
+      "dateOfCompletion": "Aug 2023",
+      "description": "This Dropbox clone project features a backend built for Ubuntu servers using ZFS-based storage and a frontend developed with React. Key backend functionalities include ZFS pool management, sudoers configuration, and API endpoints for user authentication and file services. The frontend setup involves repository cloning, dependency installation, script execution, and environment configuration. This project demonstrates essential software development practices and encourages contributions following standard git workflows and React coding guidelines.",
+      "imageUrls": [
+        "https://media.licdn.com/dms/image/D4D2DAQHV_jZnb5Yv-w/profile-treasury-image-shrink_800_800/0/1702227024512?e=1718578800&v=beta&t=1ce_vRgmi0feKwWFw0xqCISSyYhLl_LaWvY885TQ0lg",
+        "https://media.licdn.com/dms/image/D4D2DAQHl0oXsgXamSw/profile-treasury-image-shrink_800_800/0/1702226999862?e=1718578800&v=beta&t=mGQ9mt4jE3AMk3NsXmWufQx-QXL8mGnY-2y3UmSTKV8",
+        "https://media.licdn.com/dms/image/D4D2DAQGRYVpiDW7MHw/profile-treasury-image-shrink_800_800/0/1702226973478?e=1718578800&v=beta&t=hC-MEgRCBYEnyoBbQhpIGnW6-1zlR8tXCdpDTLEH1SQ",
+        "https://media.licdn.com/dms/image/D4D2DAQEeVhZdOEY8yg/profile-treasury-image-shrink_800_800/0/1702226953582?e=1718578800&v=beta&t=-ErzHjULgPsluwmD24nt9T3uXiOwfJkde4gZ2hOQKkE",
+        "https://media.licdn.com/dms/image/D4D2DAQGxdhZqxLLo9Q/profile-treasury-image-shrink_800_800/0/1702226935860?e=1718578800&v=beta&t=NetWP2CjKmRQseO-B4kHeCQJ-WLvwVl552kPliQsfaE"
+      ],
+      "affiliations": [
+        "Datto",
+        "Technological University of the Shannon"
+      ],
+      "skills": [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "Symfony",
+        "React.js",
+        "Ubuntu Server",
+        "ZFS Storage",
+        "ZFS Pool Management",
+        "Sudoers Configuration",
+        ".env Configuration",
+        "API Development",
+        "User Authentication",
+        "File Services",
+        "React Router",
+        "Bootstrap",
+        "Dependency Management",
+        "Script Execution",
+        "Development Server Setup",
+        "Production Build Scripts",
+        "Interactive Testing",
+        "System Integration",
+        "Git Workflows",
+        "Environment Setup"
+      ],
+      "links": [
+        "https://github.com/Gustolandia/dropboxbackend",
+        "https://github.com/Gustolandia/dropboxfrontend",
+        "https://www.youtube.com/watch?v=u76Cas9RbGc"
+      ],
+      "linksTitles": [
+        "Backend Repository",
+        "Frontend Repository",
+        "Demo of Filebox"
+      ]
+    },
+    {
+      "name": "Carsurfing Application",
+      "dateOfCompletion": "Apr 2023",
+      "description": "The Carsurfing App is a sophisticated carpooling application built with a modular design using Spring Boot and Maven, encompassing user, review, and ride services for enhanced maintainability and scalability. Key features include user authentication, ride booking, and review management, all facilitated by a user-friendly frontend developed in Vue.js by Gillian Middleton. The application leverages Docker and Docker Compose for efficient testing and deployment, integrates MySQL for database management, and uses Eureka Discovery Service for service registration. Developers can test the app locally using Docker, supporting various backend functionalities such as user and ride management, and review addition, all testable via HTTP clients or the integrated frontend.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Carsurfing_snip.png?updatedAt=1718064056940"
+      ],
+      "affiliations": [
+        "Technological University of the Shannon"
+      ],
+      "collaborators": [
+        "Gillian Middleton",
+        "Catalin Patularu"
+      ],
+      "skills": [
+        "Java",
+        "Spring Boot",
+        "Spring Security",
+        "Spring Data JPA",
+        "MySQL",
+        "Docker",
+        "Docker Compose",
+        "Maven",
+        "Microservices Architecture",
+        "Eureka Discovery Service",
+        "RESTful API Development",
+        "JWT Authentication",
+        "Vue.js",
+        "Vue Router",
+        "Vuex",
+        "Bootstrap Vue",
+        "Responsive Design",
+        "Continuous Integration/Continuous Deployment (CI/CD)",
+        "Unit Testing",
+        "Integration Testing",
+        "HTTP Client Testing",
+        "Database Management",
+        "SQL Scripting",
+        "Service Registration",
+        "Service Discovery",
+        "Environment Configuration",
+        "User Authentication",
+        "Ride Booking",
+        "Review Management",
+        "Frontend-Backend Integration",
+        "Local Development Environment Setup",
+        "Version Control (Git)",
+        "Git Workflows",
+        "Development Best Practices"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Article.pdf?updatedAt=1714593500595",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/ProjectPoster.pdf?updatedAt=1718103838326",
+        "https://www.youtube.com/watch?v=De-ouqBPsrk"
+      ],
+      "linksTitles": [
+        "Article",
+        "Project Poster",
+        "Demo of Carsurfing"
+      ]
+    },
+    {
+      "name": "My YouTube Bookmarks",
+      "dateOfCompletion": "Jun 2022",
+      "description": "My YouTube Bookmarks is a Chrome extension designed to enhance your YouTube experience by allowing you to save and manage timestamps on your favorite videos. With this extension, you can easily create and name bookmarks at specific moments in YouTube videos. If you ever lose track of the videos you bookmarked, you can conveniently manage all your saved timestamps from the options page, ensuring you never lose the important parts of long videos again.",
+      "imageUrls": [
+        "https://lh3.googleusercontent.com/uxG6eC413qiqi8IgkKkdojCKloLzaW-kZFqEFWZRoIMdvF0j4MH1OjQ4ijVp2lk6Sb86vZoHVjIJQ1cue_QzyB-e=s1280-w1280-h800",
+        "https://lh3.googleusercontent.com/0pnNCE71ARa-9x1fpI-d4Bx5spZ79DYep7plVqlYtK0hvoE9UWjc_fgmilpmfTOU6V2Bs5nMFPWf42S_A0zFF68W=s1280-w1280-h800",
+        "https://lh3.googleusercontent.com/0SjmWgpP_XB08haex4TYdaF03WlDiTZxLTWI6bvbcK3YVWjZBao5LctoROym666M1jAGG9_vqdhJ-it7sNZNe8HGlTc=s1280-w1280-h800"
+      ],
+      "skills": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Chrome Extensions",
+        "Manifest V3",
+        "DOM Manipulation",
+        "Event Handling",
+        "Local Storage",
+        "Asynchronous Programming",
+        "User Interface Design",
+        "Cross-Browser Compatibility",
+        "Version Control (Git)",
+        "Web Performance Optimization",
+        "Accessibility"
+      ],
+      "links": [
+        "https://chromewebstore.google.com/detail/my-youtube-bookmarks/pchgdefjjeppamekboefmlhmkadjmegn"
+      ],
+      "linksTitles": [
+        "My YouTube Bookmarks Chrome Extension"
+      ]
+    },
+    {
+      "name": "LinkedIn Clone",
+      "dateOfCompletion": "Sep 2020",
+      "description": "The LinkedIn Clone App is a comprehensive full-stack application that emulates essential features of LinkedIn. The backend, developed using Express.js and MongoDB (hosted on Atlas), supports secure user authentication, profile management, experience tracking, and post creation. The frontend, built with React and Bootstrap, ensures a responsive and interactive user interface. Core functionalities include creating, updating, and viewing user profiles and experiences, as well as managing posts. The project emphasizes scalability and real-time data handling, providing a simplified yet functional version of the professional networking platform.",
+      "imageUrls": [
+        "https://media.licdn.com/dms/image/D4D2DAQGoKcRh2XTUHg/profile-treasury-image-shrink_800_800/0/1702141481163?e=1718712000&v=beta&t=ogmgIcxCqKcJPuTDKCTvd7r_SY5vVdlY4rK9j3PdgmM",
+        "https://media.licdn.com/dms/image/D4D2DAQHD7bvOPhWBbQ/profile-treasury-image-shrink_800_800/0/1702141512890?e=1718712000&v=beta&t=BFIPI02h4D5nOazHE9OTwFWfDrAtVpOUDn5cXvr5mhA"
+      ],
+      "affiliations": [
+        "EPICODE"
+      ],
+      "collaborators": [
+        "Arbiona Shahu"
+      ],
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "JavaScript",
+        "React.js",
+        "Bootstrap",
+        "Atlas",
+        "RESTful APIs",
+        "JSON Web Tokens (JWT)",
+        "Mongoose ODM",
+        "Responsive Web Design",
+        "Component-Based Architecture",
+        "Version Control (Git)",
+        "Asynchronous Programming",
+        "Session Management",
+        "Frontend Routing",
+        "State Management",
+        "Axios",
+        "User Authentication",
+        "CRUD Operations",
+        "Data Modeling",
+        "Form Handling",
+        "Real-time Data Handling"
+      ],
+      "links": [
+        "https://github.com/Gustolandia/linkedin-backend",
+        "https://gustavo-pedro-ricou-linkedin-frontend-default.glb.edgio.link/"
+      ],
+      "linksTitles": [
+        "GitHub - Gustolandia/linkedin-backend",
+        "LinkedIn Clone Demo"
+      ]
+    },
+    {
+      "name": "Ireland's Luxury Apartments",
+      "dateOfCompletion": "2022",
+      "description": "Ireland's Luxury Apartments is a comprehensive real estate platform designed to showcase luxurious apartment listings across Ireland. Built with a focus on user experience, the website features a detailed filtering system that allows users to search for apartments based on various criteria such as price, location, and amenities. Each listing includes high-quality images, detailed descriptions, pricing, and addresses. Administrators can log in to manage listings, update property details, and handle inquiries. The website supports all standard REST operations, ensuring efficient data handling and management.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture1.JPG?updatedAt=1718105311991",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture2.JPG?updatedAt=1718105311997",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture3.JPG?updatedAt=1718105311883"
+      ],
+      "affiliations": [
+        "Atlantic Technological University"
+      ],
+      "skills": [
+        "HTML",
+        "CSS",
+        "PHP",
+        "MariaDB",
+        "JavaScript",
+        "Bootstrap",
+        "Responsive Web Design",
+        "RESTful APIs",
+        "CRUD Operations",
+        "SQL",
+        "Database Management",
+        "User Authentication",
+        "Session Management",
+        "Form Validation",
+        "Image Handling",
+        "Filtering and Sorting",
+        "Version Control (Git)",
+        "Web Hosting (Awardspace)"
+      ],
+      "links": [
+        "http://irelandrealstate.onlinewebshop.net/"
+      ],
+      "linksTitles": [
+        "Ireland's Luxury Apartments Preview"
+      ]
+    },
+    {
+      "name": "USA Manslaughter Analysis 1980-2014",
+      "dateOfCompletion": "2022",
+      "description": "This comprehensive analysis delves into the trends and patterns of manslaughter cases in the USA from 1980 to 2014. Utilizing advanced data analytics and visualization techniques, the project provides insights into various demographic factors and temporal trends. Key features include detailed statistical analysis, interactive visualizations, and an in-depth examination of the data to uncover significant findings.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Murder_Ethnicity.png?updatedAt=1718109280212",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Murder%20by%20Month.png?updatedAt=1718109280183"
+      ],
+      "affiliations": [
+        "Technological University of the Shannon"
+      ],
+      "skills": [
+        "Python",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Jupyter Notebook",
+        "SQL",
+        "Data Analysis",
+        "Statistical Modeling",
+        "Data Visualization",
+        "Machine Learning",
+        "Predictive Analytics",
+        "Hypothesis Testing",
+        "Big Data",
+        "Data Cleaning",
+        "Exploratory Data Analysis"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/asl_2022_23_assignment_part2_A00304507.pdf?updatedAt=1714593497971"
+      ],
+      "linksTitles": [
+        "USA Manslaughter Analysis 1980-2014"
+      ]
+    },
+    {
+      "name": "Product Owner Role in Scrum",
+      "dateOfCompletion": "2021",
+      "description": "This comprehensive analysis delves into the essential role of the Product Owner in a Scrum development team. The Product Owner is pivotal in maximizing product value by managing the product backlog and ensuring the team works on the most crucial tasks. This role involves significant responsibilities, including defining and prioritizing user stories, collaborating with the Scrum Master and team members, and maintaining the product vision throughout the Scrum process. The analysis covers the fundamentals of Agile methodologies, the intricacies of the Scrum framework, and the critical responsibilities and skills required for a Product Owner to succeed.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Agile_Manifesto.png?updatedAt=1718109792972"
+      ],
+      "affiliations": [
+        "Atlantic Technological University"
+      ],
+      "skills": [
+        "Agile (Scrum)",
+        "Product Backlog Management",
+        "User Story Writing",
+        "Sprint Planning",
+        "Stakeholder Engagement",
+        "Prioritization",
+        "JIRA",
+        "Confluence",
+        "Trello",
+        "Team Collaboration",
+        "Project Management",
+        "Requirements Gathering",
+        "Vision Setting"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/ProductOwnerEssentialRoleL00170136.pdf?updatedAt=1714593503089"
+      ],
+      "linksTitles": [
+        "The Product Owner plays an essential role in a Scrum development team"
+      ]
+    },
+    {
+      "name": "Report on Reflectometry",
+      "dateOfCompletion": "2015",
+      "description": "This detailed report on Reflectometry, presented at the Winter Event at CEA Cadarache, delves into the physical principles, relevance for fusion research, and experimental procedures involved in reflectometry. The project, supervised by Dr. Frederic Clairet, utilized MatLab for extensive data analysis and visualization. Reflectometry, a radar technique used to measure plasma density and turbulence in fusion reactors, is crucial for optimizing plasma confinement and stability. The report includes theoretical explanations, device schematics, and data analysis from simulated experiments due to the unavailability of plasma in Tore Supra.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Schematic_Reflectometer.png?updatedAt=1718110426811",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/photo_reflect_CEA.jpg"
+      ],
+      "affiliations": [
+        "CEA Cadarache"
+      ],
+      "collaborators": [
+        "Alejandro Muñoz"
+      ],
+      "skills": [
+        "MatLab",
+        "Signal Processing",
+        "Radar Technology",
+        "Data Analysis",
+        "Plasma Physics",
+        "Experimental Physics",
+        "Scientific Research",
+        "Numerical Methods",
+        "Fourier Transform",
+        "Fast Fourier Transform",
+        "Abel Transform",
+        "Phase Shift Analysis",
+        "Density Profile Reconstruction",
+        "Reflectometry"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Reflectometry.pdf?updatedAt=1714593492426"
+      ],
+      "linksTitles": [
+        "Report on Reflectometry"
+      ]
+    },
+    {
+      "name": "Disruption Studies on the COMPASS Tokamak",
+      "dateOfCompletion": "2014",
+      "description": "This comprehensive study on disruptions in the COMPASS tokamak was conducted for the EMTRAIC 2014 conference. The project, led by Gustavo Pedro Ricou under the supervision of J. Havlicek, O. Hronova, and A. Dvornova, aimed to investigate limit density disruptions in L-mode. Despite not achieving a density exceeding 40% of the Greenwald Limit, valuable insights were gained into the behavior of magnetic islands and the asymmetry of disruptions using saddle coils. Technologies utilized in this study included Python for data analysis and visualization. The research focused on understanding the dynamics of magnetic islands, the impact of MHD instabilities, and the diagnostic capabilities of the COMPASS tokamak. The findings contribute to the broader understanding of plasma disruptions and their mitigation in fusion reactors.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Disruptions.png?updatedAt=1718114639732g",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Compass_Tokamak.jpg?updatedAt=1718114690268"
+      ],
+      "affiliations": [
+        "Institute of Plasma Physics of the Czech Academy of Sciences"
+      ],
+      "skills": [
+        "Python",
+        "NumPy",
+        "SciPy",
+        "Data Analysis",
+        "Plasma Physics",
+        "Magnetohydrodynamics (MHD)",
+        "Signal Processing",
+        "Tokamak Operation",
+        "Scientific Research",
+        "Greenwald Limit Analysis",
+        "Magnetic Diagnostics",
+        "Experimental Physics"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/reportPragueDisruptions.pdf?updatedAt=1714593495625"
+      ],
+      "linksTitles": [
+        "Disruption Studies on the COMPASS Tokamak"
+      ]
+    },
+    {
+      "name": "Automatic Data Control and Acquisition for the Study of Electrical Susceptibility and Thermally Stimulated Currents in Ceramics and Polarizable Films",
+      "dateOfCompletion": "2011",
+      "description": "This project involved the development of a comprehensive system for automatic data control and acquisition using NI LabVIEW. The focus was on studying electrical susceptibility and thermally stimulated currents in ceramics and polarizable films. The system integrated various instruments for precise measurements and data logging, significantly enhancing experimental efficiency and accuracy.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/LabView2.png?updatedAt=1718115470572",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/LabView.png?updatedAt=1718115470441"
+      ],
+      "affiliations": [
+        "Institute of Physics for Advanced Materials, Nanotechnology and Photonics of the University of Porto"
+      ],
+      "collaborators": [
+        "Diogo P. Lopes",
+        "Pedro I. T. K. Sarmento"
+      ],
+      "skills": [
+        "NI LabVIEW",
+        "G",
+        "Data Acquisition",
+        "Electrical Susceptibility",
+        "Thermally Stimulated Currents",
+        "Ceramics",
+        "Polarizable Films",
+        "Impedance Analysis",
+        "Signal Processing",
+        "High-Precision Measurement",
+        "Automated Control Systems"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/IFIMUP.pdf?updatedAt=1714593469018"
+      ],
+      "linksTitles": [
+        "Automatic Data Control and Acquisition for the Study of Electrical Susceptibility and Thermally Stimulated Currents in Ceramics and Polarizable Films"
+      ]
+    }
+  ]
+}

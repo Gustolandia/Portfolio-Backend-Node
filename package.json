@@ -1,0 +1,26 @@
+{
+  "name": "portfolio-backend-node",
+  "version": "2.0.0",
+  "description": "Netlify Functions backend for serving portfolio content as one JSON payload.",
+  "type": "module",
+  "main": "netlify/functions/portfolio-data.js",
+  "scripts": {
+    "dev": "npx --yes netlify-cli dev",
+    "dev:local": "node scripts/local-server.js",
+    "test": "node --test",
+    "test:watch": "node --test --watch"
+  },
+  "keywords": [
+    "portfolio",
+    "netlify-functions",
+    "serverless"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "jose": "^5.9.6"
+  }
+}
