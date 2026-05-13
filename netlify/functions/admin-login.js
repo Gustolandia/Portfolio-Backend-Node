@@ -4,14 +4,9 @@ import {
   createLoginRateLimiter,
   loginRateLimitKey
 } from "../../src/admin/loginRateLimiter.js";
-import {
-  adminEmptyResponse,
-  adminErrorResponse,
-  adminJsonResponse
-} from "../../src/http/adminResponses.js";
-import { getMethod, parseJsonBody } from "../../src/http/request.js";
-
-const ALLOWED_METHODS = "POST, OPTIONS";
+import { createAdminFunction } from "../../src/http/adminFunction.js";
+import { adminJsonResponse } from "../../src/http/adminResponses.js";
+import { parseJsonBody } from "../../src/http/request.js";
 
 export function createHandler({
   credentialService = createAdminCredentialService(),
@@ -19,29 +14,10 @@ export function createHandler({
   sessionService = createAdminSessionService(),
   logger = console
 } = {}) {
-  return async function adminLoginHandler(event = {}) {
-    try {
-      const method = getMethod(event);
-
-      if (method === "OPTIONS") {
-        return adminEmptyResponse(event, 204, {
-          Allow: ALLOWED_METHODS
-        });
-      }
-
-      if (method !== "POST") {
-        return adminJsonResponse(
-          event,
-          405,
-          {
-            error: "Method Not Allowed"
-          },
-          {
-            Allow: ALLOWED_METHODS
-          }
-        );
-      }
-
+  return createAdminFunction({
+    allowedMethods: ["POST"],
+    logger,
+    handler: async (event) => {
       let body;
 
       try {
@@ -94,10 +70,8 @@ export function createHandler({
           "Set-Cookie": session.cookie
         }
       );
-    } catch (error) {
-      return adminErrorResponse(event, error, logger);
     }
-  };
+  });
 }
 
 export const handler = createHandler();

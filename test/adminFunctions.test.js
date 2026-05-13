@@ -16,6 +16,42 @@ const allowedOrigins = [
   "https://www.gustavopedroricou.com"
 ];
 
+function completePortfolioPayload(overrides = {}) {
+  return {
+    pages: {
+      home: {
+        title: "Home",
+        description: "Home page",
+        imageUrl: "https://example.com/home.jpg"
+      },
+      experience: {
+        title: "Experience",
+        description: "",
+        imageUrl: ""
+      },
+      education: {
+        title: "Education",
+        description: "",
+        imageUrl: ""
+      },
+      projects: {
+        title: "Projects",
+        description: "",
+        imageUrl: ""
+      },
+      contact: {
+        title: "Contact",
+        description: "",
+        imageUrl: ""
+      }
+    },
+    jobs: [],
+    education: [],
+    projects: [],
+    ...overrides
+  };
+}
+
 function event({ body, headers = {}, method = "GET" } = {}) {
   return {
     body: body ? JSON.stringify(body) : "",
@@ -116,6 +152,29 @@ test("admin endpoint with unapproved origin does not return wildcard CORS", asyn
   assert.equal(response.headers["Access-Control-Allow-Origin"], undefined);
   assert.notEqual(response.headers["Access-Control-Allow-Origin"], "*");
   assert.equal(response.headers["Access-Control-Allow-Credentials"], undefined);
+});
+
+test("admin server errors include CORS for approved origins without leaking details", async () => {
+  const handler = createSessionHandler({
+    logger: {
+      error: () => {}
+    },
+    sessionService: {
+      readSession: async () => {
+        throw new Error("secret provider detail");
+      }
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 500);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+  assert.equal(response.headers["Access-Control-Allow-Credentials"], "true");
+  assert.deepEqual(body, {
+    error: "Internal Server Error"
+  });
 });
 
 test("admin preflight for portfolio save includes credentialed exact-origin CORS", async () => {
@@ -236,6 +295,38 @@ test("admin logout requires matching CSRF token and clears cookie", async () => 
   assert.match(response.headers["Set-Cookie"], /Max-Age=0/);
 });
 
+test("admin logout rejects invalid CSRF token", async () => {
+  const session = {
+    authenticated: true,
+    csrfToken: "csrf",
+    user: {
+      email: "admin@example.com"
+    }
+  };
+  const handler = createLogoutHandler({
+    sessionService: {
+      readSession: async () => session,
+      validateCsrfToken: () => false
+    }
+  });
+
+  const response = await handler(
+    event({
+      headers: {
+        "x-csrf-token": "wrong"
+      },
+      method: "POST"
+    })
+  );
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 403);
+  assert.deepEqual(body, {
+    error: "Invalid CSRF token"
+  });
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+});
+
 test("admin portfolio endpoint requires a session for reads", async () => {
   const handler = createAdminDataHandler({
     sessionService: {
@@ -250,6 +341,118 @@ test("admin portfolio endpoint requires a session for reads", async () => {
   assert.equal(response.statusCode, 401);
   assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
   assert.equal(response.headers["Access-Control-Allow-Credentials"], "true");
+});
+
+test("admin portfolio endpoint returns data for authenticated reads", async () => {
+  const handler = createAdminDataHandler({
+    portfolioService: {
+      getPortfolioData: async () => completePortfolioPayload()
+    },
+    sessionService: {
+      readSession: async () => ({
+        authenticated: true,
+        csrfToken: "csrf",
+        user: {
+          email: "admin@example.com"
+        }
+      })
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(body.pages.home.title, "Home");
+  assert.deepEqual(body.jobs, []);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+});
+
+test("admin portfolio endpoint rejects unauthenticated writes", async () => {
+  const handler = createAdminDataHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: false
+      })
+    }
+  });
+
+  const response = await handler(
+    event({
+      body: completePortfolioPayload(),
+      method: "PUT"
+    })
+  );
+
+  assert.equal(response.statusCode, 401);
+});
+
+test("admin portfolio endpoint rejects writes with invalid CSRF token", async () => {
+  const handler = createAdminDataHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: true,
+        csrfToken: "csrf",
+        user: {
+          email: "admin@example.com"
+        }
+      }),
+      validateCsrfToken: () => false
+    }
+  });
+
+  const response = await handler(
+    event({
+      body: completePortfolioPayload(),
+      headers: {
+        "x-csrf-token": "wrong"
+      },
+      method: "PUT"
+    })
+  );
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 403);
+  assert.deepEqual(body, {
+    error: "Invalid CSRF token"
+  });
+});
+
+test("admin portfolio endpoint rejects incomplete write payloads", async () => {
+  const handler = createAdminDataHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: true,
+        csrfToken: "csrf",
+        user: {
+          email: "admin@example.com"
+        }
+      }),
+      validateCsrfToken: () => true
+    }
+  });
+
+  const response = await handler(
+    event({
+      body: {
+        pages: {
+          home: {
+            title: "Home"
+          }
+        },
+        jobs: []
+      },
+      headers: {
+        "x-csrf-token": "csrf"
+      },
+      method: "PUT"
+    })
+  );
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 400);
+  assert.equal(body.error, "Invalid portfolio payload");
+  assert.ok(body.details.some((detail) => detail.includes("education")));
 });
 
 test("admin portfolio endpoint writes normalized data with valid session and CSRF", async () => {
@@ -280,12 +483,7 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
   const response = await handler(
     event({
       body: {
-        pages: {
-          home: {
-            title: "Home",
-            unsafe: "remove"
-          }
-        },
+        ...completePortfolioPayload(),
         jobs: [
           {
             company: "Company",
@@ -304,12 +502,22 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
   assert.equal(response.statusCode, 200);
   assert.deepEqual(savedData.pages.home, {
     title: "Home",
-    description: "",
-    imageUrl: ""
+    description: "Home page",
+    imageUrl: "https://example.com/home.jpg"
   });
   assert.deepEqual(savedData.jobs, [
     {
-      company: "Company"
+      title: "",
+      company: "Company",
+      duration: "",
+      location: "",
+      start: "",
+      end: "",
+      imageUrls: [],
+      imageTitles: [],
+      duties: [],
+      skills: [],
+      mapLocation: ""
     }
   ]);
   assert.equal(body.pages.home.title, "Home");

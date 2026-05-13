@@ -1,37 +1,12 @@
 import { createAdminSessionService } from "../../src/admin/adminSessionService.js";
-import {
-  adminEmptyResponse,
-  adminErrorResponse,
-  adminJsonResponse
-} from "../../src/http/adminResponses.js";
-import { getMethod } from "../../src/http/request.js";
-
-const ALLOWED_METHODS = "GET, OPTIONS";
+import { createAdminFunction } from "../../src/http/adminFunction.js";
+import { adminJsonResponse } from "../../src/http/adminResponses.js";
 
 export function createHandler({ logger = console, sessionService = createAdminSessionService() } = {}) {
-  return async function adminSessionHandler(event = {}) {
-    try {
-      const method = getMethod(event);
-
-      if (method === "OPTIONS") {
-        return adminEmptyResponse(event, 204, {
-          Allow: ALLOWED_METHODS
-        });
-      }
-
-      if (method !== "GET") {
-        return adminJsonResponse(
-          event,
-          405,
-          {
-            error: "Method Not Allowed"
-          },
-          {
-            Allow: ALLOWED_METHODS
-          }
-        );
-      }
-
+  return createAdminFunction({
+    allowedMethods: ["GET"],
+    logger,
+    handler: async (event) => {
       const session = await sessionService.readSession(event);
 
       if (!session.authenticated) {
@@ -45,10 +20,8 @@ export function createHandler({ logger = console, sessionService = createAdminSe
         csrfToken: session.csrfToken,
         user: session.user
       });
-    } catch (error) {
-      return adminErrorResponse(event, error, logger);
     }
-  };
+  });
 }
 
 export const handler = createHandler();

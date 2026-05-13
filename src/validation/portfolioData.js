@@ -61,6 +61,8 @@ const ARRAY_FIELDS = new Set([
   "skills"
 ]);
 
+const TOP_LEVEL_KEYS = Object.freeze(["pages", "jobs", "education", "projects"]);
+
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -104,7 +106,6 @@ export function normalizeRichItem(value, allowedFields) {
 
   return Object.fromEntries(
     allowedFields
-      .filter((field) => Object.hasOwn(source, field))
       .map((field) => [
         field,
         ARRAY_FIELDS.has(field) ? safeStringArray(source[field]) : safeString(source[field])
@@ -132,5 +133,59 @@ export function normalizePortfolioData(value = {}) {
     jobs: normalizeRichArray(source.jobs, JOB_FIELDS),
     education: normalizeRichArray(source.education, EDUCATION_FIELDS),
     projects: normalizeRichArray(source.projects, PROJECT_FIELDS)
+  };
+}
+
+export function validateCompletePortfolioPayload(value) {
+  const errors = [];
+
+  if (!isObject(value)) {
+    return {
+      valid: false,
+      errors: ["Payload must be a JSON object."]
+    };
+  }
+
+  const unknownTopLevelKeys = Object.keys(value).filter(
+    (key) => !TOP_LEVEL_KEYS.includes(key)
+  );
+
+  if (unknownTopLevelKeys.length > 0) {
+    errors.push(`Unknown top-level keys: ${unknownTopLevelKeys.join(", ")}.`);
+  }
+
+  for (const key of TOP_LEVEL_KEYS) {
+    if (!Object.hasOwn(value, key)) {
+      errors.push(`Missing required top-level key: ${key}.`);
+    }
+  }
+
+  if (!isObject(value.pages)) {
+    errors.push("pages must be an object.");
+  } else {
+    const unknownPageKeys = Object.keys(value.pages).filter(
+      (key) => !PAGE_KEYS.includes(key)
+    );
+
+    if (unknownPageKeys.length > 0) {
+      errors.push(`Unknown page keys: ${unknownPageKeys.join(", ")}.`);
+    }
+
+    for (const pageKey of PAGE_KEYS) {
+      if (!isObject(value.pages[pageKey])) {
+        errors.push(`pages.${pageKey} must be an object.`);
+      }
+    }
+  }
+
+  for (const arrayKey of ["jobs", "education", "projects"]) {
+    if (!Array.isArray(value[arrayKey])) {
+      errors.push(`${arrayKey} must be an array.`);
+    }
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors
   };
 }

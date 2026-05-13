@@ -1,12 +1,9 @@
 import { createAuthService } from "../../src/auth/authService.js";
 import { emptyResponse, jsonResponse } from "../../src/http/responses.js";
+import { getMethod } from "../../src/http/request.js";
 import { createPortfolioService } from "../../src/services/portfolioService.js";
 
 const ALLOWED_METHODS = "GET, OPTIONS";
-
-function getMethod(event) {
-  return (event?.httpMethod || event?.requestContext?.http?.method || "GET").toUpperCase();
-}
 
 export function createHandler({
   authService = createAuthService(),
@@ -57,7 +54,7 @@ export function createHandler({
         "Cache-Control": "public, max-age=60, stale-while-revalidate=300"
       });
     } catch (error) {
-      logger.error?.("Unable to load portfolio data", error);
+      logger.error?.("Unable to load portfolio data");
 
       return jsonResponse(
         500,

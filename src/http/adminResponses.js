@@ -73,8 +73,8 @@ export function adminJsonResponse(event, statusCode, body, headers = {}) {
   };
 }
 
-export function adminErrorResponse(event, error, logger = console) {
-  logger.error?.("Admin function failed", error);
+export function adminErrorResponse(event, _error, logger = console) {
+  logger.error?.("Admin function failed");
 
   return adminJsonResponse(event, 500, {
     error: "Internal Server Error"

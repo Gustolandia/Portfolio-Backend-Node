@@ -1,42 +1,19 @@
 import { createAdminSessionService } from "../../src/admin/adminSessionService.js";
-import {
-  adminEmptyResponse,
-  adminErrorResponse,
-  adminJsonResponse
-} from "../../src/http/adminResponses.js";
-import { getMethod, parseJsonBody } from "../../src/http/request.js";
+import { createAdminFunction } from "../../src/http/adminFunction.js";
+import { adminJsonResponse } from "../../src/http/adminResponses.js";
+import { parseJsonBody } from "../../src/http/request.js";
 import { createPortfolioService } from "../../src/services/portfolioService.js";
-
-const ALLOWED_METHODS = "GET, PUT, OPTIONS";
+import { validateCompletePortfolioPayload } from "../../src/validation/portfolioData.js";
 
 export function createHandler({
   logger = console,
   portfolioService = createPortfolioService(),
   sessionService = createAdminSessionService()
 } = {}) {
-  return async function adminPortfolioDataHandler(event = {}) {
-    try {
-      const method = getMethod(event);
-
-      if (method === "OPTIONS") {
-        return adminEmptyResponse(event, 204, {
-          Allow: ALLOWED_METHODS
-        });
-      }
-
-      if (!["GET", "PUT"].includes(method)) {
-        return adminJsonResponse(
-          event,
-          405,
-          {
-            error: "Method Not Allowed"
-          },
-          {
-            Allow: ALLOWED_METHODS
-          }
-        );
-      }
-
+  return createAdminFunction({
+    allowedMethods: ["GET", "PUT"],
+    logger,
+    handler: async (event, method) => {
       const session = await sessionService.readSession(event);
 
       if (!session.authenticated) {
@@ -67,13 +44,20 @@ export function createHandler({
         });
       }
 
+      const validationResult = validateCompletePortfolioPayload(body);
+
+      if (!validationResult.valid) {
+        return adminJsonResponse(event, 400, {
+          error: "Invalid portfolio payload",
+          details: validationResult.errors
+        });
+      }
+
       const savedPortfolioData = await portfolioService.updatePortfolioData(body);
 
       return adminJsonResponse(event, 200, savedPortfolioData);
-    } catch (error) {
-      return adminErrorResponse(event, error, logger);
     }
-  };
+  });
 }
 
 export const handler = createHandler();
