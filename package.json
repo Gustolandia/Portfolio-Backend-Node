@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "npx --yes netlify-cli dev",
     "dev:local": "node scripts/local-server.js",
+    "hash:password": "node scripts/hash-password.js",
     "seed:redis": "node scripts/seed-redis.js",
     "test": "node --test",
     "test:watch": "node --test --watch"
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@upstash/redis": "^1.34.3",
+    "bcryptjs": "^2.4.3",
     "jose": "^5.9.6"
   }
 }

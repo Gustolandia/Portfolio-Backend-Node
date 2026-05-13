@@ -1,8 +1,18 @@
 import http from "node:http";
-import { handler } from "../netlify/functions/portfolio-data.js";
+import { handler as adminLoginHandler } from "../netlify/functions/admin-login.js";
+import { handler as adminLogoutHandler } from "../netlify/functions/admin-logout.js";
+import { handler as adminPortfolioDataHandler } from "../netlify/functions/admin-portfolio-data.js";
+import { handler as adminSessionHandler } from "../netlify/functions/admin-session.js";
+import { handler as portfolioDataHandler } from "../netlify/functions/portfolio-data.js";
 
 const port = Number(process.env.PORT || 8788);
-const functionPath = "/.netlify/functions/portfolio-data";
+const functionHandlers = new Map([
+  ["/.netlify/functions/admin-login", adminLoginHandler],
+  ["/.netlify/functions/admin-logout", adminLogoutHandler],
+  ["/.netlify/functions/admin-portfolio-data", adminPortfolioDataHandler],
+  ["/.netlify/functions/admin-session", adminSessionHandler],
+  ["/.netlify/functions/portfolio-data", portfolioDataHandler]
+]);
 
 function readBody(request) {
   const hasRequestBody =
@@ -23,8 +33,9 @@ function readBody(request) {
 
 const server = http.createServer(async (request, response) => {
   const url = new URL(request.url, `http://${request.headers.host}`);
+  const handler = functionHandlers.get(url.pathname);
 
-  if (url.pathname !== functionPath) {
+  if (!handler) {
     response.writeHead(404, {
       "Content-Type": "application/json; charset=utf-8"
     });
@@ -53,5 +64,5 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(port, () => {
-  console.log(`Portfolio function running at http://localhost:${port}${functionPath}`);
+  console.log(`Portfolio functions running at http://localhost:${port}/.netlify/functions`);
 });

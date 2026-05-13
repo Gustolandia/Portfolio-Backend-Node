@@ -6,6 +6,61 @@ export const PAGE_KEYS = Object.freeze([
   "contact"
 ]);
 
+export const JOB_FIELDS = Object.freeze([
+  "title",
+  "company",
+  "duration",
+  "location",
+  "start",
+  "end",
+  "imageUrls",
+  "imageTitles",
+  "duties",
+  "skills",
+  "mapLocation"
+]);
+
+export const EDUCATION_FIELDS = Object.freeze([
+  "degree",
+  "institution",
+  "duration",
+  "location",
+  "grade",
+  "start",
+  "end",
+  "imageUrls",
+  "imageTitles",
+  "courses",
+  "activities",
+  "skills",
+  "mapLocation"
+]);
+
+export const PROJECT_FIELDS = Object.freeze([
+  "name",
+  "dateOfCompletion",
+  "description",
+  "imageUrls",
+  "affiliations",
+  "collaborators",
+  "skills",
+  "links",
+  "linksTitles"
+]);
+
+const ARRAY_FIELDS = new Set([
+  "affiliations",
+  "activities",
+  "collaborators",
+  "courses",
+  "duties",
+  "imageTitles",
+  "imageUrls",
+  "links",
+  "linksTitles",
+  "skills"
+]);
+
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -16,6 +71,14 @@ function safeString(value) {
 
 function cloneJsonObject(value) {
   return JSON.parse(JSON.stringify(value));
+}
+
+function safeStringArray(value) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter((item) => typeof item === "string");
 }
 
 export function normalizePage(value) {
@@ -36,6 +99,27 @@ export function normalizeContentArray(value) {
   return value.filter(isObject).map(cloneJsonObject);
 }
 
+export function normalizeRichItem(value, allowedFields) {
+  const source = isObject(value) ? value : {};
+
+  return Object.fromEntries(
+    allowedFields
+      .filter((field) => Object.hasOwn(source, field))
+      .map((field) => [
+        field,
+        ARRAY_FIELDS.has(field) ? safeStringArray(source[field]) : safeString(source[field])
+      ])
+  );
+}
+
+export function normalizeRichArray(value, allowedFields) {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter(isObject).map((item) => normalizeRichItem(item, allowedFields));
+}
+
 export function normalizePortfolioData(value = {}) {
   const source = isObject(value) ? value : {};
   const sourcePages = isObject(source.pages) ? source.pages : {};
@@ -45,8 +129,8 @@ export function normalizePortfolioData(value = {}) {
 
   return {
     pages,
-    jobs: normalizeContentArray(source.jobs),
-    education: normalizeContentArray(source.education),
-    projects: normalizeContentArray(source.projects)
+    jobs: normalizeRichArray(source.jobs, JOB_FIELDS),
+    education: normalizeRichArray(source.education, EDUCATION_FIELDS),
+    projects: normalizeRichArray(source.projects, PROJECT_FIELDS)
   };
 }
