@@ -1,6 +1,11 @@
 [build]
   functions = "netlify/functions"
 
+[build.environment]
+  # These are public config switches, not secrets. Keep scanning enabled for
+  # actual credentials such as UPSTASH_REDIS_REST_TOKEN and AUTH_JWT_SECRET.
+  SECRETS_SCAN_OMIT_KEYS = "PORTFOLIO_STORE,PORTFOLIO_REDIS_KEY"
+
 [functions]
   included_files = ["data/portfolio.json"]
   node_bundler = "esbuild"

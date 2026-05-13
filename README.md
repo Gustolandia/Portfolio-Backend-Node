@@ -77,6 +77,8 @@ npm run seed:redis
 
 After seeding, trigger a Netlify redeploy. The public endpoint stays the same.
 
+Netlify secret scanning is configured to ignore `PORTFOLIO_STORE` and `PORTFOLIO_REDIS_KEY` because their values are public config strings that appear in code and docs. Real secrets such as `UPSTASH_REDIS_REST_TOKEN`, `AUTH_JWT_SECRET`, and `ADMIN_API_KEY` are still scanned.
+
 ## Local Development
 
 Install dependencies:
