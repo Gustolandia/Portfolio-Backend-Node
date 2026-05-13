@@ -1,17 +1,38 @@
+export const DEFAULT_ADMIN_ALLOWED_ORIGINS = Object.freeze([
+  "http://localhost:3000",
+  "https://gustavopedroricou.netlify.app",
+  "https://gustavopedroricou.com",
+  "https://www.gustavopedroricou.com"
+]);
+
 function configuredAdminOrigins() {
-  return (process.env.ADMIN_FRONTEND_ORIGIN || process.env.FRONTEND_ORIGIN || "")
+  const configuredOrigins = (process.env.ADMIN_FRONTEND_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
+
+  return [...new Set([...DEFAULT_ADMIN_ALLOWED_ORIGINS, ...configuredOrigins])];
+}
+
+export function isAdminOriginAllowed(event = {}) {
+  const requestOrigin = event.headers?.origin || event.headers?.Origin;
+
+  return configuredAdminOrigins().includes(requestOrigin);
 }
 
 export function adminCorsHeaders(event = {}, extraHeaders = {}) {
   const requestOrigin = event.headers?.origin || event.headers?.Origin;
   const allowedOrigins = configuredAdminOrigins();
-  const allowedOrigin = allowedOrigins.includes(requestOrigin)
-    ? requestOrigin
-    : allowedOrigins[0];
+
+  if (!allowedOrigins.includes(requestOrigin)) {
+    return {
+      Vary: "Origin",
+      ...extraHeaders
+    };
+  }
+
   const headers = {
+    "Access-Control-Allow-Origin": requestOrigin,
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Headers": "Content-Type, X-CSRF-Token",
     "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
@@ -20,14 +41,20 @@ export function adminCorsHeaders(event = {}, extraHeaders = {}) {
     ...extraHeaders
   };
 
-  if (allowedOrigin) {
-    headers["Access-Control-Allow-Origin"] = allowedOrigin;
-  }
-
   return headers;
 }
 
 export function adminEmptyResponse(event, statusCode = 204, headers = {}) {
+  if (statusCode === 204 && !isAdminOriginAllowed(event)) {
+    return {
+      statusCode: 403,
+      headers: {
+        Vary: "Origin"
+      },
+      body: ""
+    };
+  }
+
   return {
     statusCode,
     headers: adminCorsHeaders(event, headers),
@@ -44,4 +71,12 @@ export function adminJsonResponse(event, statusCode, body, headers = {}) {
     }),
     body: JSON.stringify(body)
   };
+}
+
+export function adminErrorResponse(event, error, logger = console) {
+  logger.error?.("Admin function failed", error);
+
+  return adminJsonResponse(event, 500, {
+    error: "Internal Server Error"
+  });
 }

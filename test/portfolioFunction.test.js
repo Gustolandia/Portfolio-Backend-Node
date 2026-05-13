@@ -28,6 +28,7 @@ test("portfolio-data function returns the full payload for GET requests", async 
 
   assert.equal(response.statusCode, 200);
   assert.equal(response.headers["Access-Control-Allow-Origin"], "*");
+  assert.equal(response.headers["Access-Control-Allow-Credentials"], undefined);
   assert.equal(body.pages.home.title, "Home");
   assert.deepEqual(body.jobs, []);
 });

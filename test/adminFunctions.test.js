@@ -7,8 +7,14 @@ import { createHandler as createSessionHandler } from "../netlify/functions/admi
 import { createAdminSessionService } from "../src/admin/adminSessionService.js";
 import { PortfolioService } from "../src/services/portfolioService.js";
 
-const origin = "https://portfolio.example.com";
+const origin = "http://localhost:3000";
 const sessionSecret = "a-long-test-secret-for-admin-session-signing";
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://gustavopedroricou.netlify.app",
+  "https://gustavopedroricou.com",
+  "https://www.gustavopedroricou.com"
+];
 
 function event({ body, headers = {}, method = "GET" } = {}) {
   return {
@@ -53,6 +59,7 @@ test("admin login sets an HttpOnly session cookie and returns a CSRF token", asy
   const body = JSON.parse(response.body);
 
   assert.equal(response.statusCode, 200);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
   assert.equal(response.headers["Access-Control-Allow-Credentials"], "true");
   assert.match(response.headers["Set-Cookie"], /HttpOnly/);
   assert.match(response.headers["Set-Cookie"], /Secure/);
@@ -60,6 +67,93 @@ test("admin login sets an HttpOnly session cookie and returns a CSRF token", asy
   assert.equal(body.authenticated, true);
   assert.equal(body.user.email, "admin@example.com");
   assert.equal(typeof body.csrfToken, "string");
+});
+
+test("admin session CORS echoes each approved frontend origin", async () => {
+  const handler = createSessionHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: false
+      })
+    }
+  });
+
+  for (const allowedOrigin of allowedOrigins) {
+    const response = await handler(
+      event({
+        headers: {
+          origin: allowedOrigin
+        },
+        method: "GET"
+      })
+    );
+
+    assert.equal(response.statusCode, 401);
+    assert.equal(response.headers["Access-Control-Allow-Origin"], allowedOrigin);
+    assert.equal(response.headers["Access-Control-Allow-Credentials"], "true");
+  }
+});
+
+test("admin endpoint with unapproved origin does not return wildcard CORS", async () => {
+  const handler = createSessionHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: false
+      })
+    }
+  });
+
+  const response = await handler(
+    event({
+      headers: {
+        origin: "https://evil.example.com"
+      },
+      method: "GET"
+    })
+  );
+
+  assert.equal(response.statusCode, 401);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], undefined);
+  assert.notEqual(response.headers["Access-Control-Allow-Origin"], "*");
+  assert.equal(response.headers["Access-Control-Allow-Credentials"], undefined);
+});
+
+test("admin preflight for portfolio save includes credentialed exact-origin CORS", async () => {
+  const handler = createAdminDataHandler();
+  const response = await handler(
+    event({
+      headers: {
+        "access-control-request-headers": "Content-Type, X-CSRF-Token",
+        "access-control-request-method": "PUT",
+        origin
+      },
+      method: "OPTIONS"
+    })
+  );
+
+  assert.equal(response.statusCode, 204);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+  assert.equal(response.headers["Access-Control-Allow-Credentials"], "true");
+  assert.equal(response.headers["Access-Control-Allow-Headers"], "Content-Type, X-CSRF-Token");
+  assert.equal(response.headers["Access-Control-Allow-Methods"], "GET, POST, PUT, OPTIONS");
+  assert.equal(response.headers.Allow, "GET, PUT, OPTIONS");
+  assert.equal(response.body, "");
+});
+
+test("admin preflight with unapproved origin is rejected without CORS origin", async () => {
+  const handler = createAdminDataHandler();
+  const response = await handler(
+    event({
+      headers: {
+        origin: "https://evil.example.com"
+      },
+      method: "OPTIONS"
+    })
+  );
+
+  assert.equal(response.statusCode, 403);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], undefined);
+  assert.equal(response.headers.Vary, "Origin");
 });
 
 test("admin login rate limits repeated attempts", async () => {
@@ -154,6 +248,8 @@ test("admin portfolio endpoint requires a session for reads", async () => {
   const response = await handler(event({ method: "GET" }));
 
   assert.equal(response.statusCode, 401);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+  assert.equal(response.headers["Access-Control-Allow-Credentials"], "true");
 });
 
 test("admin portfolio endpoint writes normalized data with valid session and CSRF", async () => {
