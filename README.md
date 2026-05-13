@@ -18,11 +18,12 @@ netlify/functions/portfolio-data.js Netlify Function handler
 src/auth/authService.js             Auth service for future write endpoints
 src/services/portfolioService.js    API-facing portfolio service
 src/storage/jsonPortfolioStore.js   Local JSON storage adapter
+src/storage/redisPortfolioStore.js  Upstash Redis storage adapter
 src/validation/portfolioData.js     Payload normalization
 test/                              Node test suite
 ```
 
-The function depends on the service layer, and the service depends on a storage adapter. To move from local JSON to Redis or another hosted KV later, add a new storage adapter with `getPortfolioData()` and wire it in without changing the function handler.
+The function depends on the service layer, and the service depends on a storage adapter. Use `PORTFOLIO_STORE=json` for local JSON, or `PORTFOLIO_STORE=redis` to read the payload from Upstash Redis.
 
 ## Environment Variables
 
@@ -32,11 +33,49 @@ Copy `.env.example` to `.env` for local development.
 FRONTEND_ORIGIN=http://localhost:3000
 AUTH_JWT_SECRET=replace-with-a-long-random-secret
 ADMIN_API_KEY=replace-with-a-long-random-api-key
+PORTFOLIO_STORE=json
+PORTFOLIO_REDIS_KEY=portfolio:data
+UPSTASH_REDIS_REST_URL=https://your-database.upstash.io
+UPSTASH_REDIS_REST_TOKEN=replace-with-your-upstash-token
 ```
 
 `FRONTEND_ORIGIN` controls CORS. If it is not set, the function returns `Access-Control-Allow-Origin: *`.
 
 `AUTH_JWT_SECRET` and `ADMIN_API_KEY` are not needed for public GET requests. They are used to protect future non-GET operations.
+
+## Upstash Redis
+
+Upstash is a good Redis choice for Netlify Functions because its official JavaScript client uses HTTP instead of persistent TCP connections.
+
+1. Log in to Upstash.
+2. Create a Redis database.
+3. Open the database's REST API or connection section.
+4. Copy `UPSTASH_REDIS_REST_URL`.
+5. Copy `UPSTASH_REDIS_REST_TOKEN`.
+6. Add these Netlify environment variables:
+
+```text
+PORTFOLIO_STORE=redis
+PORTFOLIO_REDIS_KEY=portfolio:data
+UPSTASH_REDIS_REST_URL=your-upstash-rest-url
+UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token
+```
+
+Seed Redis from the local JSON file:
+
+```bash
+UPSTASH_REDIS_REST_URL=your-upstash-rest-url UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token npm run seed:redis
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:UPSTASH_REDIS_REST_URL="your-upstash-rest-url"
+$env:UPSTASH_REDIS_REST_TOKEN="your-upstash-rest-token"
+npm run seed:redis
+```
+
+After seeding, trigger a Netlify redeploy. The public endpoint stays the same.
 
 ## Local Development
 
