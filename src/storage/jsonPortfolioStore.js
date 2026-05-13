@@ -1,11 +1,8 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
 export const DEFAULT_PORTFOLIO_DATA_PATH = path.resolve(
-  currentDirectory,
-  "../../data/portfolio.json"
+  process.env.PORTFOLIO_DATA_PATH || "data/portfolio.json"
 );
 
 export class JsonPortfolioStore {
