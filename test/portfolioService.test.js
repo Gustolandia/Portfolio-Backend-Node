@@ -48,6 +48,7 @@ test("portfolio service writes normalized data and reads the updated content", a
     jobs: [
       {
         company: "Company",
+        duration: "Deprecated",
         unknown: "discard"
       }
     ]
@@ -58,7 +59,6 @@ test("portfolio service writes normalized data and reads the updated content", a
   assert.deepEqual(readData.jobs[0], {
     title: "",
     company: "Company",
-    duration: "",
     location: "",
     start: "",
     end: "",
@@ -68,4 +68,54 @@ test("portfolio service writes normalized data and reads the updated content", a
     skills: [],
     mapLocation: ""
   });
+  assert.equal(Object.hasOwn(readData.jobs[0], "duration"), false);
+});
+
+test("portfolio service persists entries ordered by most recent end date", async () => {
+  let storedData = {};
+  const service = new PortfolioService({
+    store: {
+      getPortfolioData: async () => storedData,
+      setPortfolioData: async (data) => {
+        storedData = data;
+      }
+    }
+  });
+
+  const savedData = await service.updatePortfolioData({
+    jobs: [
+      {
+        company: "Older",
+        end: "2020-01-01"
+      },
+      {
+        company: "Latest",
+        end: "2024-01-01"
+      }
+    ],
+    education: [
+      {
+        degree: "Older",
+        end: "2018-06-01"
+      },
+      {
+        degree: "Latest",
+        end: "2022-06-01"
+      }
+    ],
+    projects: [
+      {
+        dateOfCompletion: "2019",
+        name: "Older"
+      },
+      {
+        dateOfCompletion: "Feb 2025",
+        name: "Latest"
+      }
+    ]
+  });
+
+  assert.equal(savedData.jobs[0].company, "Latest");
+  assert.equal(storedData.education[0].degree, "Latest");
+  assert.equal(storedData.projects[0].name, "Latest");
 });

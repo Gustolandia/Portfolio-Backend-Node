@@ -65,7 +65,6 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
     {
       title: "",
       company: "Company",
-      duration: "",
       location: "",
       start: "",
       end: "",
@@ -76,6 +75,55 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
       mapLocation: ""
     }
   );
+});
+
+test("normalizes portfolio data without duration fields and sorts latest entries first", () => {
+  const data = normalizePortfolioData({
+    jobs: [
+      {
+        company: "Older",
+        duration: "Jan 2020 - Jan 2021",
+        end: "2021-01-01",
+        start: "2020-01-01"
+      },
+      {
+        company: "Latest",
+        duration: "Jan 2023 - Jan 2024",
+        end: "2024-01-01",
+        start: "2023-01-01"
+      }
+    ],
+    education: [
+      {
+        degree: "Older Degree",
+        duration: "2018 - 2019",
+        end: "2019-06-01",
+        start: "2018-09-01"
+      },
+      {
+        degree: "Latest Degree",
+        duration: "2022 - 2023",
+        end: "2023-08-01",
+        start: "2022-09-01"
+      }
+    ],
+    projects: [
+      {
+        dateOfCompletion: "2021",
+        name: "Older Project"
+      },
+      {
+        dateOfCompletion: "Aug 2023",
+        name: "Latest Project"
+      }
+    ]
+  });
+
+  assert.equal(data.jobs[0].company, "Latest");
+  assert.equal(data.education[0].degree, "Latest Degree");
+  assert.equal(data.projects[0].name, "Latest Project");
+  assert.equal(Object.hasOwn(data.jobs[0], "duration"), false);
+  assert.equal(Object.hasOwn(data.education[0], "duration"), false);
 });
 
 test("validates complete admin portfolio payloads", () => {

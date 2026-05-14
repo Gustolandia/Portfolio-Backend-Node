@@ -9,7 +9,6 @@ export const PAGE_KEYS = Object.freeze([
 export const JOB_FIELDS = Object.freeze([
   "title",
   "company",
-  "duration",
   "location",
   "start",
   "end",
@@ -23,7 +22,6 @@ export const JOB_FIELDS = Object.freeze([
 export const EDUCATION_FIELDS = Object.freeze([
   "degree",
   "institution",
-  "duration",
   "location",
   "grade",
   "start",
@@ -62,6 +60,7 @@ const ARRAY_FIELDS = new Set([
 ]);
 
 const TOP_LEVEL_KEYS = Object.freeze(["pages", "jobs", "education", "projects"]);
+const OPEN_ENDED_DATE_VALUES = new Set(["current", "now", "ongoing", "present"]);
 
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -83,6 +82,12 @@ function safeStringArray(value) {
   return value.filter((item) => typeof item === "string");
 }
 
+/**
+ * Normalizes a fixed page entry and removes unsupported page fields.
+ *
+ * @param {unknown} value Candidate page object.
+ * @returns {{title: string, description: string, imageUrl: string}} Safe page payload.
+ */
 export function normalizePage(value) {
   const page = isObject(value) ? value : {};
 
@@ -93,6 +98,12 @@ export function normalizePage(value) {
   };
 }
 
+/**
+ * Preserves only JSON objects in a generic content array.
+ *
+ * @param {unknown} value Candidate content array.
+ * @returns {Record<string, unknown>[]} Deep-cloned object entries.
+ */
 export function normalizeContentArray(value) {
   if (!Array.isArray(value)) {
     return [];
@@ -101,6 +112,16 @@ export function normalizeContentArray(value) {
   return value.filter(isObject).map(cloneJsonObject);
 }
 
+/**
+ * Normalizes one rich portfolio item to the configured field allow-list.
+ *
+ * Fields not present in the allow-list are discarded. String fields default to
+ * an empty string, and array fields default to an empty array.
+ *
+ * @param {unknown} value Candidate rich portfolio item.
+ * @param {readonly string[]} allowedFields Field names to keep.
+ * @returns {Record<string, string | string[]>} Safe rich item.
+ */
 export function normalizeRichItem(value, allowedFields) {
   const source = isObject(value) ? value : {};
 
@@ -113,14 +134,78 @@ export function normalizeRichItem(value, allowedFields) {
   );
 }
 
-export function normalizeRichArray(value, allowedFields) {
+function parseSortableDate(value) {
+  if (typeof value !== "string") {
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  const normalizedValue = value.trim();
+
+  if (!normalizedValue) {
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  if (OPEN_ENDED_DATE_VALUES.has(normalizedValue.toLowerCase())) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const timestamp = Date.parse(normalizedValue);
+
+  return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
+}
+
+function sortByLatestDate(items, dateFields) {
+  return items
+    .map((item, index) => ({
+      index,
+      item,
+      timestamp: Math.max(...dateFields.map((field) => parseSortableDate(item[field])))
+    }))
+    .sort((left, right) => {
+      if (right.timestamp !== left.timestamp) {
+        return right.timestamp - left.timestamp;
+      }
+
+      return left.index - right.index;
+    })
+    .map(({ item }) => item);
+}
+
+/**
+ * Normalizes and sorts a rich portfolio collection.
+ *
+ * Sorting is descending by the latest configured date field so the most recent
+ * job, education entry, or project appears first in the API payload and in
+ * persisted storage.
+ *
+ * @param {unknown} value Candidate rich item array.
+ * @param {readonly string[]} allowedFields Field names to keep.
+ * @param {readonly string[]} dateFields Date-like fields used for ordering.
+ * @returns {Record<string, string | string[]>[]} Normalized, sorted entries.
+ */
+export function normalizeRichArray(value, allowedFields, dateFields = []) {
   if (!Array.isArray(value)) {
     return [];
   }
 
-  return value.filter(isObject).map((item) => normalizeRichItem(item, allowedFields));
+  const normalizedItems = value
+    .filter(isObject)
+    .map((item) => normalizeRichItem(item, allowedFields));
+
+  return sortByLatestDate(normalizedItems, dateFields);
 }
 
+/**
+ * Builds the complete public/admin portfolio payload.
+ *
+ * The returned payload removes deprecated fields such as `duration`, keeps only
+ * the supported page and rich-item fields, defaults missing strings/arrays to
+ * safe empty values, and sorts jobs, education, and projects by most recent end
+ * date first.
+ *
+ * @param {unknown} value Candidate portfolio payload.
+ * @returns {{pages: Record<string, {title: string, description: string, imageUrl: string}>, jobs: object[], education: object[], projects: object[]}} Normalized portfolio payload.
+ */
 export function normalizePortfolioData(value = {}) {
   const source = isObject(value) ? value : {};
   const sourcePages = isObject(source.pages) ? source.pages : {};
@@ -130,12 +215,21 @@ export function normalizePortfolioData(value = {}) {
 
   return {
     pages,
-    jobs: normalizeRichArray(source.jobs, JOB_FIELDS),
-    education: normalizeRichArray(source.education, EDUCATION_FIELDS),
-    projects: normalizeRichArray(source.projects, PROJECT_FIELDS)
+    jobs: normalizeRichArray(source.jobs, JOB_FIELDS, ["end", "start"]),
+    education: normalizeRichArray(source.education, EDUCATION_FIELDS, ["end", "start"]),
+    projects: normalizeRichArray(source.projects, PROJECT_FIELDS, ["dateOfCompletion"])
   };
 }
 
+/**
+ * Validates that an admin save request contains a complete portfolio payload.
+ *
+ * Rich item unknown fields are intentionally not rejected here because
+ * normalization discards them, preserving the existing admin editing behavior.
+ *
+ * @param {unknown} value Candidate request body.
+ * @returns {{valid: boolean, errors: string[]}} Validation result and messages.
+ */
 export function validateCompletePortfolioPayload(value) {
   const errors = [];
 

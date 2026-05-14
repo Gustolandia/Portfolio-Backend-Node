@@ -45,6 +45,67 @@ Successful login/session responses return:
 
 `admin-logout` and `PUT admin-portfolio-data` require the session cookie and `X-CSRF-Token`.
 
+## Portfolio Payload Contract
+
+Both public and admin data endpoints return one complete portfolio payload:
+
+```json
+{
+  "pages": {
+    "home": {
+      "title": "",
+      "description": "",
+      "imageUrl": ""
+    },
+    "experience": {
+      "title": "",
+      "description": "",
+      "imageUrl": ""
+    },
+    "education": {
+      "title": "",
+      "description": "",
+      "imageUrl": ""
+    },
+    "projects": {
+      "title": "",
+      "description": "",
+      "imageUrl": ""
+    },
+    "contact": {
+      "title": "",
+      "description": "",
+      "imageUrl": ""
+    }
+  },
+  "jobs": [],
+  "education": [],
+  "projects": []
+}
+```
+
+`duration` is deprecated and removed from backend responses and saves. Jobs and education should use `start` and `end` only. Projects use `dateOfCompletion`.
+
+Jobs are normalized to these fields only:
+
+```text
+title, company, location, start, end, imageUrls, imageTitles, duties, skills, mapLocation
+```
+
+Education entries are normalized to these fields only:
+
+```text
+degree, institution, location, grade, start, end, imageUrls, imageTitles, courses, activities, skills, mapLocation
+```
+
+Projects are normalized to these fields only:
+
+```text
+name, dateOfCompletion, description, imageUrls, affiliations, collaborators, skills, links, linksTitles
+```
+
+Missing string fields become `""`, missing array fields become `[]`, and unsupported rich-item fields are discarded. Jobs and education are sorted by latest `end` date first, falling back to `start`. Projects are sorted by latest `dateOfCompletion` first.
+
 ## Project Layout
 
 ```text
@@ -116,6 +177,12 @@ Seed Redis from the local JSON file:
 UPSTASH_REDIS_REST_URL=your-upstash-rest-url UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token npm run seed:redis
 ```
 
+Normalize the current Redis value in place after a data-contract change:
+
+```bash
+UPSTASH_REDIS_REST_URL=your-upstash-rest-url UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token npm run migrate:redis
+```
+
 On Windows PowerShell:
 
 ```powershell
@@ -124,7 +191,13 @@ $env:UPSTASH_REDIS_REST_TOKEN="your-upstash-rest-token"
 npm run seed:redis
 ```
 
-After seeding, trigger a Netlify redeploy. The public endpoint stays the same.
+For an in-place Redis migration on Windows PowerShell, use the same environment variables and run:
+
+```powershell
+npm run migrate:redis
+```
+
+After seeding or migrating, the public endpoint stays the same. Data-only Redis changes are available to the next function request.
 
 Netlify secret scanning is configured to ignore public config strings such as origins, admin email, `PORTFOLIO_STORE`, `PORTFOLIO_REDIS_KEY`, and `UPSTASH_REDIS_REST_URL`. Real secrets such as `ADMIN_PASSWORD_HASH`, `UPSTASH_REDIS_REST_TOKEN`, `AUTH_JWT_SECRET`, and `ADMIN_API_KEY` are still scanned.
 
@@ -161,7 +234,7 @@ curl http://localhost:8788/.netlify/functions/portfolio-data
 npm test
 ```
 
-The tests cover the Netlify Function behavior, local JSON storage, service normalization, auth service, and the public data shape.
+The tests cover the Netlify Function behavior, local JSON storage, service normalization and ordering, auth service, and the public data shape.
 
 ## Deploying To Netlify
 

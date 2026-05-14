@@ -8,6 +8,7 @@
     "dev": "npx --yes netlify-cli dev",
     "dev:local": "node scripts/local-server.js",
     "hash:password": "node scripts/hash-password.js",
+    "migrate:redis": "node scripts/migrate-redis.js",
     "seed:redis": "node scripts/seed-redis.js",
     "test": "node --test",
     "test:watch": "node --test --watch"

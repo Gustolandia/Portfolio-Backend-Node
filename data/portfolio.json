@@ -30,7 +30,6 @@
     {
       "title": "Full Stack Developer",
       "company": "Datto (Kaseya)",
-      "duration": "Jul 2023 - Jan 2024",
       "location": "Cracow, Poland",
       "start": "2023-07-01",
       "end": "2024-01-01",
@@ -100,7 +99,6 @@
     {
       "title": "Research Intern",
       "company": "Technological University of the Shannon",
-      "duration": "Jan 2023 - Jul 2023",
       "location": "Athlone, Ireland",
       "start": "2023-01-01",
       "end": "2023-07-01",
@@ -150,7 +148,6 @@
     {
       "title": "Senior Sampling Quality Analyst",
       "company": "TikTok",
-      "duration": "Oct 2020 - Jun 2023",
       "location": "Dublin, Ireland",
       "start": "2020-10-01",
       "end": "2023-06-01",
@@ -197,7 +194,6 @@
     {
       "title": "JavaScript Automation Engineer & Process Improvement Specialist",
       "company": "Accenture (Client: Google)",
-      "duration": "Jan 2019 - Aug 2019",
       "location": "Cracow, Poland",
       "start": "2019-01-01",
       "end": "2019-08-01",
@@ -249,7 +245,6 @@
     {
       "title": "Senior JavaScript Automation Engineer & Process Improvement Specialist",
       "company": "Arvato Finance (Client: Google)",
-      "duration": "Jun 2017 - Dec 2018",
       "location": "Cracow, Poland",
       "start": "2018-06-01",
       "end": "2018-12-01",
@@ -299,7 +294,6 @@
     {
       "title": "System Analyst & Back-end Developer",
       "company": "Vertu",
-      "duration": "Apr 2016 - May 2017",
       "location": "Athens, Greece",
       "start": "2016-04-01",
       "end": "2017-05-01",
@@ -357,7 +351,6 @@
     {
       "title": "Technical Support Engineer",
       "company": "Teleperformance (Client: Microsoft)",
-      "duration": "Oct 2015 - May 2016",
       "location": "Athens, Greece",
       "start": "2015-10-01",
       "end": "2016-05-01",
@@ -403,7 +396,6 @@
     {
       "title": "Research Intern",
       "company": "Institut Jean Lamour (IJL)",
-      "duration": "Mar 2015 - Oct 2015",
       "location": "Nancy, Grand Est, France",
       "start": "2015-03-01",
       "end": "2015-10-01",
@@ -444,7 +436,6 @@
     {
       "title": "Research Intern",
       "company": "Commissariat à l'Énergie Atomique et aux Énergies Alternatives (CEA) Cadarache",
-      "duration": "Jan 2015 - Apr 2015",
       "location": "Aix-en-Provence, France",
       "start": "2015-01-01",
       "end": "2015-04-01",
@@ -494,7 +485,6 @@
     {
       "title": "Research Intern",
       "company": "Institute of Plasma Physics of the Czech Academy of Sciences",
-      "duration": "Nov 2014 - Jan 2015",
       "location": "Prague, Czech Republic",
       "start": "2014-11-01",
       "end": "2015-01-01",
@@ -538,7 +528,6 @@
     {
       "title": "Research Assistant - Student Job",
       "company": "Institut für Grenzflächenverfahrenstechnik und Plasmatechnologie, Universität Stuttgart",
-      "duration": "Dec 2013 - Aug 2014",
       "location": "Stuttgart, Germany",
       "start": "2013-12-01",
       "end": "2014-08-01",
@@ -587,7 +576,6 @@
     {
       "title": "Tutor",
       "company": "AEFCUP - Associação de Estudantes da FCUP",
-      "duration": "Jan 2010 - Sep 2013",
       "location": "Porto, Portugal",
       "start": "2010-01-01",
       "end": "2013-09-01",
@@ -639,7 +627,6 @@
     {
       "title": "Research Intern",
       "company": "IFIMUP - Instituto de Física de Materiais Avançados, Nanotecnologia e Fotónica",
-      "duration": "Sep 2011 - Feb 2012",
       "location": "Porto, Portugal",
       "start": "2011-09-01",
       "end": "2012-02-01",
@@ -695,7 +682,6 @@
     {
       "degree": "MSc in Software Design with Cloud Native Computing (NFQ level 9 - EQF Level 7)",
       "institution": "Technological University of the Shannon",
-      "duration": "Sep 2022 - Nov 2023",
       "location": "Athlone, Ireland",
       "grade": "First Class Honours (GPA 4.0)",
       "start": "2022-09-01",
@@ -719,6 +705,7 @@
         "Research Methods and Professional Placement (6 sigma)",
         "Work Placement - Graduation Project at Datto (Kaseya) - Krakow"
       ],
+      "activities": [],
       "skills": [
         "Spring Boot",
         "Spring Framework",
@@ -776,7 +763,6 @@
     {
       "degree": "Higher Diploma in Science of Computing (NFQ level 8 - EQF Level 6)",
       "institution": "Atlantic Technological University",
-      "duration": "Sep 2021 - Oct 2022",
       "location": "Letterkenny, Ireland",
       "grade": "First Class Honours (GPA 4.0)",
       "start": "2021-09-01",
@@ -797,6 +783,7 @@
         "Software Engineering & Quality Assessment",
         "Internet Applications Development (HTML, CSS, PHP)"
       ],
+      "activities": [],
       "skills": [
         "MySQL",
         "SQL",
@@ -879,8 +866,8 @@
     {
       "degree": "Bootcamp - Node.js FullStack Development",
       "institution": "EPICODE",
-      "duration": "Apr 2020 - Oct 2020",
       "location": "Remote",
+      "grade": "",
       "start": "2020-04-01",
       "end": "2020-10-01",
       "imageUrls": [
@@ -900,6 +887,7 @@
         "Authentication",
         "Cloud (focused on Microsoft Azure services)"
       ],
+      "activities": [],
       "skills": [
         "HTML5",
         "CSS3",
@@ -938,13 +926,14 @@
         "Debugging",
         "Software Architecture",
         "Performance Optimization"
-      ]
+      ],
+      "mapLocation": ""
     },
     {
       "degree": "Engineering Physics - Nuclear Fusion Science",
       "institution": "Universite de Lorraine",
-      "duration": "Sep 2014 - Sep 2015",
       "location": "Nancy, France",
+      "grade": "",
       "start": "2014-09-01",
       "end": "2015-09-01",
       "imageUrls": [
@@ -960,12 +949,6 @@
         "From left to right, Bezia Lemma, Gustavo Pedro Ricou, Artur Vander Sande, Guillermo Suarez and Arvydas Šepetys",
         "Photo from Hotel de Ville, Place Stanislas",
         "Christmas in Strasbourg"
-      ],
-      "activities": [
-        "Handball",
-        "Basketball",
-        "Football",
-        "Volleyball"
       ],
       "courses": [
         "Advanced Condensed Matter Physics",
@@ -986,6 +969,12 @@
         "Plasma Turbulence, Transport and Heating",
         "Plasma-Wall Interactions",
         "Tokamaks: Operation and Research"
+      ],
+      "activities": [
+        "Handball",
+        "Basketball",
+        "Football",
+        "Volleyball"
       ],
       "skills": [
         "Python",
@@ -1021,8 +1010,8 @@
     {
       "degree": "Engineering Physics - Nuclear Fusion Science",
       "institution": "Universität Stuttgart",
-      "duration": "Sep 2013 - Sep 2014",
       "location": "Stuttgart, Germany",
+      "grade": "",
       "start": "2013-09-01",
       "end": "2014-09-01",
       "imageUrls": [
@@ -1040,13 +1029,6 @@
         "On the back row, left to right, Mikko Poikkimäki, Johan Zet Briones Paz, Gennadii Laskin, Pranay Valson, Heino Soo, Gustavo Pedro Ricou, Kim Hun-ho, Shreyas Muralidhar, Kushal Ramakrishna, Anurag Kanase, Theodoros Tsatsoulis, Sergio Cruz. On front row, Mahsa Sahebdivani, Jiyeong Kim-Poikkimäki, Namrata Gurung. At the Internationalen Zentrum (IZ) auf dem Campus Stuttgart-Vaihingen",
         "From left to right, Nicole Chia, Gustavo Pedro Ricou and Dionne Lee, at Straußäcker 3, Vaihingen-Stuttgart",
         "Field study of the German Language Class."
-      ],
-      "activities": [
-        "Handball",
-        "Basketball",
-        "Football",
-        "Volleyball",
-        "President of the Fiscal Council - Physis - Portuguese Association of Physics Students (organizer of the National Encounter of Physics Students)"
       ],
       "courses": [
         "Advanced Condensed Matter Physics",
@@ -1067,6 +1049,13 @@
         "Plasma Turbulence, Transport and Heating",
         "Plasma-Wall Interactions",
         "Tokamaks: Operation and Research"
+      ],
+      "activities": [
+        "Handball",
+        "Basketball",
+        "Football",
+        "Volleyball",
+        "President of the Fiscal Council - Physis - Portuguese Association of Physics Students (organizer of the National Encounter of Physics Students)"
       ],
       "skills": [
         "Python",
@@ -1101,7 +1090,6 @@
     {
       "degree": "Bachelor's degree in Physics (EQF level 6)",
       "institution": "Universidade do Porto",
-      "duration": "Sep 2008 - Sep 2013",
       "location": "Porto, Portugal",
       "grade": "15 (GPA 3.6 - Third best out of 50)",
       "start": "2008-09-01",
@@ -1127,12 +1115,6 @@
         "Winners of the Pubs Rally at the National Encounter of Physics Students at the University of Coimbra 2013",
         "Jazz Nights, organized by the Cultural Department of the Faculty of Sciences Student Association",
         "Volleyball Game (our victory), at the Faculty of Sports of the University of Porto"
-      ],
-      "activities": [
-        "Direction of AEFCUP - Student Association (Department of Education's Policy and Cultural Department)",
-        "Basketball Team",
-        "Volleyball Team",
-        "General Secretary - Physis - Portuguese Association of Physics Students (organizer of the National Encounter of Physics Students)"
       ],
       "courses": [
         "Classical Mechanics",
@@ -1163,6 +1145,12 @@
         "Optics",
         "Simulation",
         "Nuclear Chemistry and Radio Chemistry"
+      ],
+      "activities": [
+        "Direction of AEFCUP - Student Association (Department of Education's Policy and Cultural Department)",
+        "Basketball Team",
+        "Volleyball Team",
+        "General Secretary - Physis - Portuguese Association of Physics Students (organizer of the National Encounter of Physics Students)"
       ],
       "skills": [
         "Python",
@@ -1214,6 +1202,7 @@
         "Datto",
         "Technological University of the Shannon"
       ],
+      "collaborators": [],
       "skills": [
         "PHP",
         "MySQL",
@@ -1320,6 +1309,8 @@
         "https://lh3.googleusercontent.com/0pnNCE71ARa-9x1fpI-d4Bx5spZ79DYep7plVqlYtK0hvoE9UWjc_fgmilpmfTOU6V2Bs5nMFPWf42S_A0zFF68W=s1280-w1280-h800",
         "https://lh3.googleusercontent.com/0SjmWgpP_XB08haex4TYdaF03WlDiTZxLTWI6bvbcK3YVWjZBao5LctoROym666M1jAGG9_vqdhJ-it7sNZNe8HGlTc=s1280-w1280-h800"
       ],
+      "affiliations": [],
+      "collaborators": [],
       "skills": [
         "JavaScript",
         "HTML",
@@ -1341,6 +1332,115 @@
       ],
       "linksTitles": [
         "My YouTube Bookmarks Chrome Extension"
+      ]
+    },
+    {
+      "name": "Ireland's Luxury Apartments",
+      "dateOfCompletion": "2022",
+      "description": "Ireland's Luxury Apartments is a comprehensive real estate platform designed to showcase luxurious apartment listings across Ireland. Built with a focus on user experience, the website features a detailed filtering system that allows users to search for apartments based on various criteria such as price, location, and amenities. Each listing includes high-quality images, detailed descriptions, pricing, and addresses. Administrators can log in to manage listings, update property details, and handle inquiries. The website supports all standard REST operations, ensuring efficient data handling and management.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture1.JPG?updatedAt=1718105311991",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture2.JPG?updatedAt=1718105311997",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture3.JPG?updatedAt=1718105311883"
+      ],
+      "affiliations": [
+        "Atlantic Technological University"
+      ],
+      "collaborators": [],
+      "skills": [
+        "HTML",
+        "CSS",
+        "PHP",
+        "MariaDB",
+        "JavaScript",
+        "Bootstrap",
+        "Responsive Web Design",
+        "RESTful APIs",
+        "CRUD Operations",
+        "SQL",
+        "Database Management",
+        "User Authentication",
+        "Session Management",
+        "Form Validation",
+        "Image Handling",
+        "Filtering and Sorting",
+        "Version Control (Git)",
+        "Web Hosting (Awardspace)"
+      ],
+      "links": [
+        "http://irelandrealstate.onlinewebshop.net/"
+      ],
+      "linksTitles": [
+        "Ireland's Luxury Apartments Preview"
+      ]
+    },
+    {
+      "name": "USA Manslaughter Analysis 1980-2014",
+      "dateOfCompletion": "2022",
+      "description": "This comprehensive analysis delves into the trends and patterns of manslaughter cases in the USA from 1980 to 2014. Utilizing advanced data analytics and visualization techniques, the project provides insights into various demographic factors and temporal trends. Key features include detailed statistical analysis, interactive visualizations, and an in-depth examination of the data to uncover significant findings.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Murder_Ethnicity.png?updatedAt=1718109280212",
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Murder%20by%20Month.png?updatedAt=1718109280183"
+      ],
+      "affiliations": [
+        "Technological University of the Shannon"
+      ],
+      "collaborators": [],
+      "skills": [
+        "Python",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Jupyter Notebook",
+        "SQL",
+        "Data Analysis",
+        "Statistical Modeling",
+        "Data Visualization",
+        "Machine Learning",
+        "Predictive Analytics",
+        "Hypothesis Testing",
+        "Big Data",
+        "Data Cleaning",
+        "Exploratory Data Analysis"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/asl_2022_23_assignment_part2_A00304507.pdf?updatedAt=1714593497971"
+      ],
+      "linksTitles": [
+        "USA Manslaughter Analysis 1980-2014"
+      ]
+    },
+    {
+      "name": "Product Owner Role in Scrum",
+      "dateOfCompletion": "2021",
+      "description": "This comprehensive analysis delves into the essential role of the Product Owner in a Scrum development team. The Product Owner is pivotal in maximizing product value by managing the product backlog and ensuring the team works on the most crucial tasks. This role involves significant responsibilities, including defining and prioritizing user stories, collaborating with the Scrum Master and team members, and maintaining the product vision throughout the Scrum process. The analysis covers the fundamentals of Agile methodologies, the intricacies of the Scrum framework, and the critical responsibilities and skills required for a Product Owner to succeed.",
+      "imageUrls": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Agile_Manifesto.png?updatedAt=1718109792972"
+      ],
+      "affiliations": [
+        "Atlantic Technological University"
+      ],
+      "collaborators": [],
+      "skills": [
+        "Agile (Scrum)",
+        "Product Backlog Management",
+        "User Story Writing",
+        "Sprint Planning",
+        "Stakeholder Engagement",
+        "Prioritization",
+        "JIRA",
+        "Confluence",
+        "Trello",
+        "Team Collaboration",
+        "Project Management",
+        "Requirements Gathering",
+        "Vision Setting"
+      ],
+      "links": [
+        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/ProductOwnerEssentialRoleL00170136.pdf?updatedAt=1714593503089"
+      ],
+      "linksTitles": [
+        "The Product Owner plays an essential role in a Scrum development team"
       ]
     },
     {
@@ -1392,112 +1492,6 @@
       ]
     },
     {
-      "name": "Ireland's Luxury Apartments",
-      "dateOfCompletion": "2022",
-      "description": "Ireland's Luxury Apartments is a comprehensive real estate platform designed to showcase luxurious apartment listings across Ireland. Built with a focus on user experience, the website features a detailed filtering system that allows users to search for apartments based on various criteria such as price, location, and amenities. Each listing includes high-quality images, detailed descriptions, pricing, and addresses. Administrators can log in to manage listings, update property details, and handle inquiries. The website supports all standard REST operations, ensuring efficient data handling and management.",
-      "imageUrls": [
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture1.JPG?updatedAt=1718105311991",
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture2.JPG?updatedAt=1718105311997",
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Capture3.JPG?updatedAt=1718105311883"
-      ],
-      "affiliations": [
-        "Atlantic Technological University"
-      ],
-      "skills": [
-        "HTML",
-        "CSS",
-        "PHP",
-        "MariaDB",
-        "JavaScript",
-        "Bootstrap",
-        "Responsive Web Design",
-        "RESTful APIs",
-        "CRUD Operations",
-        "SQL",
-        "Database Management",
-        "User Authentication",
-        "Session Management",
-        "Form Validation",
-        "Image Handling",
-        "Filtering and Sorting",
-        "Version Control (Git)",
-        "Web Hosting (Awardspace)"
-      ],
-      "links": [
-        "http://irelandrealstate.onlinewebshop.net/"
-      ],
-      "linksTitles": [
-        "Ireland's Luxury Apartments Preview"
-      ]
-    },
-    {
-      "name": "USA Manslaughter Analysis 1980-2014",
-      "dateOfCompletion": "2022",
-      "description": "This comprehensive analysis delves into the trends and patterns of manslaughter cases in the USA from 1980 to 2014. Utilizing advanced data analytics and visualization techniques, the project provides insights into various demographic factors and temporal trends. Key features include detailed statistical analysis, interactive visualizations, and an in-depth examination of the data to uncover significant findings.",
-      "imageUrls": [
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Murder_Ethnicity.png?updatedAt=1718109280212",
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Murder%20by%20Month.png?updatedAt=1718109280183"
-      ],
-      "affiliations": [
-        "Technological University of the Shannon"
-      ],
-      "skills": [
-        "Python",
-        "Pandas",
-        "Matplotlib",
-        "Seaborn",
-        "Jupyter Notebook",
-        "SQL",
-        "Data Analysis",
-        "Statistical Modeling",
-        "Data Visualization",
-        "Machine Learning",
-        "Predictive Analytics",
-        "Hypothesis Testing",
-        "Big Data",
-        "Data Cleaning",
-        "Exploratory Data Analysis"
-      ],
-      "links": [
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/asl_2022_23_assignment_part2_A00304507.pdf?updatedAt=1714593497971"
-      ],
-      "linksTitles": [
-        "USA Manslaughter Analysis 1980-2014"
-      ]
-    },
-    {
-      "name": "Product Owner Role in Scrum",
-      "dateOfCompletion": "2021",
-      "description": "This comprehensive analysis delves into the essential role of the Product Owner in a Scrum development team. The Product Owner is pivotal in maximizing product value by managing the product backlog and ensuring the team works on the most crucial tasks. This role involves significant responsibilities, including defining and prioritizing user stories, collaborating with the Scrum Master and team members, and maintaining the product vision throughout the Scrum process. The analysis covers the fundamentals of Agile methodologies, the intricacies of the Scrum framework, and the critical responsibilities and skills required for a Product Owner to succeed.",
-      "imageUrls": [
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Agile_Manifesto.png?updatedAt=1718109792972"
-      ],
-      "affiliations": [
-        "Atlantic Technological University"
-      ],
-      "skills": [
-        "Agile (Scrum)",
-        "Product Backlog Management",
-        "User Story Writing",
-        "Sprint Planning",
-        "Stakeholder Engagement",
-        "Prioritization",
-        "JIRA",
-        "Confluence",
-        "Trello",
-        "Team Collaboration",
-        "Project Management",
-        "Requirements Gathering",
-        "Vision Setting"
-      ],
-      "links": [
-        "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/ProductOwnerEssentialRoleL00170136.pdf?updatedAt=1714593503089"
-      ],
-      "linksTitles": [
-        "The Product Owner plays an essential role in a Scrum development team"
-      ]
-    },
-    {
       "name": "Report on Reflectometry",
       "dateOfCompletion": "2015",
       "description": "This detailed report on Reflectometry, presented at the Winter Event at CEA Cadarache, delves into the physical principles, relevance for fusion research, and experimental procedures involved in reflectometry. The project, supervised by Dr. Frederic Clairet, utilized MatLab for extensive data analysis and visualization. Reflectometry, a radar technique used to measure plasma density and turbulence in fusion reactors, is crucial for optimizing plasma confinement and stability. The report includes theoretical explanations, device schematics, and data analysis from simulated experiments due to the unavailability of plasma in Tore Supra.",
@@ -1545,6 +1539,7 @@
       "affiliations": [
         "Institute of Plasma Physics of the Czech Academy of Sciences"
       ],
+      "collaborators": [],
       "skills": [
         "Python",
         "NumPy",

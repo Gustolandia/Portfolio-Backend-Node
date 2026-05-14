@@ -487,7 +487,14 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
         jobs: [
           {
             company: "Company",
+            duration: "Deprecated",
+            end: "2023-01-01",
             unsafe: "remove"
+          },
+          {
+            company: "Latest Company",
+            duration: "Deprecated",
+            end: "2024-01-01"
           }
         ]
       },
@@ -508,11 +515,22 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
   assert.deepEqual(savedData.jobs, [
     {
       title: "",
-      company: "Company",
-      duration: "",
+      company: "Latest Company",
       location: "",
       start: "",
-      end: "",
+      end: "2024-01-01",
+      imageUrls: [],
+      imageTitles: [],
+      duties: [],
+      skills: [],
+      mapLocation: ""
+    },
+    {
+      title: "",
+      company: "Company",
+      location: "",
+      start: "",
+      end: "2023-01-01",
       imageUrls: [],
       imageTitles: [],
       duties: [],
@@ -520,5 +538,6 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
       mapLocation: ""
     }
   ]);
+  assert.equal(Object.hasOwn(savedData.jobs[0], "duration"), false);
   assert.equal(body.pages.home.title, "Home");
 });
