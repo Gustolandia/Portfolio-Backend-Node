@@ -12,7 +12,7 @@ test("normalizes ImageKit assets without exposing provider credentials", () => {
       {
         createdAt: "2026-01-01T00:00:00.000Z",
         fileId: "file_123",
-        filePath: "/Portfolio Website/Photos/Profile Photo.jpg",
+        filePath: "/Portfolio Website/Snippets/Profile Photo.jpg",
         fileType: "image",
         height: 200,
         name: "Profile Photo.jpg",
@@ -30,8 +30,8 @@ test("normalizes ImageKit assets without exposing provider credentials", () => {
       fileId: "file_123",
       id: "file_123",
       name: "Profile Photo.jpg",
-      filePath: "/Portfolio Website/Photos/Profile Photo.jpg",
-      url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/Profile%20Photo.jpg",
+      filePath: "/Portfolio Website/Snippets/Profile Photo.jpg",
+      url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Profile%20Photo.jpg",
       thumbnailUrl: "https://ik.imagekit.io/demo/thumb.jpg",
       fileType: "image",
       mime: "",
@@ -56,10 +56,10 @@ test("ImageKit media service lists image assets from the configured folder", asy
         json: async () => [
           {
             fileId: "image_1",
-            filePath: "/Portfolio Website/Photos/image.jpg",
+            filePath: "/Portfolio Website/Snippets/image.jpg",
             fileType: "image",
             name: "image.jpg",
-            url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/image.jpg"
+            url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/image.jpg"
           }
         ],
         ok: true
@@ -71,14 +71,14 @@ test("ImageKit media service lists image assets from the configured folder", asy
   });
 
   const result = await service.listImages({
-    folder: "Photos",
+    folder: "Snippets",
     limit: "10",
     skip: "5",
     sort: "DESC_CREATED"
   });
 
   assert.equal(requestUrl.searchParams.get("fileType"), "image");
-  assert.equal(requestUrl.searchParams.get("path"), "/Portfolio Website/Photos");
+  assert.equal(requestUrl.searchParams.get("path"), "/Portfolio Website/Snippets");
   assert.equal(requestUrl.searchParams.get("limit"), "10");
   assert.equal(requestUrl.searchParams.get("skip"), "5");
   assert.equal(requestUrl.searchParams.get("sort"), "DESC_CREATED");
@@ -92,10 +92,10 @@ test("ImageKit media service lists non-image file assets", async () => {
       json: async () => [
         {
           fileId: "file_1",
-          filePath: "/Portfolio Website/Snippets/Article.pdf",
+          filePath: "/Portfolio Website/Article.pdf",
           fileType: "non-image",
           name: "Article.pdf",
-          url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Snippets/Article.pdf"
+          url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Article.pdf"
         }
       ],
       ok: true,
@@ -108,7 +108,7 @@ test("ImageKit media service lists non-image file assets", async () => {
 
   const result = await service.listFiles();
 
-  assert.equal(result.path, "/Portfolio Website/Snippets");
+  assert.equal(result.path, "/Portfolio Website");
   assert.equal(result.files[0].fileId, "file_1");
 });
 

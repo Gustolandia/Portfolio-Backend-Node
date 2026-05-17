@@ -121,12 +121,12 @@ export class ImageKitMediaService {
     this.getUrlEndpoint = getUrlEndpoint;
     this.mediaRoot = normalizeAbsolutePath(mediaRoot, DEFAULT_MEDIA_ROOT);
     this.imageFolder = normalizeAbsolutePath(
-      imageFolder || `${this.mediaRoot}/Photos`,
-      `${this.mediaRoot}/Photos`
+      imageFolder || `${this.mediaRoot}/Snippets`,
+      `${this.mediaRoot}/Snippets`
     );
     this.fileFolder = normalizeAbsolutePath(
-      fileFolder || `${this.mediaRoot}/Snippets`,
-      `${this.mediaRoot}/Snippets`
+      fileFolder || this.mediaRoot,
+      this.mediaRoot
     );
   }
 

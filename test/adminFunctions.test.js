@@ -234,8 +234,8 @@ test("admin images endpoint returns ImageKit image assets for authenticated sess
         images: [
           {
             fileId: "image_1",
-            name: "Photo.jpg",
-            url: "https://ik.imagekit.io/Gustolandia/Photo.jpg"
+            name: "Snippet.jpg",
+            url: "https://ik.imagekit.io/Gustolandia/Snippet.jpg"
           }
         ],
         limit: 100,
@@ -252,14 +252,14 @@ test("admin images endpoint returns ImageKit image assets for authenticated sess
   const response = await handler({
     ...event({ method: "GET" }),
     queryStringParameters: {
-      path: "/Portfolio Website/Photos"
+      path: "/Portfolio Website/Snippets"
     }
   });
   const body = JSON.parse(response.body);
 
   assert.equal(response.statusCode, 200);
   assert.equal(body.images[0].fileId, "image_1");
-  assert.equal(body.path, "/Portfolio Website/Photos");
+  assert.equal(body.path, "/Portfolio Website/Snippets");
 });
 
 test("admin files endpoint returns ImageKit non-image assets for authenticated sessions", async () => {
@@ -274,7 +274,7 @@ test("admin files endpoint returns ImageKit non-image assets for authenticated s
           }
         ],
         limit: 100,
-        path: "/Portfolio Website/Snippets",
+        path: "/Portfolio Website",
         skip: 0,
         sort: "ASC_CREATED"
       })
@@ -289,7 +289,7 @@ test("admin files endpoint returns ImageKit non-image assets for authenticated s
 
   assert.equal(response.statusCode, 200);
   assert.equal(body.files[0].fileId, "file_1");
-  assert.equal(body.path, "/Portfolio Website/Snippets");
+  assert.equal(body.path, "/Portfolio Website");
 });
 
 test("admin media endpoints return 400 for invalid ImageKit media paths", async () => {
