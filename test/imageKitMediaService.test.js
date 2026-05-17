@@ -44,7 +44,7 @@ test("normalizes ImageKit assets without exposing provider credentials", () => {
   );
 });
 
-test("ImageKit media service lists image assets from the configured folder", async () => {
+test("ImageKit media service lists photo assets from the configured folder", async () => {
   let requestUrl;
   let authorizationHeader;
   const service = new ImageKitMediaService({
@@ -55,7 +55,47 @@ test("ImageKit media service lists image assets from the configured folder", asy
       return {
         json: async () => [
           {
-            fileId: "image_1",
+            fileId: "photo_1",
+            filePath: "/Portfolio Website/Photos/photo.jpg",
+            fileType: "image",
+            name: "photo.jpg",
+            url: "https://ik.imagekit.io/Gustolandia/Portfolio%20Website/Photos/photo.jpg"
+          }
+        ],
+        ok: true
+      };
+    },
+    getPrivateKey: () => "private_test_key",
+    getUrlEndpoint: () => "https://ik.imagekit.io/Gustolandia/",
+    mediaRoot: "/Portfolio Website"
+  });
+
+  const result = await service.listPhotos({
+    folder: "Photos",
+    limit: "10",
+    skip: "5",
+    sort: "DESC_CREATED"
+  });
+
+  assert.equal(requestUrl.searchParams.get("fileType"), "image");
+  assert.equal(requestUrl.searchParams.get("path"), "/Portfolio Website/Photos");
+  assert.equal(requestUrl.searchParams.get("limit"), "10");
+  assert.equal(requestUrl.searchParams.get("skip"), "5");
+  assert.equal(requestUrl.searchParams.get("sort"), "DESC_CREATED");
+  assert.match(authorizationHeader, /^Basic /);
+  assert.equal(result.photos[0].fileId, "photo_1");
+});
+
+test("ImageKit media service lists snippet image assets from the configured folder", async () => {
+  let requestUrl;
+  const service = new ImageKitMediaService({
+    fetcher: async (url) => {
+      requestUrl = url;
+
+      return {
+        json: async () => [
+          {
+            fileId: "snippet_1",
             filePath: "/Portfolio Website/Snippets/image.jpg",
             fileType: "image",
             name: "image.jpg",
@@ -70,20 +110,12 @@ test("ImageKit media service lists image assets from the configured folder", asy
     mediaRoot: "/Portfolio Website"
   });
 
-  const result = await service.listImages({
-    folder: "Snippets",
-    limit: "10",
-    skip: "5",
-    sort: "DESC_CREATED"
-  });
+  const result = await service.listSnippets();
 
   assert.equal(requestUrl.searchParams.get("fileType"), "image");
   assert.equal(requestUrl.searchParams.get("path"), "/Portfolio Website/Snippets");
-  assert.equal(requestUrl.searchParams.get("limit"), "10");
-  assert.equal(requestUrl.searchParams.get("skip"), "5");
-  assert.equal(requestUrl.searchParams.get("sort"), "DESC_CREATED");
-  assert.match(authorizationHeader, /^Basic /);
-  assert.equal(result.images[0].fileId, "image_1");
+  assert.equal(result.snippets[0].fileId, "snippet_1");
+  assert.equal(result.images[0].fileId, "snippet_1");
 });
 
 test("ImageKit media service lists non-image file assets", async () => {

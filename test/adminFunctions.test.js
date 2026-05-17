@@ -4,8 +4,10 @@ import { createHandler as createAdminFilesHandler } from "../netlify/functions/a
 import { createHandler as createAdminImagesHandler } from "../netlify/functions/admin-images.js";
 import { createHandler as createLoginHandler } from "../netlify/functions/admin-login.js";
 import { createHandler as createLogoutHandler } from "../netlify/functions/admin-logout.js";
+import { createHandler as createAdminPhotosHandler } from "../netlify/functions/admin-photos.js";
 import { createHandler as createAdminDataHandler } from "../netlify/functions/admin-portfolio-data.js";
 import { createHandler as createSessionHandler } from "../netlify/functions/admin-session.js";
+import { createHandler as createAdminSnippetsHandler } from "../netlify/functions/admin-snippets.js";
 import { createAdminSessionService } from "../src/admin/adminSessionService.js";
 import { ImageKitMediaPathError } from "../src/media/imageKitMediaService.js";
 import { PortfolioService } from "../src/services/portfolioService.js";
@@ -227,19 +229,61 @@ test("admin media endpoints require a session", async () => {
   assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
 });
 
-test("admin images endpoint returns ImageKit image assets for authenticated sessions", async () => {
-  const handler = createAdminImagesHandler({
+test("admin photos endpoint returns ImageKit photo assets for authenticated sessions", async () => {
+  const handler = createAdminPhotosHandler({
     imageKitMediaService: {
-      listImages: async (query) => ({
+      listPhotos: async (query) => ({
+        limit: 100,
+        path: query.path,
+        photos: [
+          {
+            fileId: "photo_1",
+            name: "Photo.jpg",
+            url: "https://ik.imagekit.io/Gustolandia/Photo.jpg"
+          }
+        ],
+        skip: 0,
+        sort: "ASC_CREATED"
+      })
+    },
+    sessionService: {
+      readSession: async () => authenticatedSession()
+    }
+  });
+
+  const response = await handler({
+    ...event({ method: "GET" }),
+    queryStringParameters: {
+      path: "/Portfolio Website/Photos"
+    }
+  });
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(body.photos[0].fileId, "photo_1");
+  assert.equal(body.path, "/Portfolio Website/Photos");
+});
+
+test("admin snippets endpoint returns ImageKit snippet assets for authenticated sessions", async () => {
+  const handler = createAdminSnippetsHandler({
+    imageKitMediaService: {
+      listSnippets: async (query) => ({
         images: [
           {
-            fileId: "image_1",
+            fileId: "snippet_1",
             name: "Snippet.jpg",
             url: "https://ik.imagekit.io/Gustolandia/Snippet.jpg"
           }
         ],
         limit: 100,
         path: query.path,
+        snippets: [
+          {
+            fileId: "snippet_1",
+            name: "Snippet.jpg",
+            url: "https://ik.imagekit.io/Gustolandia/Snippet.jpg"
+          }
+        ],
         skip: 0,
         sort: "ASC_CREATED"
       })
@@ -258,8 +302,37 @@ test("admin images endpoint returns ImageKit image assets for authenticated sess
   const body = JSON.parse(response.body);
 
   assert.equal(response.statusCode, 200);
-  assert.equal(body.images[0].fileId, "image_1");
+  assert.equal(body.snippets[0].fileId, "snippet_1");
   assert.equal(body.path, "/Portfolio Website/Snippets");
+});
+
+test("admin images endpoint remains a compatibility alias for snippets", async () => {
+  const handler = createAdminImagesHandler({
+    imageKitMediaService: {
+      listImages: async () => ({
+        images: [
+          {
+            fileId: "snippet_alias",
+            name: "Snippet.jpg",
+            url: "https://ik.imagekit.io/Gustolandia/Snippet.jpg"
+          }
+        ],
+        limit: 100,
+        path: "/Portfolio Website/Snippets",
+        skip: 0,
+        sort: "ASC_CREATED"
+      })
+    },
+    sessionService: {
+      readSession: async () => authenticatedSession()
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(body.images[0].fileId, "snippet_alias");
 });
 
 test("admin files endpoint returns ImageKit non-image assets for authenticated sessions", async () => {

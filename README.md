@@ -18,8 +18,9 @@ Admin requests use secure HttpOnly cookie sessions. The admin frontend should us
 POST /.netlify/functions/admin-login
 GET  /.netlify/functions/admin-session
 POST /.netlify/functions/admin-logout
-GET  /.netlify/functions/admin-images
 GET  /.netlify/functions/admin-files
+GET  /.netlify/functions/admin-photos
+GET  /.netlify/functions/admin-snippets
 GET  /.netlify/functions/admin-portfolio-data
 PUT  /.netlify/functions/admin-portfolio-data
 ```
@@ -47,24 +48,25 @@ Successful login/session responses return:
 
 `admin-logout` and `PUT admin-portfolio-data` require the session cookie and `X-CSRF-Token`.
 
-`admin-images` and `admin-files` read from ImageKit Media Library with server-side credentials. They require the admin session cookie but do not require CSRF because they are read-only `GET` endpoints.
+`admin-files`, `admin-photos`, and `admin-snippets` read from ImageKit Media Library with server-side credentials. They require the admin session cookie but do not require CSRF because they are read-only `GET` endpoints.
 
 ```text
-GET /.netlify/functions/admin-images
 GET /.netlify/functions/admin-files
+GET /.netlify/functions/admin-photos
+GET /.netlify/functions/admin-snippets
 ```
 
 Optional query parameters:
 
 ```text
-path=/Portfolio Website/Snippets
-folder=Snippets
+path=/Portfolio Website/Photos
+folder=Photos
 limit=100
 skip=0
 sort=ASC_CREATED
 ```
 
-`path` accepts an absolute ImageKit Media Library path inside `IMAGEKIT_MEDIA_FOLDER`. `folder` accepts a path relative to `IMAGEKIT_MEDIA_FOLDER`. `admin-images` defaults to `IMAGEKIT_IMAGES_FOLDER` and filters ImageKit assets with `fileType=image`. `admin-files` defaults to `IMAGEKIT_FILES_FOLDER` and filters with `fileType=non-image`. In this portfolio, project snippet images live in `/Portfolio Website/Snippets`, while PDFs, videos, and other non-image files live directly under `/Portfolio Website`. Returned asset objects include public metadata such as `fileId`, `name`, `filePath`, `url`, `thumbnailUrl`, `fileType`, `mime`, `size`, `width`, `height`, `createdAt`, and `updatedAt`; ImageKit credentials are never returned.
+`path` accepts an absolute ImageKit Media Library path inside `IMAGEKIT_MEDIA_FOLDER`. `folder` accepts a path relative to `IMAGEKIT_MEDIA_FOLDER`. `admin-files` defaults to `IMAGEKIT_FILES_FOLDER` and filters with `fileType=non-image`. `admin-photos` defaults to `IMAGEKIT_PHOTOS_FOLDER` and filters with `fileType=image`. `admin-snippets` defaults to `IMAGEKIT_SNIPPETS_FOLDER` and filters with `fileType=image`. In this portfolio, general photos live in `/Portfolio Website/Photos`, project snippet images live in `/Portfolio Website/Snippets`, and PDFs, videos, and other non-image files live directly under `/Portfolio Website`. Returned asset objects include public metadata such as `fileId`, `name`, `filePath`, `url`, `thumbnailUrl`, `fileType`, `mime`, `size`, `width`, `height`, `createdAt`, and `updatedAt`; ImageKit credentials are never returned.
 
 ## Portfolio Payload Contract
 
@@ -164,8 +166,9 @@ UPSTASH_REDIS_REST_TOKEN=replace-with-your-upstash-token
 IMAGEKIT_PRIVATE_KEY=replace-with-your-imagekit-private-key
 IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
 IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
-IMAGEKIT_IMAGES_FOLDER=/Portfolio Website/Snippets
 IMAGEKIT_FILES_FOLDER=/Portfolio Website
+IMAGEKIT_PHOTOS_FOLDER=/Portfolio Website/Photos
+IMAGEKIT_SNIPPETS_FOLDER=/Portfolio Website/Snippets
 ```
 
 `FRONTEND_ORIGIN` controls CORS. If it is not set, the function returns `Access-Control-Allow-Origin: *`.
@@ -197,11 +200,12 @@ Recommended folder variables:
 
 ```text
 IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
-IMAGEKIT_IMAGES_FOLDER=/Portfolio Website/Snippets
 IMAGEKIT_FILES_FOLDER=/Portfolio Website
+IMAGEKIT_PHOTOS_FOLDER=/Portfolio Website/Photos
+IMAGEKIT_SNIPPETS_FOLDER=/Portfolio Website/Snippets
 ```
 
-Use an ImageKit restricted API key with read-only Media Library permissions when possible. The private key must stay only in Netlify/backend environment variables. The `/Photos` folder can still be browsed explicitly with `folder=Photos` or `path=/Portfolio Website/Photos` when the admin UI needs profile/general photos, but the default image endpoint is aimed at project snippets.
+Use an ImageKit restricted API key with read-only Media Library permissions when possible. The private key must stay only in Netlify/backend environment variables. The older `admin-images` endpoint is kept as a compatibility alias for snippets; new frontend work should use the explicit `admin-photos` and `admin-snippets` endpoints.
 
 ## Upstash Redis
 
@@ -306,8 +310,9 @@ The tests cover the Netlify Function behavior, local JSON storage, service norma
    - `IMAGEKIT_PRIVATE_KEY`
    - `IMAGEKIT_URL_ENDPOINT`
    - `IMAGEKIT_MEDIA_FOLDER`
-   - `IMAGEKIT_IMAGES_FOLDER`
    - `IMAGEKIT_FILES_FOLDER`
+   - `IMAGEKIT_PHOTOS_FOLDER`
+   - `IMAGEKIT_SNIPPETS_FOLDER`
 
 After deploy, the endpoint will be available at:
 

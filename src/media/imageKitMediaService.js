@@ -113,37 +113,81 @@ export class ImageKitMediaService {
     getPrivateKey = () => process.env.IMAGEKIT_PRIVATE_KEY,
     getUrlEndpoint = () => process.env.IMAGEKIT_URL_ENDPOINT,
     mediaRoot = process.env.IMAGEKIT_MEDIA_FOLDER || DEFAULT_MEDIA_ROOT,
-    imageFolder = process.env.IMAGEKIT_IMAGES_FOLDER,
-    fileFolder = process.env.IMAGEKIT_FILES_FOLDER
+    fileFolder = process.env.IMAGEKIT_FILES_FOLDER,
+    photosFolder = process.env.IMAGEKIT_PHOTOS_FOLDER,
+    snippetsFolder = process.env.IMAGEKIT_SNIPPETS_FOLDER || process.env.IMAGEKIT_IMAGES_FOLDER
   } = {}) {
     this.fetcher = fetcher;
     this.getPrivateKey = getPrivateKey;
     this.getUrlEndpoint = getUrlEndpoint;
     this.mediaRoot = normalizeAbsolutePath(mediaRoot, DEFAULT_MEDIA_ROOT);
-    this.imageFolder = normalizeAbsolutePath(
-      imageFolder || `${this.mediaRoot}/Snippets`,
-      `${this.mediaRoot}/Snippets`
-    );
+    const defaultPhotosFolder = `${this.mediaRoot}/Photos`;
+    const defaultSnippetsFolder = `${this.mediaRoot}/Snippets`;
+
     this.fileFolder = normalizeAbsolutePath(
       fileFolder || this.mediaRoot,
       this.mediaRoot
     );
+    this.photosFolder = normalizeAbsolutePath(
+      photosFolder || defaultPhotosFolder,
+      defaultPhotosFolder
+    );
+    this.snippetsFolder = normalizeAbsolutePath(
+      snippetsFolder || defaultSnippetsFolder,
+      defaultSnippetsFolder
+    );
   }
 
   /**
-   * Lists image assets from the configured ImageKit media folder.
+   * Lists image assets from the configured snippets folder.
+   *
+   * This is a compatibility alias for older admin clients. New callers should
+   * use `listPhotos` or `listSnippets` directly.
    *
    * @param {Record<string, string | undefined>} query Request query parameters.
    * @returns {Promise<{images: object[], path: string, limit: number, skip: number, sort: string}>} Images response.
    */
   async listImages(query = {}) {
+    return this.listSnippets(query);
+  }
+
+  /**
+   * Lists photo assets from the configured ImageKit photos folder.
+   *
+   * @param {Record<string, string | undefined>} query Request query parameters.
+   * @returns {Promise<{photos: object[], path: string, limit: number, skip: number, sort: string}>} Photos response.
+   */
+  async listPhotos(query = {}) {
     const result = await this.listAssets({
-      defaultPath: this.imageFolder,
+      defaultPath: this.photosFolder,
       fileType: "image",
       query
     });
 
     return {
+      photos: result.assets,
+      path: result.path,
+      limit: result.limit,
+      skip: result.skip,
+      sort: result.sort
+    };
+  }
+
+  /**
+   * Lists project snippet image assets from the configured ImageKit snippets folder.
+   *
+   * @param {Record<string, string | undefined>} query Request query parameters.
+   * @returns {Promise<{snippets: object[], images: object[], path: string, limit: number, skip: number, sort: string}>} Snippets response.
+   */
+  async listSnippets(query = {}) {
+    const result = await this.listAssets({
+      defaultPath: this.snippetsFolder,
+      fileType: "image",
+      query
+    });
+
+    return {
+      snippets: result.assets,
       images: result.assets,
       path: result.path,
       limit: result.limit,
