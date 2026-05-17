@@ -8,7 +8,8 @@ import {
   normalizePortfolioData,
   normalizeRichItem,
   validateCompletePortfolioPayload,
-  JOB_FIELDS
+  JOB_FIELDS,
+  PROJECT_FIELDS
 } from "../src/validation/portfolioData.js";
 
 test("normalizes missing portfolio sections to safe empty values", () => {
@@ -41,6 +42,23 @@ test("normalizes page text fields and strips unsupported page fields", () => {
   );
 });
 
+test("normalizes ordered project file metadata triples without breaking index association", () => {
+  const item = normalizeRichItem(
+    {
+      links: ["https://example.com/a.pdf", "", "https://example.com/b.pdf"],
+      linksBackupDescriptions: ["Backup A", "Dropped", "Backup B"],
+      linksDescriptions: ["Description A", "Dropped", "Description B"],
+      linksTitles: ["Title A", "Dropped", "Title B"]
+    },
+    PROJECT_FIELDS
+  );
+
+  assert.deepEqual(item.links, ["https://example.com/a.pdf", "https://example.com/b.pdf"]);
+  assert.deepEqual(item.linksTitles, ["Title A", "Title B"]);
+  assert.deepEqual(item.linksDescriptions, ["Description A", "Description B"]);
+  assert.deepEqual(item.linksBackupDescriptions, ["Backup A", "Backup B"]);
+});
+
 test("local portfolio data file matches the public payload shape", async () => {
   const fileContent = await readFile(DEFAULT_PORTFOLIO_DATA_PATH, "utf8");
   const normalizedData = normalizePortfolioData(JSON.parse(fileContent));
@@ -70,6 +88,8 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
       end: "",
       imageUrls: [],
       imageTitles: [],
+      imageDescriptions: [],
+      imageBackupDescriptions: [],
       duties: ["Build"],
       skills: [],
       mapLocation: ""
@@ -77,10 +97,12 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
   );
 });
 
-test("normalizes paired image and title arrays without breaking index association", () => {
+test("normalizes ordered image metadata triples without breaking index association", () => {
   assert.deepEqual(
     normalizeRichItem(
       {
+        imageBackupDescriptions: ["Backup first", "Backup dropped", "Backup invalid", "Backup third"],
+        imageDescriptions: ["Description first", "", 123, "Description third"],
         imageTitles: ["First", "Dropped", 123, "Third"],
         imageUrls: ["https://example.com/1.jpg", "", 7, "https://example.com/3.jpg"]
       },
@@ -94,6 +116,8 @@ test("normalizes paired image and title arrays without breaking index associatio
       end: "",
       imageUrls: ["https://example.com/1.jpg", "https://example.com/3.jpg"],
       imageTitles: ["First", "Third"],
+      imageDescriptions: ["Description first", "Description third"],
+      imageBackupDescriptions: ["Backup first", "Backup third"],
       duties: [],
       skills: [],
       mapLocation: ""

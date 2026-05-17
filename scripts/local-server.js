@@ -1,26 +1,18 @@
 import http from "node:http";
-import { handler as adminFilesHandler } from "../netlify/functions/admin-files.js";
-import { handler as adminImagesHandler } from "../netlify/functions/admin-images.js";
 import { handler as adminImageKitUploadAuthHandler } from "../netlify/functions/admin-imagekit-upload-auth.js";
 import { handler as adminLoginHandler } from "../netlify/functions/admin-login.js";
 import { handler as adminLogoutHandler } from "../netlify/functions/admin-logout.js";
-import { handler as adminPhotosHandler } from "../netlify/functions/admin-photos.js";
 import { handler as adminPortfolioDataHandler } from "../netlify/functions/admin-portfolio-data.js";
 import { handler as adminSessionHandler } from "../netlify/functions/admin-session.js";
-import { handler as adminSnippetsHandler } from "../netlify/functions/admin-snippets.js";
 import { handler as portfolioDataHandler } from "../netlify/functions/portfolio-data.js";
 
 const port = Number(process.env.PORT || 8788);
 const functionHandlers = new Map([
-  ["/.netlify/functions/admin-files", adminFilesHandler],
   ["/.netlify/functions/admin-imagekit-upload-auth", adminImageKitUploadAuthHandler],
-  ["/.netlify/functions/admin-images", adminImagesHandler],
   ["/.netlify/functions/admin-login", adminLoginHandler],
   ["/.netlify/functions/admin-logout", adminLogoutHandler],
-  ["/.netlify/functions/admin-photos", adminPhotosHandler],
   ["/.netlify/functions/admin-portfolio-data", adminPortfolioDataHandler],
   ["/.netlify/functions/admin-session", adminSessionHandler],
-  ["/.netlify/functions/admin-snippets", adminSnippetsHandler],
   ["/.netlify/functions/portfolio-data", portfolioDataHandler]
 ]);
 

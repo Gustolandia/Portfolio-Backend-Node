@@ -18,10 +18,7 @@ Admin requests use secure HttpOnly cookie sessions. The admin frontend should us
 POST /.netlify/functions/admin-login
 GET  /.netlify/functions/admin-session
 POST /.netlify/functions/admin-logout
-GET  /.netlify/functions/admin-files
 GET  /.netlify/functions/admin-imagekit-upload-auth
-GET  /.netlify/functions/admin-photos
-GET  /.netlify/functions/admin-snippets
 GET  /.netlify/functions/admin-portfolio-data
 PUT  /.netlify/functions/admin-portfolio-data
 ```
@@ -49,36 +46,23 @@ Successful login/session responses return:
 
 `admin-logout` and `PUT admin-portfolio-data` require the session cookie and `X-CSRF-Token`.
 
-`admin-files`, `admin-photos`, and `admin-snippets` read from ImageKit Media Library with server-side credentials. `admin-imagekit-upload-auth` returns short-lived ImageKit browser upload credentials. These endpoints require the admin session cookie but do not require CSRF because they are read-only `GET` endpoints.
+`admin-imagekit-upload-auth` returns short-lived ImageKit browser upload credentials. It requires the admin session cookie but does not require CSRF because it is a read-only `GET` endpoint. There are no admin endpoints for listing ImageKit files; portfolio pages and the public frontend only receive asset URLs that have already been saved in the Redis-backed portfolio payload.
 
 ```text
-GET /.netlify/functions/admin-files
 GET /.netlify/functions/admin-imagekit-upload-auth
-GET /.netlify/functions/admin-photos
-GET /.netlify/functions/admin-snippets
 ```
 
-Optional query parameters:
+Upload targets:
 
 ```text
-path=/Portfolio Website/Photos
-folder=Photos
-limit=100
-skip=0
-sort=ASC_CREATED
-```
-
-`path` accepts an absolute ImageKit Media Library path inside `IMAGEKIT_MEDIA_FOLDER`. `folder` accepts a path relative to `IMAGEKIT_MEDIA_FOLDER`. `admin-files` defaults to `IMAGEKIT_FILES_FOLDER` and filters with `fileType=non-image`. `admin-photos` defaults to `IMAGEKIT_PHOTOS_FOLDER` and filters with `fileType=image`. `admin-snippets` defaults to `IMAGEKIT_SNIPPETS_FOLDER` and filters with `fileType=image`. In this portfolio, general photos live in `/Portfolio Website/Photos`, project snippet images live in `/Portfolio Website/Snippets`, and PDFs, videos, and other non-image files live directly under `/Portfolio Website`. Returned asset objects include public metadata such as `fileId`, `name`, `filePath`, `url`, `thumbnailUrl`, `fileType`, `mime`, `size`, `width`, `height`, `createdAt`, and `updatedAt`; ImageKit credentials are never returned.
-
-For direct uploads from the admin frontend, call:
-
-```text
+GET /.netlify/functions/admin-imagekit-upload-auth?target=files
 GET /.netlify/functions/admin-imagekit-upload-auth?target=photos
 GET /.netlify/functions/admin-imagekit-upload-auth?target=snippets
-GET /.netlify/functions/admin-imagekit-upload-auth?target=files
 ```
 
-The response contains `token`, `expire`, `signature`, `publicKey`, `urlEndpoint`, `uploadEndpoint`, `folder`, and `folders`. The frontend sends those values plus the selected `File` to ImageKit's browser upload API. ImageKit returns the public asset URL; the frontend then saves that URL in the normal portfolio payload with `PUT admin-portfolio-data`, which persists it to Redis.
+`files` uploads to `IMAGEKIT_FILES_FOLDER`, which defaults to `/Portfolio Website`. `photos` uploads to `IMAGEKIT_PHOTOS_FOLDER`, which defaults to `/Portfolio Website/Photos`. `snippets` uploads to `IMAGEKIT_SNIPPETS_FOLDER`, which defaults to `/Portfolio Website/Snippets`. If `target` is omitted, the backend defaults to `snippets` for compatibility with project image uploads. Frontend-provided custom folders are rejected, so uploads stay inside these configured locations.
+
+The response contains `token`, `expire`, `signature`, `publicKey`, `urlEndpoint`, `uploadEndpoint`, `folder`, and `folders`. The frontend sends those values plus the selected `File` to ImageKit's browser upload API. ImageKit returns the public asset URL; the frontend then stores that URL in its local portfolio edit state and saves the complete portfolio payload with `PUT admin-portfolio-data`, which persists the URL and its metadata to Redis.
 
 ## Portfolio Payload Contract
 
@@ -124,24 +108,31 @@ Both public and admin data endpoints return one complete portfolio payload:
 Jobs are normalized to these fields only:
 
 ```text
-title, company, location, start, end, imageUrls, imageTitles, duties, skills, mapLocation
+title, company, location, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, duties, skills, mapLocation
 ```
 
 Education entries are normalized to these fields only:
 
 ```text
-degree, institution, location, grade, start, end, imageUrls, imageTitles, courses, activities, skills, mapLocation
+degree, institution, location, grade, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, courses, activities, skills, mapLocation
 ```
 
 Projects are normalized to these fields only:
 
 ```text
-name, dateOfCompletion, description, imageUrls, affiliations, collaborators, skills, links, linksTitles
+name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
 ```
 
 Missing string fields become `""`, missing array fields become `[]`, and unsupported rich-item fields are discarded. Jobs and education are sorted by latest `end` date first, falling back to `start`. Projects are sorted by latest `dateOfCompletion` first.
 
-Image URLs and image titles are normalized as paired arrays. If an invalid or empty `imageUrls[index]` is discarded, the corresponding `imageTitles[index]` is discarded too, keeping each image associated with its matching description/title. The same pairing rule applies to `links` and `linksTitles`.
+Image and file metadata is stored in ordered arrays. Order is the relationship:
+
+```text
+imageUrls[index] <-> imageDescriptions[index] <-> imageBackupDescriptions[index]
+links[index]     <-> linksDescriptions[index] <-> linksBackupDescriptions[index]
+```
+
+`imageTitles` and `linksTitles` remain supported as compatibility aliases for the primary description fields. When possible, the backend mirrors/falls back between `imageTitles` and `imageDescriptions`, and between `linksTitles` and `linksDescriptions`. If an invalid or empty `imageUrls[index]` or `links[index]` is discarded, the corresponding metadata at that same index is discarded too.
 
 ## Project Layout
 
@@ -151,7 +142,7 @@ netlify/functions/portfolio-data.js Netlify Function handler
 src/auth/authService.js             Auth service for future write endpoints
 src/admin/                          Cookie sessions, credentials, CSRF, rate limits
 src/services/portfolioService.js    API-facing portfolio service
-src/media/imageKitMediaService.js   ImageKit Media Library adapter
+src/media/imageKitMediaService.js   ImageKit browser upload auth service
 src/storage/jsonPortfolioStore.js   Local JSON storage adapter
 src/storage/redisPortfolioStore.js  Upstash Redis storage adapter
 src/validation/portfolioData.js     Payload normalization
@@ -198,9 +189,9 @@ npm run hash:password
 
 Set the printed bcrypt hash as `ADMIN_PASSWORD_HASH` in Netlify. Do not put the plain password in the repo or frontend.
 
-## ImageKit Media Library
+## ImageKit Uploads
 
-ImageKit acts as the media CMS for admin asset selection. Upload and organize assets in ImageKit, then use the admin media endpoints to list selectable images and files from the configured folders. Store the selected asset URL in the portfolio payload, keeping the existing simple `imageUrl`, `imageUrls`, `links`, and title arrays.
+ImageKit is used only as the authenticated upload target for admin files and images. The backend does not expose endpoints that list ImageKit folders or reveal what files exist in the ImageKit account. The frontend should read existing asset URLs from `GET admin-portfolio-data`, upload new assets through ImageKit when needed, then save the returned public URL in the normal portfolio payload with `PUT admin-portfolio-data`.
 
 Required Netlify variables:
 
@@ -219,7 +210,21 @@ IMAGEKIT_PHOTOS_FOLDER=/Portfolio Website/Photos
 IMAGEKIT_SNIPPETS_FOLDER=/Portfolio Website/Snippets
 ```
 
-Use an ImageKit restricted API key with the least permissions that support listing and uploading media. The private key must stay only in Netlify/backend environment variables. The public key may be returned to authenticated admin clients for ImageKit browser uploads. The older `admin-images` endpoint is kept as a compatibility alias for snippets; new frontend work should use the explicit `admin-photos` and `admin-snippets` endpoints.
+Use an ImageKit key with the least permissions that support browser upload authentication. The private key must stay only in Netlify/backend environment variables. The public key may be returned to authenticated admin clients for ImageKit browser uploads.
+
+Upload flow:
+
+```text
+1. Admin frontend calls GET admin-imagekit-upload-auth?target=files|photos|snippets with credentials included.
+2. Backend validates the admin session cookie and returns short-lived ImageKit upload parameters.
+3. Frontend uploads the selected File directly to ImageKit using those parameters.
+4. ImageKit returns the public asset URL.
+5. Frontend places that URL beside its description and backup description in local edit state.
+6. Frontend saves the complete portfolio payload with PUT admin-portfolio-data and X-CSRF-Token.
+7. Backend normalizes and writes the full payload to Redis.
+```
+
+Do not add ImageKit listing endpoints to the frontend. Redis is the source of truth for which links are attached to the portfolio.
 
 ## Upstash Redis
 
@@ -302,7 +307,7 @@ curl http://localhost:8788/.netlify/functions/portfolio-data
 npm test
 ```
 
-The tests cover the Netlify Function behavior, local JSON storage, service normalization and ordering, auth service, and the public data shape.
+The tests cover the Netlify Function behavior, local JSON storage, Redis storage with deterministic mocks, service normalization and ordering, ordered image/file metadata arrays, ImageKit upload authentication, auth/session services, and the public data shape.
 
 ## Deploying To Netlify
 

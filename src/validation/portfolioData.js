@@ -14,6 +14,8 @@ export const JOB_FIELDS = Object.freeze([
   "end",
   "imageUrls",
   "imageTitles",
+  "imageDescriptions",
+  "imageBackupDescriptions",
   "duties",
   "skills",
   "mapLocation"
@@ -28,6 +30,8 @@ export const EDUCATION_FIELDS = Object.freeze([
   "end",
   "imageUrls",
   "imageTitles",
+  "imageDescriptions",
+  "imageBackupDescriptions",
   "courses",
   "activities",
   "skills",
@@ -39,11 +43,16 @@ export const PROJECT_FIELDS = Object.freeze([
   "dateOfCompletion",
   "description",
   "imageUrls",
+  "imageTitles",
+  "imageDescriptions",
+  "imageBackupDescriptions",
   "affiliations",
   "collaborators",
   "skills",
   "links",
-  "linksTitles"
+  "linksTitles",
+  "linksDescriptions",
+  "linksBackupDescriptions"
 ]);
 
 const ARRAY_FIELDS = new Set([
@@ -52,9 +61,13 @@ const ARRAY_FIELDS = new Set([
   "collaborators",
   "courses",
   "duties",
+  "imageBackupDescriptions",
+  "imageDescriptions",
   "imageTitles",
   "imageUrls",
   "links",
+  "linksBackupDescriptions",
+  "linksDescriptions",
   "linksTitles",
   "skills"
 ]);
@@ -82,11 +95,43 @@ function safeStringArray(value) {
   return value.filter((item) => typeof item === "string");
 }
 
-function normalizePairedStringArrays(source, primaryField, secondaryField) {
+function sourceArray(source, field) {
+  return Array.isArray(source[field]) ? source[field] : [];
+}
+
+function stringAt(source, field, index) {
+  return safeString(sourceArray(source, field)[index]);
+}
+
+function firstStringAt(source, fields, index) {
+  for (const field of fields) {
+    const value = stringAt(source, field, index);
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return "";
+}
+
+/**
+ * Normalizes a primary URL/link array and its same-index metadata arrays.
+ *
+ * The primary field controls which rows survive. If a primary value is not a
+ * non-empty string, all related metadata at that index is discarded too, which
+ * preserves one-to-one ordering between URLs, descriptions, and fallback text.
+ *
+ * @param {Record<string, unknown>} source Source rich item.
+ * @param {string} primaryField Primary URL/link array field.
+ * @param {string[]} relatedFields Same-index metadata fields to normalize.
+ * @param {Record<string, string[]>} aliases Fields that may provide fallback values.
+ * @returns {Record<string, string[]>} Normalized primary and related arrays.
+ */
+function normalizeRelatedStringArrays(source, primaryField, relatedFields, aliases = {}) {
   const primaryValues = Array.isArray(source[primaryField]) ? source[primaryField] : [];
-  const secondaryValues = Array.isArray(source[secondaryField]) ? source[secondaryField] : [];
   const primary = [];
-  const secondary = [];
+  const related = Object.fromEntries(relatedFields.map((field) => [field, []]));
 
   primaryValues.forEach((primaryValue, index) => {
     if (typeof primaryValue !== "string" || !primaryValue.trim()) {
@@ -94,12 +139,14 @@ function normalizePairedStringArrays(source, primaryField, secondaryField) {
     }
 
     primary.push(primaryValue);
-    secondary.push(safeString(secondaryValues[index]));
+    for (const field of relatedFields) {
+      related[field].push(firstStringAt(source, aliases[field] || [field], index));
+    }
   });
 
   return {
     [primaryField]: primary,
-    [secondaryField]: secondary
+    ...related
   };
 }
 
@@ -156,14 +203,38 @@ export function normalizeRichItem(value, allowedFields) {
   if (allowedFields.includes("imageUrls") && allowedFields.includes("imageTitles")) {
     Object.assign(
       normalizedItem,
-      normalizePairedStringArrays(source, "imageUrls", "imageTitles")
+      normalizeRelatedStringArrays(
+        source,
+        "imageUrls",
+        allowedFields.filter((field) => [
+          "imageTitles",
+          "imageDescriptions",
+          "imageBackupDescriptions"
+        ].includes(field)),
+        {
+          imageTitles: ["imageTitles", "imageDescriptions"],
+          imageDescriptions: ["imageDescriptions", "imageTitles"]
+        }
+      )
     );
   }
 
   if (allowedFields.includes("links") && allowedFields.includes("linksTitles")) {
     Object.assign(
       normalizedItem,
-      normalizePairedStringArrays(source, "links", "linksTitles")
+      normalizeRelatedStringArrays(
+        source,
+        "links",
+        allowedFields.filter((field) => [
+          "linksTitles",
+          "linksDescriptions",
+          "linksBackupDescriptions"
+        ].includes(field)),
+        {
+          linksTitles: ["linksTitles", "linksDescriptions"],
+          linksDescriptions: ["linksDescriptions", "linksTitles"]
+        }
+      )
     );
   }
 

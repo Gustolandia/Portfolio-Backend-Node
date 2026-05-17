@@ -64,6 +64,8 @@ test("portfolio service writes normalized data and reads the updated content", a
     end: "",
     imageUrls: [],
     imageTitles: [],
+    imageDescriptions: [],
+    imageBackupDescriptions: [],
     duties: [],
     skills: [],
     mapLocation: ""
