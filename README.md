@@ -19,6 +19,7 @@ POST /.netlify/functions/admin-login
 GET  /.netlify/functions/admin-session
 POST /.netlify/functions/admin-logout
 GET  /.netlify/functions/admin-files
+GET  /.netlify/functions/admin-imagekit-upload-auth
 GET  /.netlify/functions/admin-photos
 GET  /.netlify/functions/admin-snippets
 GET  /.netlify/functions/admin-portfolio-data
@@ -48,10 +49,11 @@ Successful login/session responses return:
 
 `admin-logout` and `PUT admin-portfolio-data` require the session cookie and `X-CSRF-Token`.
 
-`admin-files`, `admin-photos`, and `admin-snippets` read from ImageKit Media Library with server-side credentials. They require the admin session cookie but do not require CSRF because they are read-only `GET` endpoints.
+`admin-files`, `admin-photos`, and `admin-snippets` read from ImageKit Media Library with server-side credentials. `admin-imagekit-upload-auth` returns short-lived ImageKit browser upload credentials. These endpoints require the admin session cookie but do not require CSRF because they are read-only `GET` endpoints.
 
 ```text
 GET /.netlify/functions/admin-files
+GET /.netlify/functions/admin-imagekit-upload-auth
 GET /.netlify/functions/admin-photos
 GET /.netlify/functions/admin-snippets
 ```
@@ -67,6 +69,16 @@ sort=ASC_CREATED
 ```
 
 `path` accepts an absolute ImageKit Media Library path inside `IMAGEKIT_MEDIA_FOLDER`. `folder` accepts a path relative to `IMAGEKIT_MEDIA_FOLDER`. `admin-files` defaults to `IMAGEKIT_FILES_FOLDER` and filters with `fileType=non-image`. `admin-photos` defaults to `IMAGEKIT_PHOTOS_FOLDER` and filters with `fileType=image`. `admin-snippets` defaults to `IMAGEKIT_SNIPPETS_FOLDER` and filters with `fileType=image`. In this portfolio, general photos live in `/Portfolio Website/Photos`, project snippet images live in `/Portfolio Website/Snippets`, and PDFs, videos, and other non-image files live directly under `/Portfolio Website`. Returned asset objects include public metadata such as `fileId`, `name`, `filePath`, `url`, `thumbnailUrl`, `fileType`, `mime`, `size`, `width`, `height`, `createdAt`, and `updatedAt`; ImageKit credentials are never returned.
+
+For direct uploads from the admin frontend, call:
+
+```text
+GET /.netlify/functions/admin-imagekit-upload-auth?target=photos
+GET /.netlify/functions/admin-imagekit-upload-auth?target=snippets
+GET /.netlify/functions/admin-imagekit-upload-auth?target=files
+```
+
+The response contains `token`, `expire`, `signature`, `publicKey`, `urlEndpoint`, `uploadEndpoint`, `folder`, and `folders`. The frontend sends those values plus the selected `File` to ImageKit's browser upload API. ImageKit returns the public asset URL; the frontend then saves that URL in the normal portfolio payload with `PUT admin-portfolio-data`, which persists it to Redis.
 
 ## Portfolio Payload Contract
 
@@ -164,6 +176,7 @@ PORTFOLIO_REDIS_KEY=portfolio:data
 UPSTASH_REDIS_REST_URL=https://your-database.upstash.io
 UPSTASH_REDIS_REST_TOKEN=replace-with-your-upstash-token
 IMAGEKIT_PRIVATE_KEY=replace-with-your-imagekit-private-key
+IMAGEKIT_PUBLIC_KEY=replace-with-your-imagekit-public-key
 IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
 IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
 IMAGEKIT_FILES_FOLDER=/Portfolio Website
@@ -193,6 +206,7 @@ Required Netlify variables:
 
 ```text
 IMAGEKIT_PRIVATE_KEY=your-imagekit-private-api-key
+IMAGEKIT_PUBLIC_KEY=your-imagekit-public-api-key
 IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
 ```
 
@@ -205,7 +219,7 @@ IMAGEKIT_PHOTOS_FOLDER=/Portfolio Website/Photos
 IMAGEKIT_SNIPPETS_FOLDER=/Portfolio Website/Snippets
 ```
 
-Use an ImageKit restricted API key with read-only Media Library permissions when possible. The private key must stay only in Netlify/backend environment variables. The older `admin-images` endpoint is kept as a compatibility alias for snippets; new frontend work should use the explicit `admin-photos` and `admin-snippets` endpoints.
+Use an ImageKit restricted API key with the least permissions that support listing and uploading media. The private key must stay only in Netlify/backend environment variables. The public key may be returned to authenticated admin clients for ImageKit browser uploads. The older `admin-images` endpoint is kept as a compatibility alias for snippets; new frontend work should use the explicit `admin-photos` and `admin-snippets` endpoints.
 
 ## Upstash Redis
 
@@ -308,6 +322,7 @@ The tests cover the Netlify Function behavior, local JSON storage, service norma
    - `UPSTASH_REDIS_REST_URL`
    - `UPSTASH_REDIS_REST_TOKEN`
    - `IMAGEKIT_PRIVATE_KEY`
+   - `IMAGEKIT_PUBLIC_KEY`
    - `IMAGEKIT_URL_ENDPOINT`
    - `IMAGEKIT_MEDIA_FOLDER`
    - `IMAGEKIT_FILES_FOLDER`

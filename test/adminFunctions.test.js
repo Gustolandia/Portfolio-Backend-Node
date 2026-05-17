@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createHandler as createAdminFilesHandler } from "../netlify/functions/admin-files.js";
+import { createHandler as createImageKitUploadAuthHandler } from "../netlify/functions/admin-imagekit-upload-auth.js";
 import { createHandler as createAdminImagesHandler } from "../netlify/functions/admin-images.js";
 import { createHandler as createLoginHandler } from "../netlify/functions/admin-login.js";
 import { createHandler as createLogoutHandler } from "../netlify/functions/admin-logout.js";
@@ -227,6 +228,61 @@ test("admin media endpoints require a session", async () => {
 
   assert.equal(response.statusCode, 401);
   assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+});
+
+test("admin ImageKit upload auth endpoint requires a session", async () => {
+  const handler = createImageKitUploadAuthHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: false
+      })
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+
+  assert.equal(response.statusCode, 401);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+});
+
+test("admin ImageKit upload auth endpoint returns short-lived upload parameters", async () => {
+  const handler = createImageKitUploadAuthHandler({
+    imageKitMediaService: {
+      getUploadAuthentication: (query) => ({
+        expire: 1234567890,
+        folder: query.target === "photos"
+          ? "/Portfolio Website/Photos"
+          : "/Portfolio Website/Snippets",
+        folders: {
+          files: "/Portfolio Website",
+          photos: "/Portfolio Website/Photos",
+          snippets: "/Portfolio Website/Snippets"
+        },
+        publicKey: "public_test_key",
+        signature: "signed",
+        token: "token",
+        uploadEndpoint: "https://upload.imagekit.io/api/v1/files/upload",
+        urlEndpoint: "https://ik.imagekit.io/Gustolandia/"
+      })
+    },
+    sessionService: {
+      readSession: async () => authenticatedSession()
+    }
+  });
+
+  const response = await handler({
+    ...event({ method: "GET" }),
+    queryStringParameters: {
+      target: "photos"
+    }
+  });
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(body.publicKey, "public_test_key");
+  assert.equal(body.folder, "/Portfolio Website/Photos");
+  assert.equal(body.signature, "signed");
+  assert.equal(body.token, "token");
 });
 
 test("admin photos endpoint returns ImageKit photo assets for authenticated sessions", async () => {
