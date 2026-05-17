@@ -77,6 +77,30 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
   );
 });
 
+test("normalizes paired image and title arrays without breaking index association", () => {
+  assert.deepEqual(
+    normalizeRichItem(
+      {
+        imageTitles: ["First", "Dropped", 123, "Third"],
+        imageUrls: ["https://example.com/1.jpg", "", 7, "https://example.com/3.jpg"]
+      },
+      JOB_FIELDS
+    ),
+    {
+      title: "",
+      company: "",
+      location: "",
+      start: "",
+      end: "",
+      imageUrls: ["https://example.com/1.jpg", "https://example.com/3.jpg"],
+      imageTitles: ["First", "Third"],
+      duties: [],
+      skills: [],
+      mapLocation: ""
+    }
+  );
+});
+
 test("normalizes portfolio data without duration fields and sorts latest entries first", () => {
   const data = normalizePortfolioData({
     jobs: [

@@ -1,4 +1,6 @@
 import http from "node:http";
+import { handler as adminFilesHandler } from "../netlify/functions/admin-files.js";
+import { handler as adminImagesHandler } from "../netlify/functions/admin-images.js";
 import { handler as adminLoginHandler } from "../netlify/functions/admin-login.js";
 import { handler as adminLogoutHandler } from "../netlify/functions/admin-logout.js";
 import { handler as adminPortfolioDataHandler } from "../netlify/functions/admin-portfolio-data.js";
@@ -7,6 +9,8 @@ import { handler as portfolioDataHandler } from "../netlify/functions/portfolio-
 
 const port = Number(process.env.PORT || 8788);
 const functionHandlers = new Map([
+  ["/.netlify/functions/admin-files", adminFilesHandler],
+  ["/.netlify/functions/admin-images", adminImagesHandler],
   ["/.netlify/functions/admin-login", adminLoginHandler],
   ["/.netlify/functions/admin-logout", adminLogoutHandler],
   ["/.netlify/functions/admin-portfolio-data", adminPortfolioDataHandler],

@@ -18,6 +18,8 @@ Admin requests use secure HttpOnly cookie sessions. The admin frontend should us
 POST /.netlify/functions/admin-login
 GET  /.netlify/functions/admin-session
 POST /.netlify/functions/admin-logout
+GET  /.netlify/functions/admin-images
+GET  /.netlify/functions/admin-files
 GET  /.netlify/functions/admin-portfolio-data
 PUT  /.netlify/functions/admin-portfolio-data
 ```
@@ -44,6 +46,25 @@ Successful login/session responses return:
 ```
 
 `admin-logout` and `PUT admin-portfolio-data` require the session cookie and `X-CSRF-Token`.
+
+`admin-images` and `admin-files` read from ImageKit Media Library with server-side credentials. They require the admin session cookie but do not require CSRF because they are read-only `GET` endpoints.
+
+```text
+GET /.netlify/functions/admin-images
+GET /.netlify/functions/admin-files
+```
+
+Optional query parameters:
+
+```text
+path=/Portfolio Website/Photos
+folder=Photos
+limit=100
+skip=0
+sort=ASC_CREATED
+```
+
+`path` accepts an absolute ImageKit Media Library path inside `IMAGEKIT_MEDIA_FOLDER`. `folder` accepts a path relative to `IMAGEKIT_MEDIA_FOLDER`. `admin-images` defaults to `IMAGEKIT_IMAGES_FOLDER` and filters ImageKit assets with `fileType=image`. `admin-files` defaults to `IMAGEKIT_FILES_FOLDER` and filters with `fileType=non-image`. Returned asset objects include public metadata such as `fileId`, `name`, `filePath`, `url`, `thumbnailUrl`, `fileType`, `mime`, `size`, `width`, `height`, `createdAt`, and `updatedAt`; ImageKit credentials are never returned.
 
 ## Portfolio Payload Contract
 
@@ -106,6 +127,8 @@ name, dateOfCompletion, description, imageUrls, affiliations, collaborators, ski
 
 Missing string fields become `""`, missing array fields become `[]`, and unsupported rich-item fields are discarded. Jobs and education are sorted by latest `end` date first, falling back to `start`. Projects are sorted by latest `dateOfCompletion` first.
 
+Image URLs and image titles are normalized as paired arrays. If an invalid or empty `imageUrls[index]` is discarded, the corresponding `imageTitles[index]` is discarded too, keeping each image associated with its matching description/title. The same pairing rule applies to `links` and `linksTitles`.
+
 ## Project Layout
 
 ```text
@@ -114,6 +137,7 @@ netlify/functions/portfolio-data.js Netlify Function handler
 src/auth/authService.js             Auth service for future write endpoints
 src/admin/                          Cookie sessions, credentials, CSRF, rate limits
 src/services/portfolioService.js    API-facing portfolio service
+src/media/imageKitMediaService.js   ImageKit Media Library adapter
 src/storage/jsonPortfolioStore.js   Local JSON storage adapter
 src/storage/redisPortfolioStore.js  Upstash Redis storage adapter
 src/validation/portfolioData.js     Payload normalization
@@ -137,6 +161,11 @@ PORTFOLIO_STORE=json
 PORTFOLIO_REDIS_KEY=portfolio:data
 UPSTASH_REDIS_REST_URL=https://your-database.upstash.io
 UPSTASH_REDIS_REST_TOKEN=replace-with-your-upstash-token
+IMAGEKIT_PRIVATE_KEY=replace-with-your-imagekit-private-key
+IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
+IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
+IMAGEKIT_IMAGES_FOLDER=/Portfolio Website/Photos
+IMAGEKIT_FILES_FOLDER=/Portfolio Website/Snippets
 ```
 
 `FRONTEND_ORIGIN` controls CORS. If it is not set, the function returns `Access-Control-Allow-Origin: *`.
@@ -152,6 +181,27 @@ npm run hash:password
 ```
 
 Set the printed bcrypt hash as `ADMIN_PASSWORD_HASH` in Netlify. Do not put the plain password in the repo or frontend.
+
+## ImageKit Media Library
+
+ImageKit acts as the media CMS for admin asset selection. Upload and organize assets in ImageKit, then use the admin media endpoints to list selectable images and files from the configured folders. Store the selected asset URL in the portfolio payload, keeping the existing simple `imageUrl`, `imageUrls`, `links`, and title arrays.
+
+Required Netlify variables:
+
+```text
+IMAGEKIT_PRIVATE_KEY=your-imagekit-private-api-key
+IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
+```
+
+Recommended folder variables:
+
+```text
+IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
+IMAGEKIT_IMAGES_FOLDER=/Portfolio Website/Photos
+IMAGEKIT_FILES_FOLDER=/Portfolio Website/Snippets
+```
+
+Use an ImageKit restricted API key with read-only Media Library permissions when possible. The private key must stay only in Netlify/backend environment variables.
 
 ## Upstash Redis
 
@@ -253,6 +303,11 @@ The tests cover the Netlify Function behavior, local JSON storage, service norma
    - `PORTFOLIO_REDIS_KEY`
    - `UPSTASH_REDIS_REST_URL`
    - `UPSTASH_REDIS_REST_TOKEN`
+   - `IMAGEKIT_PRIVATE_KEY`
+   - `IMAGEKIT_URL_ENDPOINT`
+   - `IMAGEKIT_MEDIA_FOLDER`
+   - `IMAGEKIT_IMAGES_FOLDER`
+   - `IMAGEKIT_FILES_FOLDER`
 
 After deploy, the endpoint will be available at:
 

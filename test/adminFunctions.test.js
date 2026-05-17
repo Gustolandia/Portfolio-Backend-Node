@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { createHandler as createAdminFilesHandler } from "../netlify/functions/admin-files.js";
+import { createHandler as createAdminImagesHandler } from "../netlify/functions/admin-images.js";
 import { createHandler as createLoginHandler } from "../netlify/functions/admin-login.js";
 import { createHandler as createLogoutHandler } from "../netlify/functions/admin-logout.js";
 import { createHandler as createAdminDataHandler } from "../netlify/functions/admin-portfolio-data.js";
 import { createHandler as createSessionHandler } from "../netlify/functions/admin-session.js";
 import { createAdminSessionService } from "../src/admin/adminSessionService.js";
+import { ImageKitMediaPathError } from "../src/media/imageKitMediaService.js";
 import { PortfolioService } from "../src/services/portfolioService.js";
 
 const origin = "http://localhost:3000";
@@ -60,6 +63,16 @@ function event({ body, headers = {}, method = "GET" } = {}) {
       ...headers
     },
     httpMethod: method
+  };
+}
+
+function authenticatedSession() {
+  return {
+    authenticated: true,
+    csrfToken: "csrf",
+    user: {
+      email: "admin@example.com"
+    }
   };
 }
 
@@ -197,6 +210,107 @@ test("admin preflight for portfolio save includes credentialed exact-origin CORS
   assert.equal(response.headers["Access-Control-Allow-Methods"], "GET, POST, PUT, OPTIONS");
   assert.equal(response.headers.Allow, "GET, PUT, OPTIONS");
   assert.equal(response.body, "");
+});
+
+test("admin media endpoints require a session", async () => {
+  const handler = createAdminImagesHandler({
+    sessionService: {
+      readSession: async () => ({
+        authenticated: false
+      })
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+
+  assert.equal(response.statusCode, 401);
+  assert.equal(response.headers["Access-Control-Allow-Origin"], origin);
+});
+
+test("admin images endpoint returns ImageKit image assets for authenticated sessions", async () => {
+  const handler = createAdminImagesHandler({
+    imageKitMediaService: {
+      listImages: async (query) => ({
+        images: [
+          {
+            fileId: "image_1",
+            name: "Photo.jpg",
+            url: "https://ik.imagekit.io/Gustolandia/Photo.jpg"
+          }
+        ],
+        limit: 100,
+        path: query.path,
+        skip: 0,
+        sort: "ASC_CREATED"
+      })
+    },
+    sessionService: {
+      readSession: async () => authenticatedSession()
+    }
+  });
+
+  const response = await handler({
+    ...event({ method: "GET" }),
+    queryStringParameters: {
+      path: "/Portfolio Website/Photos"
+    }
+  });
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(body.images[0].fileId, "image_1");
+  assert.equal(body.path, "/Portfolio Website/Photos");
+});
+
+test("admin files endpoint returns ImageKit non-image assets for authenticated sessions", async () => {
+  const handler = createAdminFilesHandler({
+    imageKitMediaService: {
+      listFiles: async () => ({
+        files: [
+          {
+            fileId: "file_1",
+            name: "Article.pdf",
+            url: "https://ik.imagekit.io/Gustolandia/Article.pdf"
+          }
+        ],
+        limit: 100,
+        path: "/Portfolio Website/Snippets",
+        skip: 0,
+        sort: "ASC_CREATED"
+      })
+    },
+    sessionService: {
+      readSession: async () => authenticatedSession()
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 200);
+  assert.equal(body.files[0].fileId, "file_1");
+  assert.equal(body.path, "/Portfolio Website/Snippets");
+});
+
+test("admin media endpoints return 400 for invalid ImageKit media paths", async () => {
+  const handler = createAdminImagesHandler({
+    imageKitMediaService: {
+      listImages: async () => {
+        throw new ImageKitMediaPathError("outside root");
+      }
+    },
+    sessionService: {
+      readSession: async () => authenticatedSession()
+    }
+  });
+
+  const response = await handler(event({ method: "GET" }));
+  const body = JSON.parse(response.body);
+
+  assert.equal(response.statusCode, 400);
+  assert.deepEqual(body, {
+    error: "Invalid media path"
+  });
 });
 
 test("admin preflight with unapproved origin is rejected without CORS origin", async () => {

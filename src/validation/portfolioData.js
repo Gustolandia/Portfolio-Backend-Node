@@ -82,6 +82,27 @@ function safeStringArray(value) {
   return value.filter((item) => typeof item === "string");
 }
 
+function normalizePairedStringArrays(source, primaryField, secondaryField) {
+  const primaryValues = Array.isArray(source[primaryField]) ? source[primaryField] : [];
+  const secondaryValues = Array.isArray(source[secondaryField]) ? source[secondaryField] : [];
+  const primary = [];
+  const secondary = [];
+
+  primaryValues.forEach((primaryValue, index) => {
+    if (typeof primaryValue !== "string" || !primaryValue.trim()) {
+      return;
+    }
+
+    primary.push(primaryValue);
+    secondary.push(safeString(secondaryValues[index]));
+  });
+
+  return {
+    [primaryField]: primary,
+    [secondaryField]: secondary
+  };
+}
+
 /**
  * Normalizes a fixed page entry and removes unsupported page fields.
  *
@@ -124,14 +145,29 @@ export function normalizeContentArray(value) {
  */
 export function normalizeRichItem(value, allowedFields) {
   const source = isObject(value) ? value : {};
-
-  return Object.fromEntries(
+  const normalizedItem = Object.fromEntries(
     allowedFields
       .map((field) => [
         field,
         ARRAY_FIELDS.has(field) ? safeStringArray(source[field]) : safeString(source[field])
       ])
   );
+
+  if (allowedFields.includes("imageUrls") && allowedFields.includes("imageTitles")) {
+    Object.assign(
+      normalizedItem,
+      normalizePairedStringArrays(source, "imageUrls", "imageTitles")
+    );
+  }
+
+  if (allowedFields.includes("links") && allowedFields.includes("linksTitles")) {
+    Object.assign(
+      normalizedItem,
+      normalizePairedStringArrays(source, "links", "linksTitles")
+    );
+  }
+
+  return normalizedItem;
 }
 
 function parseSortableDate(value) {
