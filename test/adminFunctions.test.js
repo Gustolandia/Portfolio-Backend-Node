@@ -574,12 +574,14 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
         ...completePortfolioPayload(),
         jobs: [
           {
+            id: "job-old",
             company: "Company",
             duration: "Deprecated",
             end: "2023-01-01",
             unsafe: "remove"
           },
           {
+            id: "job-latest",
             company: "Latest Company",
             duration: "Deprecated",
             end: "2024-01-01"
@@ -602,6 +604,8 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
   });
   assert.deepEqual(savedData.jobs, [
     {
+      id: "job-latest",
+      category: "industry",
       title: "",
       company: "Latest Company",
       location: "",
@@ -616,6 +620,8 @@ test("admin portfolio endpoint writes normalized data with valid session and CSR
       mapLocation: ""
     },
     {
+      id: "job-old",
+      category: "industry",
       title: "",
       company: "Company",
       location: "",

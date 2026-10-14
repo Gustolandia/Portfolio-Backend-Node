@@ -47,6 +47,7 @@ test("portfolio service writes normalized data and reads the updated content", a
     },
     jobs: [
       {
+        id: "job-company",
         company: "Company",
         duration: "Deprecated",
         unknown: "discard"
@@ -57,6 +58,8 @@ test("portfolio service writes normalized data and reads the updated content", a
 
   assert.equal(savedData.pages.home.title, "Updated");
   assert.deepEqual(readData.jobs[0], {
+    id: "job-company",
+    category: "industry",
     title: "",
     company: "Company",
     location: "",

@@ -1,0 +1,2066 @@
+{
+  "migrationId": "research-content-2026-10-15-v1",
+  "alreadyApplied": false,
+  "changed": true,
+  "bootstrapped": [
+    "profile",
+    "research"
+  ],
+  "added": [
+    {
+      "id": "research-arxiv-2609-05584",
+      "name": "One equation allocates playing time in competitive team sports: the rulebook sets the arithmetic and the league sets the habit",
+      "authors": [
+        "Gustavo Pedro Ricou"
+      ],
+      "outputType": "preprint",
+      "status": "preprint",
+      "dateOfCompletion": "2026-09-04"
+    },
+    {
+      "id": "research-arxiv-2608-11228",
+      "name": "Playing time tracks recent exposure in fifteen men's and women's football leagues: the denominator gradient and what it does to per-minute injury rates",
+      "authors": [
+        "Gustavo Pedro Ricou",
+        "Nicholas Mahony"
+      ],
+      "outputType": "preprint",
+      "status": "preprint",
+      "dateOfCompletion": "2026-08-22"
+    },
+    {
+      "id": "research-arxiv-2608-27736",
+      "name": "Don't look now: paying for documented need punishes discovery in US lead-pipe funding",
+      "authors": [
+        "Gustavo Pedro Ricou",
+        "Kristin C. Epstein"
+      ],
+      "outputType": "preprint",
+      "status": "preprint",
+      "dateOfCompletion": "2026-09-06"
+    },
+    {
+      "id": "research-eartharxiv-15189",
+      "name": "Do public records document PFAS drinking-water response handoffs? A 51-jurisdiction audit",
+      "authors": [
+        "Gustavo Pedro Ricou"
+      ],
+      "outputType": "preprint",
+      "status": "preprint",
+      "dateOfCompletion": "2026-09-25"
+    },
+    {
+      "id": "research-zenodo-22044877",
+      "name": "When the Interval Is Smaller Than the Instrument: code and analysis for two failure modes of streaming latency benchmarks",
+      "authors": [
+        "Gustavo Pedro Ricou"
+      ],
+      "outputType": "manuscript",
+      "status": "in-preparation",
+      "dateOfCompletion": ""
+    }
+  ],
+  "preservedExistingPapers": [],
+  "skills": {
+    "before": {
+      "sections": {
+        "jobs": {
+          "records": 13,
+          "occurrences": 282,
+          "unique": 185
+        },
+        "education": {
+          "records": 7,
+          "occurrences": 366,
+          "unique": 257
+        },
+        "projects": {
+          "records": 10,
+          "occurrences": 177,
+          "unique": 141
+        }
+      },
+      "occurrences": 825,
+      "unique": 451
+    },
+    "afterExisting": {
+      "sections": {
+        "jobs": {
+          "records": 13,
+          "occurrences": 254,
+          "unique": 133
+        },
+        "education": {
+          "records": 7,
+          "occurrences": 262,
+          "unique": 146
+        },
+        "projects": {
+          "records": 10,
+          "occurrences": 128,
+          "unique": 84
+        }
+      },
+      "occurrences": 644,
+      "unique": 214
+    },
+    "afterWithAdditions": {
+      "sections": {
+        "jobs": {
+          "records": 13,
+          "occurrences": 254,
+          "unique": 133
+        },
+        "education": {
+          "records": 7,
+          "occurrences": 262,
+          "unique": 146
+        },
+        "projects": {
+          "records": 15,
+          "occurrences": 143,
+          "unique": 88
+        }
+      },
+      "occurrences": 659,
+      "unique": 214
+    },
+    "mappings": [
+      {
+        "from": "Abel Transform",
+        "to": [
+          "Signal Processing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Academic Mentorship",
+        "to": [
+          "Mentoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Academic Research",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Academic Tutoring",
+        "to": [
+          "Tutoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Academic Writing",
+        "to": [
+          "Scientific Writing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Data Analysis",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Diagnostics",
+        "to": [
+          "Experimental Physics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Experimental Design",
+        "to": [
+          "Experimental Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Linear Models",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Multivariate Analysis",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Python Development",
+        "to": [
+          "Python"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Quantitative Methods",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced R Programming",
+        "to": [
+          "R"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Regression Analysis",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Statistical Computing",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Statistical Modelling",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Advanced Statistical Techniques",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Agile / Scrum",
+        "to": [
+          "Agile"
+        ],
+        "occurrences": 5
+      },
+      {
+        "from": "Agile Methodologies",
+        "to": [
+          "Agile"
+        ],
+        "occurrences": 4
+      },
+      {
+        "from": "AJAX",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "ANOVA",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Apache Spark",
+        "to": [
+          "Spark"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Applied Data Science",
+        "to": [
+          "Data Science"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Applied Statistics",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Automated Task Handling",
+        "to": [
+          "Automation"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Automated Testing",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Axios",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Behavior-Driven Development (BDD)",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Bootstrap Vue",
+        "to": [
+          "BootstrapVue"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Caching Mechanisms",
+        "to": [
+          "Caching"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Categorical Data Analysis",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Ceramics",
+        "to": [
+          "Materials Science"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Chai",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Classification Methods",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Cluster Analysis",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Collaborative Learning",
+        "to": [
+          "Collaboration"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Collaborative Research",
+        "to": [
+          "Collaboration"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Component-Based Architecture",
+        "to": [
+          "Software Architecture"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Computational Statistics",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Confidence Interval Estimation",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Content Clarity Enhancement",
+        "to": [
+          "Content Review"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Content Verification",
+        "to": [
+          "Content Review"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Contract Testing",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Correlation Analysis",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Cross-Functional Collaboration",
+        "to": [
+          "Collaboration"
+        ],
+        "occurrences": 4
+      },
+      {
+        "from": "Cross-Functional Team Leadership",
+        "to": [
+          "Leadership"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Cross-Validation",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "CRUD Operations",
+        "to": [
+          "API Development"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Customer Requirements Analysis",
+        "to": [
+          "Requirements Gathering"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Dashboard Development",
+        "to": [
+          "Data Visualization"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Analytics",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Data Interpretation",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Modelling",
+        "to": [
+          "Data Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Preparation",
+        "to": [
+          "Data Cleaning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Quality Assessment",
+        "to": [
+          "Data Management"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Science Foundations",
+        "to": [
+          "Data Science"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Transformation",
+        "to": [
+          "Data Cleaning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data Wrangling",
+        "to": [
+          "Data Cleaning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Data-Driven Decision-Making",
+        "to": [
+          "Data-Driven Decision Making"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Density Profile Reconstruction",
+        "to": [
+          "Plasma Diagnostics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Descriptive Statistics",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Design of Experiments",
+        "to": [
+          "Experimental Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Development Best Practices",
+        "to": [
+          "Software Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Development Server Setup",
+        "to": [
+          "Environment Configuration"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Dimensionality Reduction",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Dissertation Research",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Docker Compose",
+        "to": [
+          "Docker"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "DOM Manipulation",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Educational Material Development",
+        "to": [
+          "Teaching Materials"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Effect Size Estimation",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Electrical Susceptibility",
+        "to": [
+          "Materials Science"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Enterprise Application Development",
+        "to": [
+          "Software Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Environment Setup",
+        "to": [
+          "Environment Configuration"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Ethical Hacking",
+        "to": [
+          "Security Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Eureka Discovery Service",
+        "to": [
+          "Service Discovery"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Event Handling",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Exam Preparation",
+        "to": [
+          "Tutoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Excel Dashboards",
+        "to": [
+          "Microsoft Excel",
+          "Data Visualization"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Exploratory Data Analysis",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Fast Fourier Transform (FFT)",
+        "to": [
+          "Signal Processing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Feature Engineering",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "File Services",
+        "to": [
+          "File Management"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Filtering and Sorting",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Forecasting",
+        "to": [
+          "Time Series Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Form Handling",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Form Validation",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Fourier Transform",
+        "to": [
+          "Signal Processing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Frontend Routing",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Frontend-Backend Integration",
+        "to": [
+          "Full-Stack Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "G Programming Language (LabVIEW)",
+        "to": [
+          "LabVIEW"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Generalised Linear Models",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Git / Version Control",
+        "to": [
+          "Git"
+        ],
+        "occurrences": 9
+      },
+      {
+        "from": "Git Workflows",
+        "to": [
+          "Git"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Google Cloud Platform (GCP)",
+        "to": [
+          "Google Cloud"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Graphical Design",
+        "to": [
+          "Graphic Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Greenwald Limit Analysis",
+        "to": [
+          "Plasma Physics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Greenwald Limit Studies",
+        "to": [
+          "Plasma Physics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Hibernate",
+        "to": [
+          "ORM"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "High-Availability Systems",
+        "to": [
+          "Resilient Systems"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "High-Dimensional Data Analysis",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "High-Precision Measurement",
+        "to": [
+          "Experimental Physics"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "HTTP Client Testing",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "HTTP/HTTPS",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Hypothesis Testing",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Hystrix Resiliency Patterns",
+        "to": [
+          "Resilient Systems"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Image Handling",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Impedance Analysis",
+        "to": [
+          "Materials Science"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "In-Browser Event Simulation",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Inferential Statistics",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Infrastructure as Code (IaC)",
+        "to": [
+          "Infrastructure as Code"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Innovative Teaching Methods",
+        "to": [
+          "Tutoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Integration Testing",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 4
+      },
+      {
+        "from": "Interactive Testing",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Interdisciplinary Collaboration",
+        "to": [
+          "Collaboration"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Jest",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "JIRA",
+        "to": [
+          "Jira"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "JPA",
+        "to": [
+          "ORM"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "JUnit",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Jupyter Notebook",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "JWT Authentication",
+        "to": [
+          "Authentication"
+        ],
+        "occurrences": 4
+      },
+      {
+        "from": "Karate Testing Framework",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Lab Equipment Maintenance",
+        "to": [
+          "Experimental Physics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Leadership & Mentoring",
+        "to": [
+          "Leadership",
+          "Mentoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Linear Algebra for Statistics",
+        "to": [
+          "Linear Algebra"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Linear Regression",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Local Development Environment Setup",
+        "to": [
+          "Environment Configuration"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Local Storage",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Longitudinal Data Analysis",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Lyx",
+        "to": [
+          "LyX"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Magnetic Diagnostics",
+        "to": [
+          "Plasma Diagnostics"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Magnetic Fusion",
+        "to": [
+          "Plasma Physics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Magnetic Island Analysis",
+        "to": [
+          "Magnetohydrodynamics (MHD)"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Manifest V3",
+        "to": [
+          "Chrome Extensions"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Mathematical Modelling",
+        "to": [
+          "Mathematical Modeling"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Mathematical Notation",
+        "to": [
+          "Mathematics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Matplotlib",
+        "to": [
+          "Data Visualization"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Maven",
+        "to": [
+          "Build Tooling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Missing Data Handling",
+        "to": [
+          "Data Cleaning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Mixed-Effects Models",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Mobile Application Development",
+        "to": [
+          "Mobile Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Mocha",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Mockito",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Model Comparison",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Model Diagnostics",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Model Evaluation",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Model Interpretation",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Model Selection",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "MongoDB Atlas",
+        "to": [
+          "MongoDB"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Mongoose ODM",
+        "to": [
+          "MongoDB"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Multiple Regression",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Multivariate Analysis",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Multivariate Statistical Methods",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Network Support",
+        "to": [
+          "Networking"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Networking Concepts",
+        "to": [
+          "Networking"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "NI LabVIEW",
+        "to": [
+          "LabVIEW"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Numerical Analysis",
+        "to": [
+          "Numerical Methods"
+        ],
+        "occurrences": 7
+      },
+      {
+        "from": "Numerical Modeling",
+        "to": [
+          "Numerical Methods"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Numerical Simulation",
+        "to": [
+          "Numerical Methods"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "NumPy",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 8
+      },
+      {
+        "from": "OAuth",
+        "to": [
+          "Authentication"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Object-Relational Mapping (ORM)",
+        "to": [
+          "ORM"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "ODEs",
+        "to": [
+          "Ordinary Differential Equations"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Operational Efficiency",
+        "to": [
+          "Process Improvement"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Pandas",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Parameter Estimation",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "PDEs",
+        "to": [
+          "Partial Differential Equations"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Penetration Testing",
+        "to": [
+          "Security Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Personalized Learning Plans",
+        "to": [
+          "Tutoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Phase Shift Analysis",
+        "to": [
+          "Signal Processing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Plasma Turbulence",
+        "to": [
+          "Plasma Physics"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Polarizable Films",
+        "to": [
+          "Materials Science"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Predictive Modelling",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Principal Component Analysis",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Prioritisation",
+        "to": [
+          "Time Management"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Problem Resolution",
+        "to": [
+          "Problem Solving"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Product Backlog Management",
+        "to": [
+          "Agile"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Production Build Scripts",
+        "to": [
+          "Build Tooling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Public Speaking",
+        "to": [
+          "Presentation Skills"
+        ],
+        "occurrences": 6
+      },
+      {
+        "from": "Puppeteer",
+        "to": [
+          "Browser Automation"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Quantitative Data Analysis",
+        "to": [
+          "Data Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Quantitative Research",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "R Markdown",
+        "to": [
+          "R"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "R Package Use",
+        "to": [
+          "R"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "R Programming",
+        "to": [
+          "R"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Radar Technology",
+        "to": [
+          "Signal Processing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "React Hooks",
+        "to": [
+          "React"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "React Router",
+        "to": [
+          "React"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "React.js",
+        "to": [
+          "React"
+        ],
+        "occurrences": 5
+      },
+      {
+        "from": "Real-time Data Handling",
+        "to": [
+          "Data Processing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Redux",
+        "to": [
+          "React"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Reflectometry",
+        "to": [
+          "Plasma Diagnostics"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Regression Analysis",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Regression Diagnostics",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Regression Modelling",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Repeated Measures Analysis",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Research",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Research and Development (R&D)",
+        "to": [
+          "Research and Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Research Design",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Research Methodologies",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Research Methodology",
+        "to": [
+          "Scientific Research"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Research Presentation",
+        "to": [
+          "Scientific Communication"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Research Reporting",
+        "to": [
+          "Scientific Writing"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Residual Analysis",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Responsive Web Design",
+        "to": [
+          "Responsive Design"
+        ],
+        "occurrences": 5
+      },
+      {
+        "from": "REST API Development",
+        "to": [
+          "REST APIs"
+        ],
+        "occurrences": 7
+      },
+      {
+        "from": "Review Management",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Ride Booking",
+        "to": [
+          "Web Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Sampling Methods",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Sass",
+        "to": [
+          "CSS"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Scientific Programming",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Scientific Reporting",
+        "to": [
+          "Scientific Writing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "SciPy",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 8
+      },
+      {
+        "from": "Script Execution",
+        "to": [
+          "Automation"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Seaborn",
+        "to": [
+          "Data Visualization"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Security Best Practices",
+        "to": [
+          "Web Security"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Selenium",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Service Registration",
+        "to": [
+          "Service Discovery"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Service Scalability",
+        "to": [
+          "Scalable Systems"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Session Management",
+        "to": [
+          "Authentication"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Software Prototyping",
+        "to": [
+          "Software Development"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Spring Cloud Config",
+        "to": [
+          "Spring Framework"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Spring Cloud Sleuth",
+        "to": [
+          "Observability"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Spring Data",
+        "to": [
+          "Spring Framework"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Spring Data JPA",
+        "to": [
+          "Spring Framework"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Spring Security",
+        "to": [
+          "Spring Framework"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Sprint Planning",
+        "to": [
+          "Agile"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "SQL Scripting",
+        "to": [
+          "SQL"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Stakeholder Communication",
+        "to": [
+          "Communication"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Stakeholder Engagement",
+        "to": [
+          "Communication"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Communication",
+        "to": [
+          "Scientific Communication"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Computing",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Inference",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Learning",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Methods",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Modelling",
+        "to": [
+          "Statistical Modeling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Statistical Programming",
+        "to": [
+          "Scientific Computing"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Strategic Decision-Making",
+        "to": [
+          "Strategic Planning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Student Engagement",
+        "to": [
+          "Tutoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Study Material Creation",
+        "to": [
+          "Teaching Materials"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Sudoers Configuration",
+        "to": [
+          "Linux"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Supervised Classification",
+        "to": [
+          "Machine Learning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "System Architecture",
+        "to": [
+          "Software Architecture"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "System Optimization",
+        "to": [
+          "Performance Optimization"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "System Performance Tuning",
+        "to": [
+          "Performance Optimization"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Team Collaboration",
+        "to": [
+          "Collaboration"
+        ],
+        "occurrences": 5
+      },
+      {
+        "from": "Team Leadership",
+        "to": [
+          "Leadership"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Technical Documentation",
+        "to": [
+          "Documentation"
+        ],
+        "occurrences": 8
+      },
+      {
+        "from": "Technical Leadership",
+        "to": [
+          "Leadership"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Technical Mentoring",
+        "to": [
+          "Mentoring"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Technical Presentation",
+        "to": [
+          "Presentation Skills"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Technical Reporting and Presentation",
+        "to": [
+          "Technical Writing",
+          "Presentation Skills"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Technical Troubleshooting",
+        "to": [
+          "Troubleshooting"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Test-Driven Development (TDD)",
+        "to": [
+          "Test-Driven Development"
+        ],
+        "occurrences": 3
+      },
+      {
+        "from": "Thermally Stimulated Currents",
+        "to": [
+          "Materials Science"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Time Series Forecasting",
+        "to": [
+          "Time Series Analysis"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Tokamak Operations",
+        "to": [
+          "Tokamak Operation"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Tore Supra Tokamak",
+        "to": [
+          "Tokamak Operation"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Training Support",
+        "to": [
+          "User Training"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Ubuntu Server",
+        "to": [
+          "Linux"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "UI/UX Collaboration",
+        "to": [
+          "UI/UX Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Unit Testing",
+        "to": [
+          "Software Testing"
+        ],
+        "occurrences": 4
+      },
+      {
+        "from": "User Authentication",
+        "to": [
+          "Authentication"
+        ],
+        "occurrences": 4
+      },
+      {
+        "from": "User Experience (UX) Design",
+        "to": [
+          "UI/UX Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "User Interface (UI) Design",
+        "to": [
+          "UI/UX Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "User Interface Design",
+        "to": [
+          "UI/UX Design"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "User Story Writing",
+        "to": [
+          "Requirements Gathering"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Variance Analysis",
+        "to": [
+          "Statistics"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Vision Setting",
+        "to": [
+          "Strategic Planning"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Vue Router",
+        "to": [
+          "Vue.js"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Vuex",
+        "to": [
+          "Vue.js"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Web Hosting (Awardspace)",
+        "to": [
+          "Web Hosting"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Web Performance Optimization",
+        "to": [
+          "Performance Optimization"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Web Safety",
+        "to": [
+          "Web Security"
+        ],
+        "occurrences": 2
+      },
+      {
+        "from": "Webpack",
+        "to": [
+          "Build Tooling"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "ZFS Pool Management",
+        "to": [
+          "ZFS"
+        ],
+        "occurrences": 1
+      },
+      {
+        "from": "Zipkin",
+        "to": [
+          "Observability"
+        ],
+        "occurrences": 1
+      }
+    ]
+  }
+}

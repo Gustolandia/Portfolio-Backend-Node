@@ -63,7 +63,7 @@ test("local portfolio data file matches the public payload shape", async () => {
   const fileContent = await readFile(DEFAULT_PORTFOLIO_DATA_PATH, "utf8");
   const normalizedData = normalizePortfolioData(JSON.parse(fileContent));
 
-  assert.deepEqual(Object.keys(normalizedData), ["pages", "jobs", "education", "projects"]);
+  assert.deepEqual(Object.keys(normalizedData), ["pages", "jobs", "education", "projects", "profile", "research"]);
   assert.deepEqual(Object.keys(normalizedData.pages), PAGE_KEYS);
   assert.ok(normalizedData.jobs.length > 0);
   assert.ok(normalizedData.education.length > 0);
@@ -74,6 +74,7 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
   assert.deepEqual(
     normalizeRichItem(
       {
+        id: "job-company",
         company: "Company",
         duties: ["Build"],
         unknown: "discard"
@@ -81,6 +82,8 @@ test("normalizes rich items to allowed fields with safe defaults", () => {
       JOB_FIELDS
     ),
     {
+      id: "job-company",
+      category: "industry",
       title: "",
       company: "Company",
       location: "",
@@ -101,6 +104,7 @@ test("normalizes ordered image metadata triples without breaking index associati
   assert.deepEqual(
     normalizeRichItem(
       {
+        id: "job-images",
         imageBackupDescriptions: ["Backup first", "Backup dropped", "Backup invalid", "Backup third"],
         imageDescriptions: ["Description first", "", 123, "Description third"],
         imageTitles: ["First", "Dropped", 123, "Third"],
@@ -109,6 +113,8 @@ test("normalizes ordered image metadata triples without breaking index associati
       JOB_FIELDS
     ),
     {
+      id: "job-images",
+      category: "industry",
       title: "",
       company: "",
       location: "",

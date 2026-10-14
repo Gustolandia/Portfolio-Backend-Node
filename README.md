@@ -1,6 +1,6 @@
 # Portfolio Backend
 
-Small Netlify Functions backend for a React portfolio website. It serves all portfolio content as one JSON payload so the frontend can fetch once at startup and keep the data in browser memory.
+Small Netlify Functions backend for a React academic portfolio website. It serves profile, thesis overview, experience, education, projects and their attached assets as one JSON payload so the frontend can fetch once at startup and keep the data in browser memory.
 
 ## Endpoint
 
@@ -99,7 +99,29 @@ Both public and admin data endpoints return one complete portfolio payload:
   },
   "jobs": [],
   "education": [],
-  "projects": []
+  "projects": [],
+  "profile": {
+    "name": "",
+    "headline": "",
+    "summary": "",
+    "location": "",
+    "email": "",
+    "cvUrl": "",
+    "portraitUrl": "",
+    "researchInterests": []
+  },
+  "research": {
+    "title": "",
+    "summary": "",
+    "thesisTitle": "",
+    "thesisSummary": "",
+    "thesisStatus": "",
+    "thesisInstitution": "",
+    "thesisStart": "",
+    "thesisEnd": "",
+    "thesisQuestions": [],
+    "thesisMethods": []
+  }
 }
 ```
 
@@ -108,19 +130,19 @@ Both public and admin data endpoints return one complete portfolio payload:
 Jobs are normalized to these fields only:
 
 ```text
-title, company, location, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, duties, skills, mapLocation
+id, category, title, company, location, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, duties, skills, mapLocation
 ```
 
 Education entries are normalized to these fields only:
 
 ```text
-degree, institution, location, grade, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, courses, activities, skills, mapLocation
+status, degree, institution, location, grade, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, courses, activities, skills, mapLocation
 ```
 
 Projects are normalized to these fields only:
 
 ```text
-name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
+id, category, outputType, status, contribution, relatedRoleIds, authors, name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
 ```
 
 Missing string fields become `""`, missing array fields become `[]`, and unsupported rich-item fields are discarded. Jobs and education are sorted by latest `end` date first, falling back to `start`. Projects are sorted by latest `dateOfCompletion` first.
@@ -134,6 +156,74 @@ links[index]     <-> linksDescriptions[index] <-> linksBackupDescriptions[index]
 
 `imageTitles` and `linksTitles` remain supported as compatibility aliases for the primary description fields. When possible, the backend mirrors/falls back between `imageTitles` and `imageDescriptions`, and between `linksTitles` and `linksDescriptions`. If an invalid or empty `imageUrls[index]` or `links[index]` is discarded, the corresponding metadata at that same index is discarded too.
 
+## Academic Metadata And Placement
+
+`profile` and `research` are returned by both data endpoints. Their string fields default to `""` and their string-array fields default to `[]` when an object is explicitly supplied. `profile.researchInterests`, `research.thesisQuestions`, and `research.thesisMethods` are ordered string arrays; all other fields in these two objects are strings. `research.thesisStatus` uses the enum below. Unknown fields are discarded. On normalization, explicit `null` for either singleton object produces empty fields; only `undefined`/an absent object receives legacy defaults. Admin PUT still requires any supplied singleton value to be an object, so clients should normalize nulls to empty objects before saving.
+
+The four legacy top-level sections (`pages`, `jobs`, `education`, `projects`) remain required for PUT. Older clients may omit `profile` or `research`: the service retains any stored object, or uses the approved legacy defaults if no object exists yet. Supplying `{}` clears an object's fields to empty values. Supplying explicit empty strings never restores default text on a later GET/save. Supplied non-object metadata and non-string/string-array fields return 400.
+
+For legacy data missing each entire object, the backend provides these approved defaults:
+
+```json
+{
+  "profile": {
+    "name": "Gustavo Pedro Ricou",
+    "headline": "Machine learning, statistics & scientific computing",
+    "summary": "My background combines physics, statistics and software engineering. My current thesis investigates when sharing a neural-network representation helps or hurts tasks trained together.",
+    "location": "",
+    "email": "",
+    "cvUrl": "",
+    "portraitUrl": "",
+    "researchInterests": ["Multi-task learning", "Transfer and gradient interference", "Statistics", "Scientific computing"]
+  },
+  "research": {
+    "title": "Research",
+    "summary": "Questions at the intersection of learning, statistics and scientific computing.",
+    "thesisTitle": "Gradient interference and transfer in multi-task learning",
+    "thesisSummary": "I study two tasks trained simultaneously on the same inputs, using a shared trunk and a separate output head for each task. Each task is compared with a matched single-task network. The aim is to understand when sharing helps or hurts and whether transfer can be predicted before training.",
+    "thesisStatus": "in-progress",
+    "thesisInstitution": "",
+    "thesisStart": "",
+    "thesisEnd": "",
+    "thesisQuestions": ["When does sharing a trunk help or hurt each task?", "Can transfer be predicted before training?"],
+    "thesisMethods": ["Hard parameter sharing", "Matched single-task baselines", "Gradient interference"]
+  }
+}
+```
+
+The thesis is early-stage work. Prediction is an aim; no achieved prediction result or discovery is seeded. Institution, dates, contact address and CV require explicit backend content edits. No login email or authentication environment variable is used as public contact information. Add a public email through the authenticated admin editor; keep any temporary content snapshot under the ignored `private-content/` directory. A frontend Show email button can deter simple scraping, but `profile.email`, once saved, is available to public API readers. Empty `cvUrl` allows the frontend to use its printable `/cv` route without a new backend endpoint or an outdated PDF fallback.
+
+`profile.portraitUrl` is an optional string defaulting to `""`, using the same safe URL rules as `cvUrl`. The admin can explicitly select/upload an approved portrait and save the returned URL through the usual full payload PUT. There is no automatic fallback from `pages.home.imageUrl`; that legacy page photo remains stored separately. Explicitly clearing `portraitUrl` keeps it empty on subsequent reads and saves.
+
+Placement and output fields use these exact values:
+
+| Field | Allowed Values | Missing Legacy Value |
+| --- | --- | --- |
+| `jobs.category` | `research`, `industry`, `teaching` | Approved title rule, otherwise `industry` |
+| `projects.category` | `research`, `software`, `data`, `coursework`, `other` | Approved report names, otherwise `other` |
+| `projects.outputType` | `""`, `report`, `preprint`, `manuscript`, `article`, `dataset`, `software`, `other` | Approved reports use `report`; otherwise `""` |
+| `projects.status` | `""`, `in-progress`, `in-preparation`, `preprint`, `published`, `completed` | Approved reports use `completed`; otherwise `""` |
+| `education.status` | `in-progress`, `completed`, `not-completed`, `""` | `""` |
+| `research.thesisStatus` | `""`, `in-progress`, `in-preparation`, `completed` | Absent research object uses `in-progress`; otherwise `""` |
+
+`projects.contribution` is a string, defaulting to `""`. `projects.relatedRoleIds` is an ordered string array, defaulting to `[]`; each ID must reference a job in the same complete PUT payload. Remove/update these references when deleting a related role. Duplicate references are normalized once in first-occurrence order. Invalid supplied enum values, duplicate IDs, malformed relationship arrays and dangling relationships return 400 with the existing admin CORS headers.
+
+Legacy jobs use whole-word `Research` in the title to migrate to `research`, then whole-word `Tutor` or `teaching` to migrate to `teaching`; other titles migrate to `industry`. Legacy projects migrate to `research` / `report` / `completed` only for these exact names:
+
+- `Report on Reflectometry`
+- `Disruption Studies on the COMPASS Tokamak`
+- `Automatic Data Control and Acquisition for the Study of Electrical Susceptibility and Thermally Stimulated Currents in Ceramics and Polarizable Films`
+
+Explicit categories, statuses and output types override these migration defaults. Empty project `outputType` and `status` mean "Not specified" and are valid on PUT/GET, including for approved reports. Only omitted fields on the three exact legacy reports migrate to `report`/`completed`. Other legacy projects receive empty output/status fields; historical software is never automatically labeled "in preparation". Unknown stored output/status values normalize to empty strings, while invalid supplied enum values on PUT return 400. Categories do not allow an empty string. Renaming subsequently uses the persisted category instead of the title. Generic coursework is not classified as original research. A manuscript explicitly being prepared must retain `status: "in-preparation"`; artifact release versions do not establish publication status. Recent paper metadata must be verified before an administrator saves or seeds it. Education completion or awards are never inferred from dates or degree titles.
+
+Job/project `id` values persist through rename and save. Legacy IDs are deterministic SHA-256-derived strings (`job-<24 hex digits>` / `project-<24 hex digits>`) computed from the initial title/company/start/end or name/dateOfCompletion. No random IDs or storage writes occur on GET. Identical legacy records receive deterministic numeric suffixes to keep IDs unique. Save the returned IDs once and always send them back on subsequent edits; deleting an ID and changing its original identifying fields generates a new identity. Frontends may create new IDs themselves using UUIDs. IDs may contain letters, digits, dots, underscores, colons or hyphens, begin with a letter/digit, and contain at most 128 characters. An omitted/empty new ID is generated by the backend. GET/PUT output retains contributors, affiliations, contribution and same-index media metadata when categories/IDs are migrated.
+
+Public `profile.cvUrl`, `profile.portraitUrl`, page `imageUrl`, rich `imageUrls` and project `links` accept HTTP(S) URLs or safe relative asset paths such as `/assets/cv.pdf` and `./images/photo.jpg`. Executable schemes (`javascript:`, `data:`, etc.), protocol-relative URLs, embedded credentials, backslashes and control characters are rejected on PUT. Reads sanitize unsafe legacy values; when a rich URL is removed its metadata row is removed with it. URLs identify assets relative to the frontend origin when the frontend renders them. Public email is optional and, when nonempty, must be an explicit address.
+
+`projects.authors` is an ordered string-array byline, default `[]`, distinct from `collaborators`. Omitted existing bylines are retained by stable ID for older admin saves; unsupported ID-less omissions return 400 before writing, while explicit `authors: []` clears the byline. Skill labels use reviewed aliases and stable deduplication on GET/PUT; new unknown skills remain valid. Thesis methods/interests use synonyms only.
+
+The local seed now includes four verified preprints and one manuscript in preparation. Content is added only by an explicit migration, never automatically on GET or PUT. See [the research content audit and migration guide](docs/research-content-migration.md) for source metadata, first/latest dates, preserved content, skills counts, review hashes, backups and the one-time ledger. The live migration operates on the current raw Redis value; never replace it with the older local seed.
+
 ## Project Layout
 
 ```text
@@ -146,6 +236,9 @@ src/media/imageKitMediaService.js   ImageKit browser upload auth service
 src/storage/jsonPortfolioStore.js   Local JSON storage adapter
 src/storage/redisPortfolioStore.js  Upstash Redis storage adapter
 src/validation/portfolioData.js     Payload normalization
+src/validation/academicMetadata.js Academic defaults, identity and placement
+src/validation/publicUrl.js         Public asset URL safety
+scripts/migrate-redis.js            Dry-run-first Redis contract migration
 test/                              Node test suite
 ```
 
@@ -250,10 +343,10 @@ Seed Redis from the local JSON file:
 UPSTASH_REDIS_REST_URL=your-upstash-rest-url UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token npm run seed:redis
 ```
 
-Normalize the current Redis value in place after a data-contract change:
+Preview normalization of the current Redis value after a contract change (one read, no writes):
 
 ```bash
-UPSTASH_REDIS_REST_URL=your-upstash-rest-url UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token npm run migrate:redis
+UPSTASH_REDIS_REST_URL=your-upstash-rest-url UPSTASH_REDIS_REST_TOKEN=your-upstash-rest-token npm run migrate:redis -- --dry-run
 ```
 
 On Windows PowerShell:
@@ -264,11 +357,30 @@ $env:UPSTASH_REDIS_REST_TOKEN="your-upstash-rest-token"
 npm run seed:redis
 ```
 
-For an in-place Redis migration on Windows PowerShell, use the same environment variables and run:
+For the read-only Redis migration preview on Windows PowerShell, use the same environment variables and run:
 
 ```powershell
-npm run migrate:redis
+npm run migrate:redis -- --dry-run
 ```
+
+Plain `npm run migrate:redis` also defaults to dry run. The command prints generated IDs/categories/statuses and whether content would change, without printing contact data, credentials or the entire payload. Preview a local snapshot without Redis credentials or network access:
+
+```powershell
+npm run migrate:redis -- --dry-run --input data/portfolio.json
+npm run migrate:redis -- --dry-run --input private-content/portfolio-snapshot.json
+```
+
+Use a noncommitted complete JSON snapshot for private content review. General schema `migrate:redis --input` is preview-only and cannot be combined with `--apply`; publish reviewed contact/content through authenticated admin PUT. The tracked JSON includes explicitly reviewed research additions; seeding normalizes it but replaces the entire Redis payload. Do not reseed an edited live portfolio. The dedicated `migrate:content` command provides a separate narrowly scoped, hash-checked and backed-up content migration with a persistent ledger.
+
+When separately authorized to persist the migration, pause concurrent admin edits, inspect the dry run, then explicitly run:
+
+```powershell
+npm run migrate:redis -- --apply
+```
+
+Apply writes the original value to `portfolio:data:backup:<ISO timestamp>` (using your configured key prefix) before a single Redis SET replaces the portfolio value. It stops before writing if normalized relationships fail validation. A repeat on already normalized content performs no writes. Review or remove the backup later; it contains the previous public content. The backup and replacement are separate commands, so schedule apply while admin editing is paused.
+
+Deployment and persistent migration are separate: GET will normalize legacy data without writing it once this backend is deployed. A complete authenticated admin save can also persist the returned IDs and new fields. This change introduces no new endpoint or environment variable.
 
 After seeding or migrating, the public endpoint stays the same. Data-only Redis changes are available to the next function request.
 
@@ -307,7 +419,7 @@ curl http://localhost:8788/.netlify/functions/portfolio-data
 npm test
 ```
 
-The tests cover the Netlify Function behavior, local JSON storage, Redis storage with deterministic mocks, service normalization and ordering, ordered image/file metadata arrays, ImageKit upload authentication, auth/session services, and the public data shape.
+The tests cover legacy/new academic payloads, conservative defaults, explicit empty/null normalization, optional project editorial fields, shared thesis status values, deterministic IDs and rename stability, relationships and contributors, safe URLs, ordered image/file metadata arrays, dry-run migration and backup behavior, and full frontend payload PUT-to-public GET using mocked Redis. Existing cookie/CORS/CSRF, login rate limiting, ImageKit upload authentication and local JSON/storage tests remain included. Redis tests and migration applies use mocks; the suite does not write live Redis. There is no separate lint or build script in this package.
 
 ## Deploying To Netlify
 

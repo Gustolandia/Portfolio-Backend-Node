@@ -2,7 +2,7 @@ import { createAdminSessionService } from "../../src/admin/adminSessionService.j
 import { createAdminFunction } from "../../src/http/adminFunction.js";
 import { adminJsonResponse } from "../../src/http/adminResponses.js";
 import { parseJsonBody } from "../../src/http/request.js";
-import { createPortfolioService } from "../../src/services/portfolioService.js";
+import { createPortfolioService, PortfolioPayloadCompatibilityError } from "../../src/services/portfolioService.js";
 import { validateCompletePortfolioPayload } from "../../src/validation/portfolioData.js";
 
 export function createHandler({
@@ -53,9 +53,18 @@ export function createHandler({
         });
       }
 
-      const savedPortfolioData = await portfolioService.updatePortfolioData(body);
+      try {
+        const savedPortfolioData = await portfolioService.updatePortfolioData(body);
 
-      return adminJsonResponse(event, 200, savedPortfolioData);
+        return adminJsonResponse(event, 200, savedPortfolioData);
+      } catch (error) {
+        if (error instanceof PortfolioPayloadCompatibilityError) {
+          return adminJsonResponse(event, 400, {
+            error: "Invalid portfolio payload", details: [error.message]
+          });
+        }
+        throw error;
+      }
     }
   });
 }
