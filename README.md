@@ -2,6 +2,20 @@
 
 Small Netlify Functions backend for a React academic portfolio website. It serves profile, thesis overview, experience, education, projects and their attached assets as one JSON payload so the frontend can fetch once at startup and keep the data in browser memory.
 
+## Table Of Contents
+
+- [Endpoint](#endpoint)
+- [Admin Endpoints](#admin-endpoints)
+- [Portfolio Payload Contract](#portfolio-payload-contract)
+- [Academic Metadata And Placement](#academic-metadata-and-placement)
+- [Project Layout](#project-layout)
+- [Environment Variables](#environment-variables)
+- [ImageKit Uploads](#imagekit-uploads)
+- [Upstash Redis](#upstash-redis)
+- [Local Development](#local-development)
+- [Tests](#tests)
+- [Deploying To Netlify](#deploying-to-netlify)
+
 ## Endpoint
 
 ```text
@@ -117,6 +131,7 @@ Both public and admin data endpoints return one complete portfolio payload:
     "thesisSummary": "",
     "thesisStatus": "",
     "thesisInstitution": "",
+    "thesisSupervisor": "",
     "thesisStart": "",
     "thesisEnd": "",
     "thesisQuestions": [],
@@ -183,6 +198,7 @@ For legacy data missing each entire object, the backend provides these approved 
     "thesisSummary": "I study two tasks trained simultaneously on the same inputs, using a shared trunk and a separate output head for each task. Each task is compared with a matched single-task network. The aim is to understand when sharing helps or hurts and whether transfer can be predicted before training.",
     "thesisStatus": "in-progress",
     "thesisInstitution": "",
+    "thesisSupervisor": "",
     "thesisStart": "",
     "thesisEnd": "",
     "thesisQuestions": ["When does sharing a trunk help or hurt each task?", "Can transfer be predicted before training?"],
@@ -223,6 +239,8 @@ Public `profile.cvUrl`, `profile.portraitUrl`, page `imageUrl`, rich `imageUrls`
 `projects.authors` is an ordered string-array byline, default `[]`, distinct from `collaborators`. Omitted existing bylines are retained by stable ID for older admin saves; unsupported ID-less omissions return 400 before writing, while explicit `authors: []` clears the byline. Skill labels use reviewed aliases and stable deduplication on GET/PUT; new unknown skills remain valid. Thesis methods/interests use synonyms only.
 
 The local seed now includes four verified preprints and one manuscript in preparation. Content is added only by an explicit migration, never automatically on GET or PUT. See [the research content audit and migration guide](docs/research-content-migration.md) for source metadata, first/latest dates, preserved content, skills counts, review hashes, backups and the one-time ledger. The live migration operates on the current raw Redis value; never replace it with the older local seed.
+
+The [academic website review](docs/academic-review-migration.md) adds optional public `research.thesisSupervisor` text and documents verified contributions, thesis context, Fusion-EP coursework status and research-facing course previews. Older admin saves omitting the supervisor retain it; an explicit empty string clears it. `thesisEnd` may be a submission deadline, not evidence of completion. The explicit review migration preserves IDs, categories, skills and ordered media; it requires full raw backups, reviewed source/candidate hashes and its own CAS ledger. It never runs on GET/PUT or replaces live data with the local seed.
 
 ## Project Layout
 
@@ -415,6 +433,8 @@ curl http://localhost:8788/.netlify/functions/portfolio-data
 
 ## Tests
 
+Academic review coverage includes optional supervisor validation/read/write, legacy omission preservation and explicit clearing, unchanged cookie/CORS/CSRF enforcement, evidence-scoped content patches, complete course/activities preservation, aligned links, untouched image tuples, raw backups, exact review hashes, concurrent-edit rejection and ledger no-op repeats. See [the academic review guide](docs/academic-review-migration.md) for factual evidence and guarded migration steps.
+
 ```bash
 npm test
 ```
@@ -425,7 +445,7 @@ The tests cover legacy/new academic payloads, conservative defaults, explicit em
 
 1. Push this repository to GitHub.
 2. Create a new Netlify site from the repository.
-3. Leave the build command empty unless you add a frontend later.
+3. Set the build command to `npm test` so tests gate function packaging/deployment.
 4. Set the functions directory to `netlify/functions`; this is already configured in `netlify.toml`.
 5. Add environment variables in Netlify site settings:
    - `FRONTEND_ORIGIN`

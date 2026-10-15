@@ -7,7 +7,7 @@ export const PROFILE_FIELDS = Object.freeze([
 ]);
 export const RESEARCH_FIELDS = Object.freeze([
   "title", "summary", "thesisTitle", "thesisSummary", "thesisStatus",
-  "thesisInstitution", "thesisStart", "thesisEnd", "thesisQuestions", "thesisMethods"
+  "thesisInstitution", "thesisSupervisor", "thesisStart", "thesisEnd", "thesisQuestions", "thesisMethods"
 ]);
 export const JOB_CATEGORIES = Object.freeze(["research", "industry", "teaching"]);
 export const PROJECT_CATEGORIES = Object.freeze([
@@ -46,6 +46,7 @@ export const DEFAULT_RESEARCH = Object.freeze({
   thesisSummary: "I study two tasks trained simultaneously on the same inputs, using a shared trunk and a separate output head for each task. Each task is compared with a matched single-task network. The aim is to understand when sharing helps or hurts and whether transfer can be predicted before training.",
   thesisStatus: "in-progress",
   thesisInstitution: "",
+  thesisSupervisor: "",
   thesisStart: "",
   thesisEnd: "",
   thesisQuestions: Object.freeze([
@@ -85,8 +86,9 @@ const METADATA_ARRAY_FIELDS = new Set([
  * @property {string} thesisSummary Early-stage aims without claims of results.
  * @property {'' | 'in-progress' | 'in-preparation' | 'completed'} thesisStatus Explicit thesis status, or unspecified.
  * @property {string} thesisInstitution Explicit institution, or empty.
- * @property {string} thesisStart Explicit start date, or empty.
- * @property {string} thesisEnd Explicit end date, or empty.
+ * @property {string} thesisSupervisor Explicit public supervisor name, or empty.
+ * @property {string} thesisStart Official thesis start date, or empty.
+ * @property {string} thesisEnd Explicit end/submission deadline, not proof of completion, or empty.
  * @property {string[]} thesisQuestions Ordered research questions.
  * @property {string[]} thesisMethods Ordered methods under study.
  */

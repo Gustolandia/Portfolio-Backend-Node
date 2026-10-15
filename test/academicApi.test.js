@@ -107,6 +107,31 @@ test("legacy saves preserve existing profile/research while explicit empties cle
   assert.equal(cleared.research.thesisTitle, "");
 });
 
+test("supervisor survives authenticated PUT/public GET and omitted-field legacy saves; explicit empty clears", async () => {
+  const { admin, publicHandler, event, getStored, writes } = await setup();
+  const body = JSON.parse((await admin(event("GET"))).body);
+  Object.assign(body.research, { thesisSupervisor: "Van-Dinh Nguyen", thesisInstitution: "Trinity College Dublin", thesisStart: "2026-09-25", thesisEnd: "2027-04-19" });
+  const saved = await admin(event("PUT", body));
+  assert.equal(saved.statusCode, 200);
+  assert.equal(getStored().research.thesisSupervisor, "Van-Dinh Nguyen");
+  const publicResponse = await publicHandler({ httpMethod: "GET", headers: {} });
+  assert.equal(publicResponse.headers["Access-Control-Allow-Origin"], "*");
+  assert.equal(publicResponse.headers["Set-Cookie"], undefined);
+  assert.equal(JSON.parse(publicResponse.body).research.thesisSupervisor, "Van-Dinh Nguyen");
+  delete body.research.thesisSupervisor;
+  body.research.thesisSummary = "Updated aim, not an established result.";
+  const legacy = JSON.parse((await admin(event("PUT", body))).body);
+  assert.equal(legacy.research.thesisSupervisor, "Van-Dinh Nguyen");
+  assert.equal(legacy.research.thesisSummary, body.research.thesisSummary);
+  assert.equal((await admin(event("PUT", { ...body, research: { ...body.research, thesisSupervisor: 4 } }))).statusCode, 400);
+  const denied = event("PUT", body); delete denied.headers.cookie;
+  assert.equal((await admin(denied)).statusCode, 401);
+  assert.equal((await admin(event("PUT", body, "bad-csrf"))).statusCode, 403);
+  assert.equal(writes.length, 2);
+  const cleared = JSON.parse((await admin(event("PUT", { ...body, research: { ...body.research, thesisSupervisor: "" } }))).body);
+  assert.equal(cleared.research.thesisSupervisor, "");
+});
+
 test("a complete frontend payload with unspecified project fields survives PUT and public GET", async () => {
   const { admin, publicHandler, event, getStored } = await setup();
   const legacy = JSON.parse(await readFile(DEFAULT_PORTFOLIO_DATA_PATH, "utf8"));

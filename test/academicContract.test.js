@@ -23,6 +23,7 @@ test("absent legacy objects receive the approved early-stage defaults without co
   assert.equal(data.profile.cvUrl, "");
   assert.equal(data.profile.portraitUrl, "");
   assert.equal(data.research.thesisInstitution, "");
+  assert.equal(data.research.thesisSupervisor, "");
   assert.equal(data.research.thesisStart, "");
   assert.equal(data.research.thesisEnd, "");
   assert.equal(data.research.thesisStatus, "in-progress");
@@ -59,6 +60,19 @@ test("new metadata round-trips and drops unsupported fields", () => {
   assert.equal(Object.hasOwn(data.profile, "secret"), false);
   assert.equal(Object.hasOwn(data.research, "secret"), false);
   assert.equal(validateCompletePortfolioPayload(data).valid, true);
+});
+
+test("thesis supervisor is optional explicit public text, never inferred, and validates supplied types", () => {
+  for (const thesisSupervisor of ["", "Van-Dinh Nguyen"]) {
+    const body = payload({ research: { thesisSupervisor } });
+    assert.equal(validateCompletePortfolioPayload(body).valid, true);
+    assert.equal(normalizePortfolioData(body).research.thesisSupervisor, thesisSupervisor);
+  }
+  assert.equal(normalizeResearch({ thesisInstitution: "Trinity College Dublin" }).thesisSupervisor, "");
+  for (const thesisSupervisor of [null, 4, [], {}]) {
+    assert.equal(validateCompletePortfolioPayload(payload({ research: { thesisSupervisor } })).valid, false);
+    assert.equal(normalizeResearch({ thesisSupervisor }).thesisSupervisor, "");
+  }
 });
 
 test("legacy categories are conservative and research reports require exact approved names", () => {

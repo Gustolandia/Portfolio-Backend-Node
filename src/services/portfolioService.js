@@ -34,6 +34,8 @@ export class PortfolioService {
    * Explicit objects (including empty strings) replace the existing values.
    * Omitted existing project authors are retained by stable ID during rollout;
    * unsupported ID-less legacy saves are rejected rather than erasing bylines.
+   * Older clients omitting research.thesisSupervisor retain the stored name;
+   * an explicit empty string clears it. Explicit null still clears the object.
    *
    * @param {unknown} portfolioData Candidate portfolio payload from admin PUT.
    * @returns {Promise<ReturnType<typeof normalizePortfolioData>>} Saved payload.
@@ -50,11 +52,16 @@ export class PortfolioService {
     const omittedAuthors = Array.isArray(source.projects) && source.projects.some(
       (project) => project && typeof project === "object" && !Object.hasOwn(project, "authors")
     );
-    if (omittedMetadata.length > 0 || omittedAuthors) {
+    const omittedSupervisor = source.research !== null && typeof source.research === "object" &&
+      !Array.isArray(source.research) && !Object.hasOwn(source.research, "thesisSupervisor");
+    if (omittedMetadata.length > 0 || omittedAuthors || omittedSupervisor) {
       const current = await this.getPortfolioData();
 
       for (const key of omittedMetadata) {
         source[key] = current[key];
+      }
+      if (omittedSupervisor) {
+        source.research = { ...source.research, thesisSupervisor: current.research.thesisSupervisor };
       }
       if (omittedAuthors) {
         const authorsById = new Map(current.projects.map((project) => [project.id, project.authors]));

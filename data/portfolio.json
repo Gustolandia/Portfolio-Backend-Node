@@ -1735,6 +1735,7 @@
     "thesisSummary": "I study two tasks trained simultaneously on the same inputs, using a shared trunk and a separate output head for each task. Each task is compared with a matched single-task network. The aim is to understand when sharing helps or hurts and whether transfer can be predicted before training.",
     "thesisStatus": "in-progress",
     "thesisInstitution": "",
+    "thesisSupervisor": "",
     "thesisStart": "",
     "thesisEnd": "",
     "thesisQuestions": [
