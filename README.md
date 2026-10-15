@@ -9,6 +9,7 @@ Small Netlify Functions backend for a React academic portfolio website. It serve
 - [Portfolio Payload Contract](#portfolio-payload-contract)
 - [Academic Metadata And Placement](#academic-metadata-and-placement)
 - [Project Layout](#project-layout)
+- [Maintenance Tools](#maintenance-tools)
 - [Environment Variables](#environment-variables)
 - [ImageKit Uploads](#imagekit-uploads)
 - [Upstash Redis](#upstash-redis)
@@ -74,7 +75,7 @@ GET /.netlify/functions/admin-imagekit-upload-auth?target=photos
 GET /.netlify/functions/admin-imagekit-upload-auth?target=snippets
 ```
 
-`files` uploads to `IMAGEKIT_FILES_FOLDER`, which defaults to `/Portfolio Website`. `photos` uploads to `IMAGEKIT_PHOTOS_FOLDER`, which defaults to `/Portfolio Website/Photos`. `snippets` uploads to `IMAGEKIT_SNIPPETS_FOLDER`, which defaults to `/Portfolio Website/Snippets`. If `target` is omitted, the backend defaults to `snippets` for compatibility with project image uploads. Frontend-provided custom folders are rejected, so uploads stay inside these configured locations.
+`files`, `photos` and `snippets` use their server-configured folder variables. Configure the new upload root `/Portfolio-Website` and its `/Photos` and `/Snippets` subfolders explicitly: ImageKit upload folder names do not allow spaces. Historical code defaults use `/Portfolio Website`; they are not suitable for new uploads and are not changed implicitly. Existing CDN URLs with encoded spaces stay untouched. If `target` is omitted, the backend defaults to `snippets` for compatibility with project image uploads. Frontend-provided custom folders are rejected.
 
 The response contains `token`, `expire`, `signature`, `publicKey`, `urlEndpoint`, `uploadEndpoint`, `folder`, and `folders`. The frontend sends those values plus the selected `File` to ImageKit's browser upload API. ImageKit returns the public asset URL; the frontend then stores that URL in its local portfolio edit state and saves the complete portfolio payload with `PUT admin-portfolio-data`, which persists the URL and its metadata to Redis.
 
@@ -242,6 +243,14 @@ The local seed now includes four verified preprints and one manuscript in prepar
 
 The [academic website review](docs/academic-review-migration.md) adds optional public `research.thesisSupervisor` text and documents verified contributions, thesis context, Fusion-EP coursework status and research-facing course previews. Older admin saves omitting the supervisor retain it; an explicit empty string clears it. `thesisEnd` may be a submission deadline, not evidence of completion. The explicit review migration preserves IDs, categories, skills and ordered media; it requires full raw backups, reviewed source/candidate hashes and its own CAS ledger. It never runs on GET/PUT or replaces live data with the local seed.
 
+The separate [reviewed LinkedIn content update](docs/linkedin-content-migration.md) adds four verified industry roles and narrowly scoped factual corrections. `npm run migrate:linkedin -- --dry-run` previews the current raw Redis value; application requires a reviewed hash, full backups and its own one-time ledger. Existing role IDs/categories are pinned before title changes; papers, thesis, skills and ordered media stay intact. Ongoing jobs use `end: "Present"`; education has a separate optional status, and provisional marks do not establish degree completion. This command never seeds on GET/PUT or replaces live content from a file input.
+
+The separately requested [existing-role description update](docs/linkedin-role-descriptions-migration.md) changes only the thirteen original `jobs[].duties` arrays. `npm run migrate:role-descriptions -- --dry-run` uses a distinct ledger and previews both source/candidate hashes; apply requires both reviewed hashes and complete backups. All other fields, job order and four newer roles stay intact. The existing admin editor and role dialogs already support these ordered string arrays, so no API/frontend changes or redeployment are needed.
+
+The separate [reviewed media recovery workflow](docs/media-recovery.md) stages only selected hash-pinned files without ImageKit library listing, then prepares an independently reviewed media-only Redis candidate. It keeps URL/title/description/backup arrays aligned, preserves working ImageKit URLs and all non-media content, archives retired tuples, and requires full raw backups plus both review hashes and CAS before any separately approved application. Private assets, manifests and receipts remain under ignored `private-content/`; uploading alone never saves portfolio data.
+
+The later [workplace maps and building-photo update](docs/workplace-content-migration.md) is independently scoped to reviewed `mapLocation` strings and appended image tuples on jobs/education only. It preserves all existing media and non-media facts, distinguishes remote organisation-city context from a physical workplace, verifies historical locations and photo licences, and uses complete raw backups, source/candidate hashes, CAS and its own ledger. No backend deployment or endpoint change is required for this content update; an unverified physical office is never filled with a logo or unrelated stock photo.
+
 ## Project Layout
 
 ```text
@@ -251,16 +260,29 @@ src/auth/authService.js             Auth service for future write endpoints
 src/admin/                          Cookie sessions, credentials, CSRF, rate limits
 src/services/portfolioService.js    API-facing portfolio service
 src/media/imageKitMediaService.js   ImageKit browser upload auth service
+src/media/stageImageKitAssets.js    Selected-asset maintenance upload library
+src/content/                       Reviewed content planners and shared Redis CAS
 src/storage/jsonPortfolioStore.js   Local JSON storage adapter
 src/storage/redisPortfolioStore.js  Upstash Redis storage adapter
 src/validation/portfolioData.js     Payload normalization
 src/validation/academicMetadata.js Academic defaults, identity and placement
 src/validation/publicUrl.js         Public asset URL safety
 scripts/migrate-redis.js            Dry-run-first Redis contract migration
+scripts/migrate-content.js          One-time research/skills migration
+scripts/migrate-linkedin-content.js Historical roles and duties-only migrations
+scripts/migrate-academic-review.js  Evidence-scoped academic review migration
 test/                              Node test suite
 ```
 
 The function depends on the service layer, and the service depends on a storage adapter. Use `PORTFOLIO_STORE=json` for local JSON, or `PORTFOLIO_STORE=redis` to read the payload from Upstash Redis.
+
+## Maintenance Tools
+
+The [maintenance guide](docs/maintenance-tools.md) indexes all migration and selected-upload tools, their independent ledgers, preview commands, review requirements and release checks. They are explicitly invoked tools, not Netlify endpoints, startup hooks or build steps. `npm test` never uploads media or writes live Redis. Publishing the tools does not replay earlier migrations or change portfolio content.
+
+Only the boolean `dryRun: false` enables the shared content runner's write path; non-boolean values are rejected before Redis access. Apply still requires the reviewed source hash, full original backup and deployment verification; the media, workplace, role-description and academic-review wrappers additionally require the reviewed candidate hash. Never delete an applied ledger to replay an old patch against later edits.
+
+Keep `.env`, all local `.env.*` files and `private-content/` outside commits and deployment inputs. Only the placeholder `.env.example` is allowed in Git. Release from a reviewed clean checkout, not this workspace's private source/backup tree; Git ignore rules are not a substitute for checking a manual deployment's publish directory. Historical rollout counts and receipts in the guides describe those specific updates, not a fresh live audit.
 
 ## Environment Variables
 
@@ -280,10 +302,10 @@ UPSTASH_REDIS_REST_TOKEN=replace-with-your-upstash-token
 IMAGEKIT_PRIVATE_KEY=replace-with-your-imagekit-private-key
 IMAGEKIT_PUBLIC_KEY=replace-with-your-imagekit-public-key
 IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
-IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
-IMAGEKIT_FILES_FOLDER=/Portfolio Website
-IMAGEKIT_PHOTOS_FOLDER=/Portfolio Website/Photos
-IMAGEKIT_SNIPPETS_FOLDER=/Portfolio Website/Snippets
+IMAGEKIT_MEDIA_FOLDER=/Portfolio-Website
+IMAGEKIT_FILES_FOLDER=/Portfolio-Website
+IMAGEKIT_PHOTOS_FOLDER=/Portfolio-Website/Photos
+IMAGEKIT_SNIPPETS_FOLDER=/Portfolio-Website/Snippets
 ```
 
 `FRONTEND_ORIGIN` controls CORS. If it is not set, the function returns `Access-Control-Allow-Origin: *`.
@@ -315,13 +337,15 @@ IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your-imagekit-id/
 Recommended folder variables:
 
 ```text
-IMAGEKIT_MEDIA_FOLDER=/Portfolio Website
-IMAGEKIT_FILES_FOLDER=/Portfolio Website
-IMAGEKIT_PHOTOS_FOLDER=/Portfolio Website/Photos
-IMAGEKIT_SNIPPETS_FOLDER=/Portfolio Website/Snippets
+IMAGEKIT_MEDIA_FOLDER=/Portfolio-Website
+IMAGEKIT_FILES_FOLDER=/Portfolio-Website
+IMAGEKIT_PHOTOS_FOLDER=/Portfolio-Website/Photos
+IMAGEKIT_SNIPPETS_FOLDER=/Portfolio-Website/Snippets
 ```
 
 Use an ImageKit key with the least permissions that support browser upload authentication. The private key must stay only in Netlify/backend environment variables. The public key may be returned to authenticated admin clients for ImageKit browser uploads.
+
+Changing Netlify function environment values requires a successful deployment to activate them. Keep `npm test` as the deployment gate. Folder changes affect only new uploads; do not move or rename existing files or rewrite working stored URLs.
 
 Upload flow:
 
@@ -439,7 +463,9 @@ Academic review coverage includes optional supervisor validation/read/write, leg
 npm test
 ```
 
-The tests cover legacy/new academic payloads, conservative defaults, explicit empty/null normalization, optional project editorial fields, shared thesis status values, deterministic IDs and rename stability, relationships and contributors, safe URLs, ordered image/file metadata arrays, dry-run migration and backup behavior, and full frontend payload PUT-to-public GET using mocked Redis. Existing cookie/CORS/CSRF, login rate limiting, ImageKit upload authentication and local JSON/storage tests remain included. Redis tests and migration applies use mocks; the suite does not write live Redis. There is no separate lint or build script in this package.
+The tests cover legacy/new academic payloads, conservative defaults, explicit empty/null normalization, optional project editorial fields, shared thesis status values, deterministic IDs and rename stability, relationships and contributors, safe URLs, ordered image/file metadata arrays, dry-run migration and backup behavior, and full frontend payload PUT-to-public GET using mocked Redis. LinkedIn update tests additionally enforce its exact factual field scope, identity/category pinning, ongoing/month-precision dates, provisional education status, separate migration ledger, complete backups and hash/concurrent-edit protection. Duties-only tests also prove raw field/job-order preservation, stable computed IDs and independent source/candidate guards. Existing cookie/CORS/CSRF, login rate limiting, ImageKit upload authentication and local JSON/storage tests remain included. Redis tests and migration applies use mocks; the suite does not write live Redis. There is no separate lint or build script in this package.
+
+Selected-asset staging and media-recovery tests additionally cover source/receipt hashes, decoded MIME types, non-overwrite/resume safety, secret omission, animation frames, full media-only field scope, same-index metadata, explicit empty captions, protected URLs, stale indexes, complete backups, concurrent edits and the separate media ledger. ImageKit fixtures inject every folder option and include an incompatible-ambient-env regression so production environment values do not change test assumptions.
 
 ## Deploying To Netlify
 

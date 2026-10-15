@@ -42,6 +42,12 @@ test("Redis content preview is read-only and reports the exact raw snapshot hash
   assert.equal(f.backups.length, 0);
 });
 
+test("research migration rejects ambiguous dry-run modes before accessing Redis", async () => {
+  for (const dryRun of [null, 0, "false", "true", {}, []]) {
+    await assert.rejects(migrateResearchContentRedis({ dryRun, redis: { get: () => assert.fail("No Redis access") } }), /boolean/);
+  }
+});
+
 test("reviewed apply saves complete original backup and sets the one-time ledger atomically", async () => {
   const f = fixture();
   const original = f.raw();

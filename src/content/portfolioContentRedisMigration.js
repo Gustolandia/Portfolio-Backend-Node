@@ -22,7 +22,9 @@ async function persistBackup(path, raw) {
  *
  * Redis must disable automatic deserialization so the reviewed SHA-256 and
  * Redis backup cover the exact original bytes. The planner owns field scope;
- * each migration uses its own ledger. A repeat never restores deleted records.
+ * each migration uses its own ledger. Only the boolean false enables writes;
+ * ambiguous modes are rejected before Redis access. A repeat never restores
+ * deleted records.
  * Apply requires deployment verification and an outside-Git original backup.
  * Concurrent edits abort before any Redis write. No credentials are returned.
  *
@@ -45,6 +47,7 @@ export async function migratePortfolioContentRedis({
   backupDirectory, backupFile, verifyDeployment,
   backupWriter = persistBackup, backupReader = readFile
 }) {
+  if (typeof dryRun !== "boolean") throw new Error("Content migration dryRun must be a boolean.");
   if (typeof migrationId !== "string" || !/^[a-z0-9][a-z0-9-]{0,127}$/.test(migrationId) || typeof planMigration !== "function") {
     throw new Error("Content migration requires a stable identity and scoped planner.");
   }
