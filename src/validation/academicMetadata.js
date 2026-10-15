@@ -3,7 +3,8 @@ import { normalizePublicUrl } from "./publicUrl.js";
 import { normalizeResearchLabels } from "../content/skillAliases.js";
 
 export const PROFILE_FIELDS = Object.freeze([
-  "name", "headline", "summary", "location", "email", "cvUrl", "portraitUrl", "researchInterests"
+  "name", "headline", "summary", "location", "email", "cvUrl", "portraitUrl", "researchInterests",
+  "academicStatus", "availability"
 ]);
 export const RESEARCH_FIELDS = Object.freeze([
   "title", "summary", "thesisTitle", "thesisSummary", "thesisStatus",
@@ -34,6 +35,8 @@ export const DEFAULT_PROFILE = Object.freeze({
   email: "",
   cvUrl: "",
   portraitUrl: "",
+  academicStatus: "",
+  availability: "",
   researchInterests: Object.freeze([
     "Multi-task learning", "Transfer and gradient interference", "Statistics", "Scientific computing"
   ])
@@ -76,6 +79,8 @@ const METADATA_ARRAY_FIELDS = new Set([
  * @property {string} cvUrl HTTP(S) or relative CV asset URL, or empty.
  * @property {string} portraitUrl Explicit HTTP(S) or relative portrait asset URL, or empty.
  * @property {string[]} researchInterests Ordered research interests.
+ * @property {string} academicStatus Explicit current academic context, or empty.
+ * @property {string} availability Owner-approved availability statement, or empty; never inferred from study dates.
  */
 
 /**
@@ -152,12 +157,20 @@ function supportedValue(value, values, fallback) {
  * Optional output type/status remain empty unless explicitly set or omitted
  * from an approved legacy report; explicit empty strings override that migration.
  *
+ * Optional positive safe-integer featuredOrder is editorial metadata only and
+ * never changes chronological array ordering. Invalid/null values are omitted
+ * on reads. Optional education programme groups periods without merging them;
+ * absent/empty values are omitted rather than inventing a programme.
+ *
  * @param {Record<string, unknown>} source Original rich item.
- * @param {Record<string, string | string[]>} item Normalized item to enrich.
- * @returns {Record<string, string | string[]>} Enriched item, modified in place.
+ * @param {Record<string, string | string[] | number>} item Normalized item to enrich.
+ * @returns {Record<string, string | string[] | number>} Enriched item, modified in place.
  */
 export function normalizeAcademicItem(source, item) {
   if (Object.hasOwn(item, "id")) {
+    if (Number.isSafeInteger(source.featuredOrder) && source.featuredOrder > 0) {
+      item.featuredOrder = source.featuredOrder;
+    }
     const isJob = Object.hasOwn(item, "company");
     const identity = isJob
       ? [item.title, item.company, item.start, item.end]
@@ -182,6 +195,9 @@ export function normalizeAcademicItem(source, item) {
     }
   } else if (Object.hasOwn(item, "status")) {
     item.status = supportedValue(source.status, EDUCATION_STATUSES, "");
+    if (typeof source.programme === "string" && source.programme.trim()) {
+      item.programme = source.programme.trim();
+    }
   }
 
   return item;

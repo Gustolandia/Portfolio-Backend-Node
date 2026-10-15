@@ -1715,6 +1715,8 @@
   ],
   "profile": {
     "name": "Gustavo Pedro Ricou",
+    "academicStatus": "",
+    "availability": "",
     "headline": "Machine learning, statistics & scientific computing",
     "summary": "My background combines physics, statistics and software engineering. My current thesis investigates when sharing a neural-network representation helps or hurts tasks trained together.",
     "location": "",

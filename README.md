@@ -23,7 +23,7 @@ Small Netlify Functions backend for a React academic portfolio website. It serve
 GET /.netlify/functions/portfolio-data
 ```
 
-`GET` is public. Any non-GET request is authenticated first with either `Authorization: Bearer <jwt>` or `X-API-Key: <key>`, then rejected with `405 Method Not Allowed` until write endpoints are added.
+`GET` is public and sends no cookies. On this public route, non-GET requests are authenticated first with either `Authorization: Bearer <jwt>` or `X-API-Key: <key>`, then rejected with `405 Method Not Allowed`. Content writes use the separate cookie-authenticated admin endpoint below.
 
 ## Admin Endpoints
 
@@ -123,6 +123,8 @@ Both public and admin data endpoints return one complete portfolio payload:
     "email": "",
     "cvUrl": "",
     "portraitUrl": "",
+    "academicStatus": "",
+    "availability": "",
     "researchInterests": []
   },
   "research": {
@@ -146,22 +148,24 @@ Both public and admin data endpoints return one complete portfolio payload:
 Jobs are normalized to these fields only:
 
 ```text
-id, category, title, company, location, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, duties, skills, mapLocation
+id, category, featuredOrder?, title, company, location, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, duties, skills, mapLocation
 ```
 
 Education entries are normalized to these fields only:
 
 ```text
-status, degree, institution, location, grade, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, courses, activities, skills, mapLocation
+status, programme?, degree, institution, location, grade, start, end, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, courses, activities, skills, mapLocation
 ```
 
 Projects are normalized to these fields only:
 
 ```text
-id, category, outputType, status, contribution, relatedRoleIds, authors, name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
+id, category, featuredOrder?, outputType, status, contribution, relatedRoleIds, authors, name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
 ```
 
 Missing string fields become `""`, missing array fields become `[]`, and unsupported rich-item fields are discarded. Jobs and education are sorted by latest `end` date first, falling back to `start`. Projects are sorted by latest `dateOfCompletion` first.
+
+The `?` above denotes an optional field, not part of its JSON key. Jobs/projects may carry a positive safe-integer `featuredOrder`; unset values are omitted from responses. It selects frontend featured subsets without changing the main chronological arrays. Education may carry a trimmed, nonempty `programme` to group periods visually without merging records. See [editorial metadata](docs/editorial-metadata.md) for older-client retention, exact education matching, and explicit clearing rules.
 
 Image and file metadata is stored in ordered arrays. Order is the relationship:
 
@@ -176,7 +180,7 @@ links[index]     <-> linksDescriptions[index] <-> linksBackupDescriptions[index]
 
 `profile` and `research` are returned by both data endpoints. Their string fields default to `""` and their string-array fields default to `[]` when an object is explicitly supplied. `profile.researchInterests`, `research.thesisQuestions`, and `research.thesisMethods` are ordered string arrays; all other fields in these two objects are strings. `research.thesisStatus` uses the enum below. Unknown fields are discarded. On normalization, explicit `null` for either singleton object produces empty fields; only `undefined`/an absent object receives legacy defaults. Admin PUT still requires any supplied singleton value to be an object, so clients should normalize nulls to empty objects before saving.
 
-The four legacy top-level sections (`pages`, `jobs`, `education`, `projects`) remain required for PUT. Older clients may omit `profile` or `research`: the service retains any stored object, or uses the approved legacy defaults if no object exists yet. Supplying `{}` clears an object's fields to empty values. Supplying explicit empty strings never restores default text on a later GET/save. Supplied non-object metadata and non-string/string-array fields return 400.
+The four legacy top-level sections (`pages`, `jobs`, `education`, `projects`) remain required for PUT. Older clients may omit `profile` or `research`: the service retains any stored object, or uses the approved legacy defaults if no object exists yet. Explicit objects replace ordinary fields with normalized values. Compatibility exceptions retain omitted `profile.academicStatus`, `profile.availability`, and `research.thesisSupervisor`, even inside `{}`; send each field as `""` to clear it. Explicit empty strings never restore default text on a later GET/save. Supplied non-object metadata and non-string/string-array fields return 400.
 
 For legacy data missing each entire object, the backend provides these approved defaults:
 
@@ -190,6 +194,8 @@ For legacy data missing each entire object, the backend provides these approved 
     "email": "",
     "cvUrl": "",
     "portraitUrl": "",
+    "academicStatus": "",
+    "availability": "",
     "researchInterests": ["Multi-task learning", "Transfer and gradient interference", "Statistics", "Scientific computing"]
   },
   "research": {
@@ -211,6 +217,8 @@ For legacy data missing each entire object, the backend provides these approved 
 The thesis is early-stage work. Prediction is an aim; no achieved prediction result or discovery is seeded. Institution, dates, contact address and CV require explicit backend content edits. No login email or authentication environment variable is used as public contact information. Add a public email through the authenticated admin editor; keep any temporary content snapshot under the ignored `private-content/` directory. A frontend Show email button can deter simple scraping, but `profile.email`, once saved, is available to public API readers. Empty `cvUrl` allows the frontend to use its printable `/cv` route without a new backend endpoint or an outdated PDF fallback.
 
 `profile.portraitUrl` is an optional string defaulting to `""`, using the same safe URL rules as `cvUrl`. The admin can explicitly select/upload an approved portrait and save the returned URL through the usual full payload PUT. There is no automatic fallback from `pages.home.imageUrl`; that legacy page photo remains stored separately. Explicitly clearing `portraitUrl` keeps it empty on subsequent reads and saves.
+
+`profile.academicStatus` and `profile.availability` are explicit public strings, defaulting to `""`. They are never inferred from degree dates or authentication settings. Their addition does not seed new claims, selected ranks or programme names into live Redis. Publishing code, applying an approved content plan and browser verification remain separate steps.
 
 Placement and output fields use these exact values:
 
@@ -458,6 +466,8 @@ curl http://localhost:8788/.netlify/functions/portfolio-data
 ## Tests
 
 Academic review coverage includes optional supervisor validation/read/write, legacy omission preservation and explicit clearing, unchanged cookie/CORS/CSRF enforcement, evidence-scoped content patches, complete course/activities preservation, aligned links, untouched image tuples, raw backups, exact review hashes, concurrent-edit rejection and ledger no-op repeats. See [the academic review guide](docs/academic-review-migration.md) for factual evidence and guarded migration steps.
+
+Editorial metadata coverage includes empty academic status/availability defaults, supported and rejected ranks, input-only null clearing, exact education-period matching, ambiguity rejection, stable IDs through renames, unchanged chronological ordering, same-index media preservation, legacy omission retention and authenticated PUT-to-public GET round trips. See [the editorial contract guide](docs/editorial-metadata.md). No live content migration is run by these tests or by deployment.
 
 ```bash
 npm test

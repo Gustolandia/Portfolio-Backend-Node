@@ -25,6 +25,7 @@ export const PAGE_KEYS = Object.freeze([
 export const JOB_FIELDS = Object.freeze([
   "id",
   "category",
+  "featuredOrder",
   "title",
   "company",
   "location",
@@ -41,6 +42,7 @@ export const JOB_FIELDS = Object.freeze([
 
 export const EDUCATION_FIELDS = Object.freeze([
   "status",
+  "programme",
   "degree",
   "institution",
   "location",
@@ -60,6 +62,7 @@ export const EDUCATION_FIELDS = Object.freeze([
 export const PROJECT_FIELDS = Object.freeze([
   "id",
   "category",
+  "featuredOrder",
   "outputType",
   "status",
   "contribution",
@@ -101,6 +104,7 @@ const ARRAY_FIELDS = new Set([
 ]);
 
 const REQUIRED_TOP_LEVEL_KEYS = Object.freeze(["pages", "jobs", "education", "projects"]);
+const OPTIONAL_RICH_FIELDS = new Set(["featuredOrder", "programme"]);
 const TOP_LEVEL_KEYS = Object.freeze([...REQUIRED_TOP_LEVEL_KEYS, "profile", "research"]);
 const ID_PATTERN = /^[a-z\d][a-z\d._:-]{0,127}$/i;
 const OPEN_ENDED_DATE_VALUES = new Set(["current", "now", "ongoing", "present"]);
@@ -220,14 +224,18 @@ export function normalizeContentArray(value) {
  * and academic status use conservative legacy migration rules. Unsafe media
  * URLs and their same-index metadata are removed together.
  *
+ * Optional editorial fields are omitted unless explicitly supported; null
+ * featuredOrder is an input-only clear command, not a response value.
+ *
  * @param {unknown} value Candidate rich portfolio item.
  * @param {readonly string[]} allowedFields Field names to keep.
- * @returns {Record<string, string | string[]>} Safe rich item.
+ * @returns {Record<string, string | string[] | number>} Safe rich item.
  */
 export function normalizeRichItem(value, allowedFields) {
   const source = isObject(value) ? value : {};
   const normalizedItem = Object.fromEntries(
     allowedFields
+      .filter((field) => !OPTIONAL_RICH_FIELDS.has(field))
       .map((field) => [
         field,
         ARRAY_FIELDS.has(field) ? safeStringArray(source[field]) : safeString(source[field])
@@ -326,7 +334,7 @@ function sortByLatestDate(items, dateFields) {
  * @param {unknown} value Candidate rich item array.
  * @param {readonly string[]} allowedFields Field names to keep.
  * @param {readonly string[]} dateFields Date-like fields used for ordering.
- * @returns {Record<string, string | string[]>[]} Normalized, sorted entries.
+ * @returns {Record<string, string | string[] | number>[]} Normalized, chronologically sorted entries; featuredOrder does not sort the main arrays.
  */
 export function normalizeRichArray(value, allowedFields, dateFields = []) {
   if (!Array.isArray(value)) {
@@ -455,6 +463,10 @@ function validateRichMetadata(value, key, errors) {
         }
       }
       validateEnum(item, "category", key === "jobs" ? JOB_CATEGORIES : PROJECT_CATEGORIES, path, errors);
+      if (Object.hasOwn(item, "featuredOrder") && item.featuredOrder !== null &&
+          (!Number.isSafeInteger(item.featuredOrder) || item.featuredOrder <= 0)) {
+        errors.push(`${path}.featuredOrder must be a positive safe integer or null to clear.`);
+      }
     }
 
     if (key === "projects") {
@@ -473,6 +485,9 @@ function validateRichMetadata(value, key, errors) {
       }
     } else if (key === "education") {
       validateEnum(item, "status", EDUCATION_STATUSES, path, errors);
+      if (Object.hasOwn(item, "programme") && typeof item.programme !== "string") {
+        errors.push(`${path}.programme must be a string.`);
+      }
     }
 
     for (const field of ["imageUrls", ...(key === "projects" ? ["links"] : [])]) {
@@ -490,6 +505,8 @@ function validateRichMetadata(value, key, errors) {
  * older clients. Supplied metadata types, enums, unique IDs, role references,
  * public email and URL schemes are validated. Unknown rich/object fields are
  * discarded during normalization, preserving existing editing behavior.
+ * Supplied featuredOrder must be a positive safe integer or an input-only null
+ * clear command; education programme and profile editorial fields are strings.
  *
  * @param {unknown} value Candidate request body.
  * @returns {{valid: boolean, errors: string[]}} Validation result and messages.

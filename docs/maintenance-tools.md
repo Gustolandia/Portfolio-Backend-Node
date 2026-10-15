@@ -120,6 +120,13 @@ earlier content application and any remaining browser-verification limits.
 
 ## Publication Verification
 
+The later [editorial metadata contract](editorial-metadata.md) adds explicit
+academic status/availability, optional selected ranks and education grouping.
+Its schema publication does not apply a content migration. Its tests cover
+legacy retention and explicit clears while preserving existing chronology,
+media associations and security behavior. The counts below describe the
+earlier maintenance publication, not the current suite size.
+
 For this maintenance release, the complete backend suite passed **179 tests**,
 including all existing API/auth/CORS/CSRF/storage tests and the new maintenance
 regressions. All **65 JavaScript files** passed syntax checks. The production
