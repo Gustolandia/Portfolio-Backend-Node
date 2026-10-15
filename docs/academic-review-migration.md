@@ -117,3 +117,41 @@ script. The isolated exact release snapshot passed **108 tests**; it excludes
 unrelated uncommitted maintenance tests intentionally preserved in the working
 tree. Git whitespace checks passed. Live deployment/application receipts and
 post-apply checks are recorded separately below only after they succeed.
+
+## Verified Live Application
+
+The runtime release `3e4a39e60538bcc982361c0306da07697aea90b4` was pushed to
+`main` and published by Netlify deployment `6ad12810a40662bdec42124c` before
+the data update. No frontend files were changed by this backend release.
+
+The reviewed 15-operation plan was applied once with these exact guards:
+
+- Original raw SHA-256: `49ccf4d343ce86ca10768b3a3f48d3d5278da5e080b769d675861eddfa064cc8`.
+- Candidate raw SHA-256: `a9e1fce8ad63a9d28b159f1e0cb147e25edbfb548055a9bc50e84baa24e74260`.
+- Redis backup: `portfolio:data:backup:academic-review-2026-10-15-v1:1792092258458-663bc14c-4a89-439f-a20d-2ab989a43400`.
+- Ledger: `portfolio:data:migrations:academic-review-2026-10-15-v1`.
+- Ignored local originals, plan, candidate, intent and receipts:
+  `private-content/academic-review-2026-10-15/`.
+
+Exact raw readback, byte-identical complete local/Redis original backups,
+ledger contents, public GET equality with the normalized candidate and a
+write-free repeat no-op all passed. Counts remain 17 jobs, 7 education entries
+and 15 projects, including 8 research outputs with non-empty contributions,
+4 preprints and 1 manuscript in preparation. All 214 distinct skills across
+677 occurrences, original image tuples, maps, categories, IDs and relationships
+are preserved. Five education course arrays are exact permutations; both
+Fusion-EP entries retain all original activities and add the honest explanation.
+
+Public GET returned 200 with wildcard CORS and no cookies. Signed-out session
+checks for all four approved admin origins returned 401 with exact origin and
+credentials headers. Signed-out admin data GET/PUT, logout and upload-auth
+returned 401. Approved PUT preflight returned 204 including the CSRF header;
+unapproved preflight returned 403 without an allowed origin. The private
+original-backup URL returned 404, and actual configured secret values were
+absent from the release snapshot and public response.
+
+The live signed-in browser save/upload roundtrip was not performed; its auth,
+CSRF, normalization and storage behavior is covered by isolated tests. Individual
+task division in the reflectometry team and current latency coauthorship remains
+unclaimed rather than inferred. Subsequent changes require a fresh reviewed
+migration identity/plan; never remove this ledger to replay the original patch.
