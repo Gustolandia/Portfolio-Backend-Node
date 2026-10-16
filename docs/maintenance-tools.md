@@ -17,6 +17,7 @@ contract are unchanged.
 | Media-only recovery candidate | Import `planMediaRecoveryMigration` / `migrateMediaRecoveryRedis` | `media-recovery-2026-10-15-v1`; [guide](media-recovery.md) |
 | Workplace maps and appended photo tuples | Import `planWorkplaceContentMigration` / `migrateWorkplaceContentRedis` | `workplace-photos-2026-10-15-v1`; [guide](workplace-content-migration.md) |
 | Academic facts and research summaries | `node scripts/migrate-academic-review.js` | `academic-review-2026-10-15-v1`; [guide](academic-review-migration.md) |
+| Website editorial copy and selections | `node scripts/migrate-website-review.js` | `website-review-2026-10-16-v1`; [guide](website-review-migration.md) |
 
 The general Redis payload-contract tool remains `npm run migrate:redis`; see
 the README before using it. It is not a replacement for a scoped content plan.

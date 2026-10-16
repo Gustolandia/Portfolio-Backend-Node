@@ -111,6 +111,10 @@ separately reviewed source/candidate plan and migration identity with the
 or replace the live payload with the older local seed. This release does not
 include an editorial candidate or claim that live content was changed.
 
+A separately authorized [website content review](website-review-migration.md)
+uses this deployed schema with its own reviewed candidate, backups and ledger.
+Its live verification is recorded separately from this schema publication.
+
 ## Verification
 
 `test/editorialContract.test.js` exercises defaults, types, ranks, clearing,

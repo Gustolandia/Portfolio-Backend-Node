@@ -259,6 +259,8 @@ The separate [reviewed media recovery workflow](docs/media-recovery.md) stages o
 
 The later [workplace maps and building-photo update](docs/workplace-content-migration.md) is independently scoped to reviewed `mapLocation` strings and appended image tuples on jobs/education only. It preserves all existing media and non-media facts, distinguishes remote organisation-city context from a physical workplace, verifies historical locations and photo licences, and uses complete raw backups, source/candidate hashes, CAS and its own ledger. No backend deployment or endpoint change is required for this content update; an unverified physical office is never filled with a logo or unrelated stock photo.
 
+The separately authorized [website editorial review](docs/website-review-migration.md) applies confirmed academic facts, selected positions, programme grouping, shorter copy, role relationships and repeated-tag curation. It preserves every distinct skill, record, primary media URL, full image credit, byline and publication status. `node scripts/migrate-website-review.js` previews an explicitly reviewed private plan; applying requires both exact hashes, a full raw backup, deployed-schema verification and a fresh independent CAS ledger. It never runs on GET/PUT or during deployment.
+
 ## Project Layout
 
 ```text
@@ -279,6 +281,7 @@ scripts/migrate-redis.js            Dry-run-first Redis contract migration
 scripts/migrate-content.js          One-time research/skills migration
 scripts/migrate-linkedin-content.js Historical roles and duties-only migrations
 scripts/migrate-academic-review.js  Evidence-scoped academic review migration
+scripts/migrate-website-review.js   Separately guarded website editorial review
 test/                              Node test suite
 ```
 
