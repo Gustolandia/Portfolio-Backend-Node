@@ -123,13 +123,62 @@ An immediate ledger repeat must make zero extra CAS calls and retain later edits
 deletions. Reload frontend memory/reset stale drafts without another admin save.
 Browser appearance, original image-byte proof and Redis readback are distinct checks.
 
-## Current Status And Tests
+## Verified Application
 
-Four original-only uploads are verified with exact source-byte readbacks and full
-private provenance; zero QA uploads/deletions occurred. The reviewed media candidate
-adds four tuples/promotes them and reorders Filebox only. This is staged/preview
-evidence, not a claim of Redis application. Counts stay 17 jobs, 7 education and
-15 projects; the entire post-narrative portfolio is preserved outside that scope.
+The four sources, complete captions/credits, exact candidate and Filebox tuple
+permutation were independently reviewed and confirmed. A fresh complete raw/public
+backup was saved/read back before any upload. The existing guarded staging helper
+made exactly four non-overwriting original PNG uploads, zero QA uploads and zero
+deletions. Original-byte CDN readbacks matched all four approved hashes/dimensions;
+actual decoding/nonblank checks passed. The selected `tr=orig-true` URLs were fetched
+again and matched every original byte before and after the separate Redis save.
+
+All **289 backend tests**, **87 JavaScript syntax checks**, documentation links/
+README contents, dependency-tree and whitespace checks passed. A clean install
+produced no dependency deprecation warnings; the full audit reported zero known
+vulnerabilities. Maintenance commit `0b2fdfe` was published ready on 2026-10-16.
+No app dependency, upload helper, runtime API or auth/CORS/CSRF/schema changed.
+
+Redis application waited for the frontend white-artboard release. The actual
+published frontend was confirmed ready and a descendant of the approved release;
+current public HTML/CSS was structurally parsed to verify a white, contained
+`.project-media img` display. The publicly served full latency artwork licence
+notice matched the exact original licence bytes. Thus the native transparent
+CarSurfing PNG was not promoted onto the old dark image background.
+
+Immediately before applying, fresh full raw/public reads still matched the exact
+confirmed post-narrative source. A new complete original backup was saved and
+read back byte-for-byte. One Lua CAS atomically wrote the exact reviewed candidate,
+original Redis backup and independent ledger. Stored bytes, both original backups,
+and uncached plus ordinary public responses were verified exactly. Complete
+raw/public mask proof changed only five projects' four media arrays: four new
+first tuples with every old complete tuple retained as an exact suffix, and the
+five-item Filebox permutation. Every non-media field and other media/order stayed
+exact, including polished copy, curated skills and manuscript/publication status.
+Counts remained 17 jobs, 7 education and 15 projects.
+
+The immediate wrapper repeat returned `applied: false`, `alreadyApplied: true`,
+`changed: false`, made zero extra CAS calls, and preserved raw bytes/ledger.
+Private complete originals/candidates/plans, provenance/full licence/source PDFs,
+safe success file IDs/URLs, upload intents/receipts, CAS intent, Redis backup/
+ledger readbacks and application/no-op receipts remain under ignored
+`private-content/scientific-figures-2026-10-16/`, outside Git/deployment inputs.
+No ImageKit listing, deletion, repeated upload, unnecessary admin save or old
+migration replay occurred. Browser appearance and backend readback remain
+independent evidence; the frontend owns its final visual/interaction checks.
+
+These release-specific hashes must not be assumed current for a later update.
+Raw hashes cover exact Redis UTF-8 bytes; canonical public hashes recursively
+sort object keys while preserving every array order.
+
+| Snapshot | SHA-256 |
+| --- | --- |
+| Original post-narrative raw Redis | `2680f73eea3c5266855c337e742eed56cc6ff31c97a97ad3f81d3da83597d0a8` |
+| Stored approved media candidate | `77a462a0b7a463096f8910d714b061146a51e46af12dec6a16681a96ebb16958` |
+| Original canonical public | `5aacde32c80d00fb371d37fb724a2206210b7b4d0b31731819861b484cad9a9e` |
+| Verified canonical public | `d2365a018fc5973d65b17724d8d178c4e90f5e314ea094eb0c53b136f602b972` |
+
+## Tests
 
 `test/scientificFiguresMigration.test.js` covers exact originals/receipts/folders,
 old tuple suffixes, Filebox permutation, raw blanks/public aliases, optimized

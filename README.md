@@ -325,6 +325,9 @@ byte proofs, original-only delivery links, full private rights provenance, separ
 candidate confirmation and a new atomic CAS ledger protect the media-only save.
 Frontend white-background display must be published before the transparent
 CarSurfing original is promoted; publishing backend code alone never applies it.
+The independently approved four-figure update and complete Filebox tuple reorder
+were applied once after the frontend white artboard/licence release was verified.
+All originals, backups, full raw/public scope and the zero-extra-write repeat passed.
 
 ## Project Layout
 
