@@ -133,14 +133,71 @@ An immediate repeat must make zero extra CAS calls and retain later owner edits,
 removed photos and deleted records. Reload frontend memory/reset stale drafts
 without another admin save. Browser appearance and backend readback are separate.
 
-## Prepared Status And Tests
+## Verified Application
 
-Five rights-reviewed originals are staged in two batches with five total POSTs;
-the two initial successes were not reposted. Zero held official-photo uploads,
-asset deletions or live Redis writes occurred during preparation. The exact
-append-only preview, concise backup labels, source/delivery readbacks and complete
-prefix/non-media preservation proofs remain private. This describes preparation,
-not a claim of live application; publishing code alone never applies the plan.
+The owner-approved sources/context and exact five-tuple candidate were independently
+reviewed before any Redis write. Fresh complete raw/public backups were saved and
+read back before each upload batch. Five source originals were staged with exactly
+five non-overwriting POSTs (two plus three); the first two known successes were not
+reposted. Zero permission-held official images or QA files were uploaded, and no
+asset was deleted. Exact original-byte/dimension/nonblank and selected delivery
+readbacks passed, with full private source-specific rights/provenance retained.
+
+All **304 backend tests**, **90 JavaScript syntax checks**, documentation links/
+README contents, whitespace and dependency-tree checks passed. Clean install
+produced no dependency deprecation warnings; the complete audit reported zero
+known vulnerabilities. There is no separate package lint/build script; Netlify's
+actual test/bundling/deploy gate completed. Maintenance commit `0dd001e` was
+published ready on 2026-10-16. No app dependency, API/schema/auth/CORS/CSRF rule,
+original logo or existing media/caption changed.
+
+After exact candidate/hash confirmation and actual code/frontend publication,
+fresh complete raw/public reads immediately before save still matched the reviewed
+source. A newly saved complete original backup was verified byte-for-byte. The
+public full Genkit Apache notice returned 200 with exact original licence bytes.
+One existing Lua CAS atomically wrote the approved candidate, exact original Redis
+backup and new independent photo-completion ledger. Stored bytes and complete
+local/Redis original backups matched exactly. Uncached and ordinary public GET
+both returned the exact normalized candidate, with public CORS and no cookie.
+
+Each of the five old four-array prefixes stayed exact and one reviewed tuple was
+appended. Full raw/public comparisons masked only those four jobs and one education
+record's media arrays; every other field remained identical. All projects and
+scientific figures, narrative, curated skills, courses, maps, statuses/bylines,
+collections, CV, thesis/profile and record/media order were preserved. Counts
+remained 17 jobs, 7 education and 15 projects. All five full-size original hashes
+and selected delivery hashes were rechecked before and after the single CAS.
+
+The immediate wrapper repeat returned `applied: false`, `alreadyApplied: true`,
+`changed: false`, made zero extra CAS calls and preserved stored bytes/ledger.
+Private source assets, licence/provenance records, success file IDs/URLs, upload
+intents/receipts, full originals/candidates/plans, preapply backups, CAS intent,
+Redis backup/ledger readbacks and application/no-op proofs remain under ignored
+`private-content/photo-completion-2026-10-16/`, outside Git/deployment inputs.
+No ImageKit listing, repeated upload, deletion, unnecessary admin save or historical
+migration replay occurred. Frontend appearance/interaction checks remain separate
+from backend/data/image-byte proof.
+
+| Original Source | SHA-256 | Selected Delivery |
+| --- | --- | --- |
+| Leopardstown context | `0df960d12a7f5531ea5091374f0e9d72bfe1df6313909d17eed60bf63cfde488` | Width-only 1600px |
+| Genkit documentation | `ab2e04bd7b31b32e75d7d94b5911cbb8bc7d0f30516d2e25565e94478648f8e8` | Exact original |
+| Argonne battery context | `4b8ff2f7665c549f5a0d90c245f98d1a1cfd7543b95a5c1b432432259d881a9c` | Width-only 1600px |
+| Historical Vertu handset | `24c26f7e2f50122cb09e72e5e087cdb258273957c1d465e251268b90d59f7572` | Width-only 1600px |
+| Programming-study context | `023e974c12264f032fea515cbb2cda0dd677a03d7cb0914d8d5f008633df4ab4` | Exact original |
+
+These release-specific payload hashes are not assumptions for a future change.
+Raw hashes cover exact UTF-8 Redis bytes; public hashes recursively sort object
+keys while preserving every array's order.
+
+| Snapshot | SHA-256 |
+| --- | --- |
+| Original raw Redis | `77a462a0b7a463096f8910d714b061146a51e46af12dec6a16681a96ebb16958` |
+| Stored approved append-only candidate | `f9e8987ca3e6d438038af7886bc878c4c6891a07359a169565eb23c5e7ee6e9f` |
+| Original canonical public | `d2365a018fc5973d65b17724d8d178c4e90f5e314ea094eb0c53b136f602b972` |
+| Verified canonical public | `f2c49d0c134eebee952ff0c28e04edbf6244a7b3d9322e15a20266ac22408617` |
+
+## Tests
 
 `test/photoCompletionMigration.test.js` covers all five exact targets, untouched
 projects/scientific figures/narrative/skills/maps/CV, original tuple prefixes,

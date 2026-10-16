@@ -330,13 +330,16 @@ were applied once after the frontend white artboard/licence release was verified
 All originals, backups, full raw/public scope and the zero-extra-write repeat passed.
 
 The separate [append-only context photo update](docs/photo-completion-migration.md)
-previews one rights-reviewed image for each of four logo-only jobs and EPICODE.
+adds one rights-reviewed image for each of four previously logo-only jobs and EPICODE.
 Full source/context/credit text and concise paired backup labels stay associated
 with each appended URL. Existing logos/media remain exact prefixes; maps, every
 project/scientific figure, narrative, skills and all other content are protected.
 Original-byte and reviewed width-only delivery proofs, exact backups, separate
 candidate confirmation and a new CAS ledger guard the save. Code publication
 does not upload media or apply the candidate.
+The exact candidate was independently confirmed and applied once after publication,
+with byte-exact originals/backups, complete prefix/scope proof, original/delivery
+readbacks and a zero-extra-write repeat; no held official photographs were uploaded.
 
 ## Project Layout
 
