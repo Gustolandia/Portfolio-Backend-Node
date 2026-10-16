@@ -34,3 +34,10 @@ test("repeatable dependency audit checks the complete tree without severity supp
   const manifest = await readJson("../package.json");
   assert.equal(manifest.scripts.audit, "npm audit");
 });
+
+test("committed dependencies contain no declared package deprecations", async () => {
+  const lock = await readJson("../package-lock.json");
+  for (const [path, entry] of Object.entries(lock.packages)) {
+    assert.ok(!entry.deprecated, `${path || "root"} declares a deprecated package`);
+  }
+});

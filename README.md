@@ -479,6 +479,10 @@ For a reproducible install and a full dependency audit, use `npm ci` followed by
 filtering; it is separate from deterministic tests. See the [backend dependency
 security review](docs/dependency-security.md) for locked versions, findings,
 regressions, scope limits and release verification.
+Also review clean-install warnings and the exact locked versions' registry
+deprecation status: an audit with zero vulnerabilities does not check package
+deprecations. The manifest tests reject declared lockfile deprecations without
+making tests dependent on registry availability.
 
 Academic review coverage includes optional supervisor validation/read/write, legacy omission preservation and explicit clearing, unchanged cookie/CORS/CSRF enforcement, evidence-scoped content patches, complete course/activities preservation, aligned links, untouched image tuples, raw backups, exact review hashes, concurrent-edit rejection and ledger no-op repeats. See [the academic review guide](docs/academic-review-migration.md) for factual evidence and guarded migration steps.
 

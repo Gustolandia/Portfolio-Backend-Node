@@ -37,6 +37,16 @@ npm ls --all
 npm test
 ```
 
+Check the complete `npm ci` output for deprecation and peer-dependency warnings;
+do not suppress them with log-level flags. An audit finding and a deprecation
+notice are different signals: a zero-vulnerability audit alone does not establish
+that packages are supported. The deterministic manifest tests reject a declared
+`deprecated` entry in the committed lockfile. Since registry status can change
+without a lockfile change, also query `npm view <package>@<locked-version>
+deprecated --json` for each locked package during a release review. An unset
+deprecation field returns no value. These live queries supplement, rather than
+replace, a clean install and the full security audit.
+
 `npm run audit` runs the unfiltered full-tree `npm audit`. It is intentionally
 separate from deterministic tests: tests must not depend on registry availability
 or upload assets/write Redis. Netlify retains its existing `npm test` deployment
@@ -92,3 +102,31 @@ It contains 17 jobs, 7 education entries and 15 projects, including all 214
 distinct skills across 566 occurrences. Private before/after snapshots, full
 audit JSON and installed-tree reports stay outside commits. Deployed verification
 is recorded separately after the Git-based release is published.
+
+## Final Production Recheck
+
+On 2026-10-16, a subsequent clean install again produced no deprecation or peer
+warnings. None of the four exact locked versions had a registry deprecation
+notice, and the unfiltered full-tree audit still reported zero vulnerabilities.
+The additional manifest regression keeps the no-declared-deprecations requirement
+visible in the offline test suite; it cannot predict future registry changes.
+All **206 backend tests** and **71 JavaScript syntax checks** passed. No runtime
+handler, package version or lockfile was changed for this recheck.
+
+A fresh exact-byte raw Redis backup and complete public JSON snapshot were
+captured and read back under ignored `private-content/final-production-2026-10-16/`
+before any save/upload testing. This baseline follows the separately approved
+current-residence clearing, so it is not the historical hash above. Its public
+canonical SHA-256 is
+`83375c7c4a21580733fe63cf7cfc41ec5d826ee859d1e29c45f2c907250c74a8`.
+All 17 jobs, 7 education records and 15 projects remain present.
+
+Forty-eight live HTTP checks verified unauthenticated public JSON with wildcard
+CORS and no cookies; exact-origin credentialed admin responses for all four
+approved origins; successful allowed preflights; rejected unapproved preflights;
+401 signed-out responses; 405 unsupported methods; 400 malformed login JSON;
+and 401 invalid credentials. Only one deliberately invalid login was sent; live
+rate-limit exhaustion is intentionally avoided and remains covered by isolated
+tests. Browser authentication, saves and uploads are separate checks and must
+not be inferred from these HTTP results. Private receipts record their actual
+outcomes when performed. No private backup or credential belongs in Git.
