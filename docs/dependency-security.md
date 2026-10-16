@@ -78,9 +78,10 @@ A fresh complete public-payload snapshot and canonical hash were captured under
 ignored `private-content/dependency-review-2026-10-16/` before release. Canonical
 hashing sorts object keys but preserves every array's order. Deployment readback
 must match every original normalized field, record and ordered media tuple.
-No Redis write, admin save, ImageKit listing/deletion or content migration is part
-of this review. Private snapshots/receipts and server credentials stay excluded
-from Git and deploy inputs.
+The dependency-only review made no Redis write, admin save, ImageKit
+listing/deletion or content migration. The later owner-authorized signed-in
+production check is recorded separately below. Private snapshots/receipts and
+server credentials stay excluded from Git and deploy inputs.
 
 Local clean-install, full checks and deployed verification are recorded below
 only after they complete. No signed-in UI upload/save is repeated by this
@@ -130,3 +131,41 @@ rate-limit exhaustion is intentionally avoided and remains covered by isolated
 tests. Browser authentication, saves and uploads are separate checks and must
 not be inferred from these HTTP results. Private receipts record their actual
 outcomes when performed. No private backup or credential belongs in Git.
+
+## Signed-In Production Verification
+
+After the owner signed in on 2026-10-16, a new complete raw Redis backup and
+public snapshot were captured and read back before testing. An offline preview
+using the actual frontend hydrator/serializer and backend normalizer proved
+that an unchanged draft preserved every public field and array order.
+
+The real admin UI then completed one authenticated, CSRF-protected save of the
+original content. The visible success message was followed by an independent
+readback: the raw Redis value was byte-for-byte identical to the fresh backup,
+and the public canonical hash remained the value recorded above. The frontend
+release was `713a049`, already published and passing Windows/Linux CI on both
+frontend branches. No cookie, password or CSRF token was extracted into receipts.
+
+Three uniquely named synthetic fixtures tested the actual snippets, files and
+photos upload controls. All returned URLs in the intended folders and HTTP 200
+delivery. The uploaded PDF rendered visibly through the self-hosted PDF worker
+and its delivered bytes matched the source fixture. The PNG fixtures were
+served as optimised JPEG previews: both retained their 160 by 120 dimensions,
+with a maximum decoded channel difference of 1. Their delivery was not claimed
+to be byte-identical. Moving an image row moved its URL, description and backup
+description together, and moving it back restored their order.
+
+The upload draft was **not saved**. Reset restored the original page image,
+project image, file URLs and captions; Save became disabled. Independent Redis
+and public readback proved every test URL/name absent and the entire original
+payload unchanged: 17 jobs, 7 education records, 15 projects, 97 images, 25 links
+and 214 distinct skills across 566 occurrences. The session survived a clean
+reload; sign-out succeeded and a second reload remained signed out.
+
+Three tiny QA assets remain in ImageKit only. No library listing or deletion
+was performed, and the current frontend exposes upload URLs rather than file
+IDs. Permanent cleanup is a separate authorized operation requiring exact
+successful-upload IDs; never infer IDs or delete assets by guessed names. All
+private fixtures, screenshots, backups and receipts remain ignored and excluded
+from commits and deployment inputs. These observations verify the tested flows,
+not every browser, future service state or untested upload format.
