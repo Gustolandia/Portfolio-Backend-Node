@@ -285,6 +285,15 @@ with `node scripts/migrate-education-skills.js --input <private-raw.json> --plan
 <reviewed-plan.json> --dry-run`; live apply needs both hashes, a complete exact
 backup, deployment verification and an independent atomic CAS ledger.
 
+The separately reviewed [professional skill reduction](docs/professional-skills-migration.md)
+previews twelve industry/teaching roles from 194 tags to 57 (32 distinct labels).
+Only ten skill arrays change; Invertase and Covalen stay exact, including Covalen's
+empty skills. Five research roles and all education/project/research skills,
+duties, media, maps and other fields remain untouched. Its strict per-ID evidence
+rules and separate ledger need both hashes, exact backups and independent
+candidate confirmation before live apply. Publishing maintenance code alone does
+not apply the preview; no global aliases or API limits change.
+
 ## Project Layout
 
 ```text
@@ -307,6 +316,7 @@ scripts/migrate-linkedin-content.js Historical roles and duties-only migrations
 scripts/migrate-academic-review.js  Evidence-scoped academic review migration
 scripts/migrate-website-review.js   Separately guarded website editorial review
 scripts/migrate-education-skills.js Education-only reviewed skill reduction
+scripts/migrate-professional-skills.js Non-research role skill reduction only
 test/                              Node test suite
 ```
 
