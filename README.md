@@ -341,6 +341,14 @@ The exact candidate was independently confirmed and applied once after publicati
 with byte-exact originals/backups, complete prefix/scope proof, original/delivery
 readbacks and a zero-extra-write repeat; no held official photographs were uploaded.
 
+The separate [approved collection assignments](docs/project-collection-assignments.md)
+planner assigns 28 memberships across the existing fifteen projects, with exact
+raw-property-presence/identity/narrative checks and a new independent ledger.
+Only `projects[].collections` may change. Categories, scientific claims, credits,
+selection/order, all media tuples, skills and every other raw/public field stay
+exact. Source/candidate hashes, full original backup and deployment checks guard
+an explicitly approved apply. Publishing the tool alone does not write Redis.
+
 ## Project Layout
 
 ```text
@@ -368,6 +376,7 @@ scripts/migrate-research-project-skills.js Research role/project skills only
 scripts/migrate-presentation-review.js Approved narrative copy only; no media
 scripts/migrate-scientific-figures.js Original figures/gallery tuples only
 scripts/migrate-photo-completion.js Five-target append-only context images
+scripts/migrate-project-collections.js Approved project memberships only
 test/                              Node test suite
 ```
 

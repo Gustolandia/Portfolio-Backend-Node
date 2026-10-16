@@ -25,7 +25,8 @@ test("README and maintenance guide have no missing local documentation links", a
     "docs/linkedin-role-descriptions-migration.md", "docs/media-recovery.md", "docs/workplace-content-migration.md",
     "docs/editorial-metadata.md", "docs/website-review-migration.md", "docs/dependency-security.md",
     "docs/education-skills-migration.md", "docs/professional-skills-migration.md", "docs/research-project-skills-migration.md",
-    "docs/presentation-review-migration.md", "docs/scientific-figures-migration.md", "docs/photo-completion-migration.md"]) {
+    "docs/presentation-review-migration.md", "docs/scientific-figures-migration.md", "docs/photo-completion-migration.md",
+    "docs/project-collections.md", "docs/project-collection-assignments.md"]) {
     const path = join(root, name);
     const text = prose(await readFile(path, "utf8"));
     for (const [, target] of text.matchAll(/\[[^\]]+\]\(([^\s)]+)\)/g)) {

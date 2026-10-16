@@ -24,6 +24,7 @@ contract are unchanged.
 | Approved presentation narratives only | `node scripts/migrate-presentation-review.js` | `presentation-review-2026-10-16-v1`; [guide](presentation-review-migration.md) |
 | Original scientific figures and gallery order | `node scripts/migrate-scientific-figures.js` | `scientific-figures-2026-10-16-v1`; [guide](scientific-figures-migration.md) |
 | Five-target append-only context images | `node scripts/migrate-photo-completion.js` | `photo-completion-2026-10-16-v1`; [guide](photo-completion-migration.md) |
+| Approved existing-project collection assignments | `node scripts/migrate-project-collections.js` | `project-collections-2026-10-16-v1`; [guide](project-collection-assignments.md) |
 
 The general Redis payload-contract tool remains `npm run migrate:redis`; see
 the README before using it. It is not a replacement for a scoped content plan.
@@ -53,6 +54,7 @@ node scripts/migrate-research-project-skills.js --input private-content/backups/
 node scripts/migrate-presentation-review.js --input private-content/backups/original.json --plan private-content/presentation-review-2026-10-16/reviewed-plan.json --dry-run
 node scripts/migrate-scientific-figures.js --input private-content/backups/original.json --plan private-content/scientific-figures-2026-10-16/reviewed-plan.json --receipts private-content/scientific-figures-2026-10-16/verified-upload-receipts.json --dry-run
 node scripts/migrate-photo-completion.js --input private-content/backups/original.json --plan private-content/photo-completion-2026-10-16/reviewed-plan.json --receipts private-content/photo-completion-2026-10-16/verified-upload-receipts.json --dry-run
+node scripts/migrate-project-collections.js --input private-content/backups/original.json --plan private-content/project-collections-2026-10-16/reviewed-plan.json --dry-run
 ```
 
 These historical planners have strict source identities/scopes. A source from
@@ -70,12 +72,13 @@ Read the complete raw Redis value with automatic deserialization disabled; the
 normalized public endpoint is useful for comparison, not a complete raw backup.
 
 Review the exact source SHA-256, full field diff and complete local original
-backup. Media/workplace/role-description/academic-review and all three scoped skill
-reduction/presentation narrative/scientific figure/photo completion applies also enforce the exact reviewed candidate SHA-256. The original
-research-content/LinkedIn prepared backups accept
-semantically identical JSON formatting for compatibility; the media, workplace
-academic-review, presentation, scientific figures, photo completion and all three scoped skill reduction wrappers require byte-identical
-prepared backups. Every
+backup. Media, workplace, role-description, academic-review, all three scoped
+skill reductions, presentation, scientific figures, photo completion and
+collection assignments also enforce the exact reviewed candidate SHA-256.
+The original research-content/LinkedIn prepared backups accept semantically
+identical JSON formatting for compatibility. Media, workplace, academic-review,
+presentation, scientific figures, photo completion, collection assignments and
+all three scoped skill wrappers require byte-identical prepared backups. Every
 Redis original backup preserves exact source bytes regardless of local formatting.
 
 The common runner verifies deployment/backup, then one Lua CAS compares the

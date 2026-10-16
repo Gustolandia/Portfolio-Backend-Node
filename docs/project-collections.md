@@ -2,7 +2,10 @@
 
 Projects may belong to multiple user-defined collections. This additive field
 does not replace their academic `category`, publication metadata or stable ID.
-It adds no endpoint, environment variable, service dependency or Redis migration.
+Introducing the field adds no endpoint, environment variable or dependency and
+requires no Redis migration. A separately approved, optional
+[existing-project assignment update](project-collection-assignments.md) is
+documented independently; publishing its planner does not execute it.
 Cookie sessions, exact-origin admin CORS, CSRF, login throttling, uploads and the
 public unauthenticated single-payload GET keep their existing contracts.
 
@@ -61,7 +64,10 @@ title and backup-description associations remain untouched.
 `featuredOrder` remains supported for editorial presentation, including research
 priority. Removing the frontend's former Selected projects scope does not erase
 this metadata. Research placement remains based on the explicit category rather
-than collection names. The backend does not implement server-side filtering.
+than collection names. The frontend may additionally show explicitly tagged
+instrumentation research reports in Projects without removing them from Research
+or duplicating/reclassifying payload records. The backend does not implement
+server-side filtering.
 
 ## Frontend Rollout
 
