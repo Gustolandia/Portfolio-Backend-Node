@@ -314,6 +314,8 @@ backend/live-data work; thesis aims and scientific caveats remain precise.
 All curated skills, courses, bylines/statuses, media/captions, maps and ordering
 stay exact. Its fresh independent ledger and source/candidate/backup guards never
 replay older content or run on deployment; paper figures require a separate review.
+The exact copy was independently confirmed and applied once, with complete
+raw/public preservation proof, verified originals and a zero-extra-write repeat.
 
 ## Project Layout
 

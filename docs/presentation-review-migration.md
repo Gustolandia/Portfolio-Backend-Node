@@ -98,13 +98,46 @@ An immediate ledger-aware repeat must make zero extra CAS calls/writes and retai
 later edits/deletions. Refresh frontend memory/reset stale drafts without an
 unnecessary admin save. No ImageKit upload, caption edit or deletion is included.
 
-## Preview Status And Tests
+## Verified Application
 
-The reviewed private preview has fourteen operations/twenty-two narrative fields,
-unchanged counts of 17 jobs, 7 education and 15 projects, complete raw/public
-preservation proof and checked scientific caveats/credits. This describes a
-preview, not live application. Complete private artifacts remain under
-`private-content/presentation-review-2026-10-16/`.
+The exact fourteen-operation/twenty-two-field candidate and full preservation
+proof were independently confirmed before applying. Maintenance commit `55b7a08`
+was published ready on 2026-10-16. All **275 backend tests**, **84 JavaScript
+syntax checks**, README contents/local documentation links and whitespace checks
+passed. A clean install produced no dependency deprecation warnings; the full
+audit reported zero known vulnerabilities and the installed tree was valid.
+
+Fresh complete raw/public reads immediately before application still matched
+the reviewed source. A newly saved complete original was read back exactly before
+one Lua CAS atomically wrote the confirmed candidate, exact original Redis backup
+and independent ledger. Stored bytes matched the approved compact candidate;
+both local and Redis original backups matched every source byte. An immediate
+wrapper repeat returned `applied: false`, `alreadyApplied: true`, `changed: false`,
+made zero additional CAS calls and preserved raw bytes and the ledger exactly.
+
+Uncached and ordinary public GET returned the exact normalized candidate. Full
+raw/public comparisons masked only the twenty-two approved narrative fields;
+all jobs/education/courses/curated skills, statuses/bylines, maps, ordering,
+collections, CV, thesis methods/availability and every media URL/caption/backup
+were unchanged. Counts remained 17 jobs, 7 education and 15 projects. Scientific
+caveats and credits were checked against the existing source. No ImageKit action,
+media edit, admin save, old-ledger replay or runtime API/security change occurred.
+
+Complete private plans, full snapshots/candidates, preapply original, CAS intent,
+original Redis backup readback, ledger and apply/no-op receipts remain under
+ignored `private-content/presentation-review-2026-10-16/`, excluded from Git and
+deployment. These release-specific hashes are not assumptions for future figure
+or copy updates. Raw hashes cover exact UTF-8 Redis bytes; canonical public hashes
+recursively sort object keys while preserving all array order.
+
+| Snapshot | SHA-256 |
+| --- | --- |
+| Original raw Redis | `7b1884d6a9460fc1f1bf4a4cbbcf14df2328e226a298500cd108e8ddc61e568e` |
+| Stored approved narrative candidate | `2680f73eea3c5266855c337e742eed56cc6ff31c97a97ad3f81d3da83597d0a8` |
+| Original canonical public | `9b0754fa3426b3350e45543706d200e18d1846a0421cde659cd4d42c53b55c17` |
+| Verified canonical public | `5aacde32c80d00fb371d37fb724a2206210b7b4d0b31731819861b484cad9a9e` |
+
+## Tests
 
 `test/presentationReviewMigration.test.js` covers raw/public field-scope equality,
 source immutability, scientific wording/credit/status/ordered media preservation,
