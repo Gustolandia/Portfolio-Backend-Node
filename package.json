@@ -14,6 +14,7 @@
     "migrate:role-descriptions": "node scripts/migrate-linkedin-content.js --role-descriptions",
     "seed:redis": "node scripts/seed-redis.js",
     "test": "node --test",
+    "audit": "npm audit",
     "test:watch": "node --test --watch"
   },
   "keywords": [

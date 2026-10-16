@@ -99,6 +99,10 @@ admin upload/save are separate checks, not implied by mocked backend tests.
 
 ## Release Checklist
 
+The [dependency security review](dependency-security.md) documents the full-tree
+audit command, lockfile safeguards and the boundary between project dependencies
+and separately managed build/development tools.
+
 1. Run `npm test`, JavaScript syntax checks, dependency audit and `git diff --check`.
 2. Review staged paths/diffs explicitly. Exclude `.env`, local `.env.*`,
    `private-content/`, local source assets, complete backups, upload receipts,

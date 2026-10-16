@@ -468,6 +468,12 @@ curl http://localhost:8788/.netlify/functions/portfolio-data
 
 ## Tests
 
+For a reproducible install and a full dependency audit, use `npm ci` followed by
+`npm run audit`. The audit includes the entire project tree without severity
+filtering; it is separate from deterministic tests. See the [backend dependency
+security review](docs/dependency-security.md) for locked versions, findings,
+regressions, scope limits and release verification.
+
 Academic review coverage includes optional supervisor validation/read/write, legacy omission preservation and explicit clearing, unchanged cookie/CORS/CSRF enforcement, evidence-scoped content patches, complete course/activities preservation, aligned links, untouched image tuples, raw backups, exact review hashes, concurrent-edit rejection and ledger no-op repeats. See [the academic review guide](docs/academic-review-migration.md) for factual evidence and guarded migration steps.
 
 Editorial metadata coverage includes empty academic status/availability defaults, supported and rejected ranks, input-only null clearing, exact education-period matching, ambiguity rejection, stable IDs through renames, unchanged chronological ordering, same-index media preservation, legacy omission retention and authenticated PUT-to-public GET round trips. See [the editorial contract guide](docs/editorial-metadata.md). No live content migration is run by these tests or by deployment.
