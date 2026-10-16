@@ -329,6 +329,15 @@ The independently approved four-figure update and complete Filebox tuple reorder
 were applied once after the frontend white artboard/licence release was verified.
 All originals, backups, full raw/public scope and the zero-extra-write repeat passed.
 
+The separate [append-only context photo update](docs/photo-completion-migration.md)
+previews one rights-reviewed image for each of four logo-only jobs and EPICODE.
+Full source/context/credit text and concise paired backup labels stay associated
+with each appended URL. Existing logos/media remain exact prefixes; maps, every
+project/scientific figure, narrative, skills and all other content are protected.
+Original-byte and reviewed width-only delivery proofs, exact backups, separate
+candidate confirmation and a new CAS ledger guard the save. Code publication
+does not upload media or apply the candidate.
+
 ## Project Layout
 
 ```text
@@ -355,6 +364,7 @@ scripts/migrate-professional-skills.js Non-research role skill reduction only
 scripts/migrate-research-project-skills.js Research role/project skills only
 scripts/migrate-presentation-review.js Approved narrative copy only; no media
 scripts/migrate-scientific-figures.js Original figures/gallery tuples only
+scripts/migrate-photo-completion.js Five-target append-only context images
 test/                              Node test suite
 ```
 
