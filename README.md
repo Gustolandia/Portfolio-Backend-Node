@@ -317,6 +317,15 @@ replay older content or run on deployment; paper figures require a separate revi
 The exact copy was independently confirmed and applied once, with complete
 raw/public preservation proof, verified originals and a zero-extra-write repeat.
 
+The separately reviewed [scientific figure/gallery update](docs/scientific-figures-migration.md)
+stages four real-source originals using the existing selected-upload helper, then
+previews complete tuple promotion and Filebox's existing navigation-image reorder.
+Existing photos/GIFs/covers and their paired text are preserved. Exact source/CDN
+byte proofs, original-only delivery links, full private rights provenance, separate
+candidate confirmation and a new atomic CAS ledger protect the media-only save.
+Frontend white-background display must be published before the transparent
+CarSurfing original is promoted; publishing backend code alone never applies it.
+
 ## Project Layout
 
 ```text
@@ -342,6 +351,7 @@ scripts/migrate-education-skills.js Education-only reviewed skill reduction
 scripts/migrate-professional-skills.js Non-research role skill reduction only
 scripts/migrate-research-project-skills.js Research role/project skills only
 scripts/migrate-presentation-review.js Approved narrative copy only; no media
+scripts/migrate-scientific-figures.js Original figures/gallery tuples only
 test/                              Node test suite
 ```
 
