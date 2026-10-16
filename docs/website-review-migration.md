@@ -151,3 +151,43 @@ vulnerabilities. README contents/links and Git whitespace checks also passed.
 There is no separate lint/build script; Netlify retains `npm test` as its gate.
 The tracked local JSON is a historical development seed, not the current live
 snapshot; never use it to replace the edited Redis portfolio.
+
+## Verified Live Application
+
+Backend commit `c42ba5d76d58f05ec173f339b0b35bba998329d5` was pushed to `main`
+and published ready by Netlify deployment `6ad16a3e28a1201d2de0648d` before the
+content write. Frontend factual/preservation QA reviewed the private candidate;
+the final refinements are the tightly scoped label/permutation/blank-caption
+changes documented above and the explicitly retained before-training aim.
+
+The final 40-operation plan was applied once with these exact guards:
+
+- Original raw SHA-256: `a9e1fce8ad63a9d28b159f1e0cb147e25edbfb548055a9bc50e84baa24e74260`.
+- Candidate raw SHA-256: `c27df8e690b837a4bd36e45208bf75e8e0928392d144bcb0fe7474c3221179f1`.
+- Redis original backup: `portfolio:data:backup:website-review-2026-10-16-v1:1792109167099-eca702ae-c31d-4bae-9a90-36bd45d16dc4`.
+- Independent ledger: `portfolio:data:migrations:website-review-2026-10-16-v1`.
+- Ignored local original, reviewed final plan, candidates, intent and receipts:
+  `private-content/website-review-2026-10-16/`.
+
+Exact raw candidate readback, byte-identical complete local/Redis originals,
+ledger fields and public GET equality with the normalized candidate all passed.
+A repeated read-only preview found the ledger and made no writes; raw content
+remained unchanged. Counts stay **17 jobs, 7 education entries and 15 projects**.
+All **214 distinct skills** remain, with occurrences reduced **677 to 566**.
+The main chronological job/project ID order, images/GIFs, maps, all previously
+populated image titles, ordered bylines, publication states, courses and public
+contact/portrait fields passed preservation checks. Only the confirmed TCD end
+changes to Present; latency links use the one complete-tuple permutation.
+
+Live public GET returned 200, wildcard CORS and no cookies. Eleven additional
+read-only HTTP checks passed: session 401/exact credentialed CORS for all four
+approved origins; signed-out admin data GET/PUT, logout and upload-auth 401;
+approved save preflight 204 with the CSRF header and no cookie; unapproved
+preflight 403 without an allowed origin; and private original-backup URL 404.
+Configured backend secret values were absent from both the 88-file release tree
+and public JSON. Private snapshots/plans/receipts were never staged or deployed.
+
+No signed-in browser save/upload roundtrip is claimed; backend behavior remains
+covered by the complete isolated security/storage suite. Frontend presentation
+and mobile browser QA belong to the coordinated frontend release. Publishing
+these receipts is documentation only and never replays the applied migration.
