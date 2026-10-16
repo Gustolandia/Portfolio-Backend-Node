@@ -125,15 +125,45 @@ make no additional CAS/write and preserve later edits/deletions. Refresh fronten
 memory and reset stale admin drafts so later full-payload saves cannot restore
 old tags. Tests use isolated Redis mocks and do not write live content.
 
-## Current Status
+## Verified Application
 
-The 2026-10-16 preview proposes **194 to 57** occurrences, ten changed arrays,
-32 distinct labels and unchanged record counts of 17 jobs, 7 education and
-15 projects. All five research rows and the protected Invertase/Covalen records
-remain exact. Complete raw/public comparisons mask only the ten skill arrays;
-every other field and all media order match. The original backup was read back.
-This is a reviewed preview, **not a claim of live application**. Full private
-artifacts remain under `private-content/professional-skills-2026-10-16/`.
+The exact candidate and full field-scope evidence were independently reviewed
+and confirmed before any live write. Maintenance commit `86670c5` was published
+ready on 2026-10-16. All **247 backend tests**, **78 JavaScript syntax checks**,
+documentation links/README contents, full dependency audit and whitespace checks
+passed. A clean install reported no deprecation warnings; all four locked packages
+formed a valid dependency tree with zero known vulnerabilities. No dependency,
+global alias, endpoint or frontend file changed in this backend release.
+
+A fresh immediate preapply full raw/public read still matched the confirmed
+source. The newly saved complete original was read back byte-for-byte before
+one Lua CAS atomically wrote the reviewed candidate, exact Redis original backup
+and independent ledger. Stored bytes matched the confirmed compact candidate.
+Both local and Redis originals matched every source byte. Immediate wrapper
+repeat returned `applied: false`, `alreadyApplied: true`, `changed: false`, made
+zero additional CAS calls and preserved the stored value and ledger exactly.
+
+Both uncached and ordinary public GET reflected **194 to 57** professional
+skill occurrences, 32 distinct labels and unchanged counts of 17 jobs,
+7 education and 15 projects. Complete raw/public comparisons masked only the
+ten approved skill arrays. All five research rows and the entire protected
+Invertase/Covalen records stayed exact; Covalen remained empty. Every other
+field, all media order, collections, thesis and blank residence matched.
+There was no ImageKit action, admin save or replay of an older migration.
+
+Private plans, exact full snapshots, preapply backup, CAS intent, ledger, original
+Redis backup readback and application/no-op receipts remain under ignored
+`private-content/professional-skills-2026-10-16/`, excluded from Git/deployment.
+Public hashes below use recursively sorted object keys and unchanged array
+order; raw hashes cover exact UTF-8 Redis bytes. They document this release,
+not an assumed baseline for any later operation.
+
+| Snapshot | SHA-256 |
+| --- | --- |
+| Original raw Redis | `ebcf2dc7982de91fd68f75c448cb9a2c8f34f0e527ecc9693ec3a241661cb775` |
+| Stored reviewed candidate | `105f3bb75d00b5755e072b888a5b054ae26caccf7251bc19cc45bf4cb20a34f5` |
+| Original canonical public | `a15123348344cb9bb7bba6e2853236966511d602885d5c1907fefd18a226d8e7` |
+| Verified canonical public | `a6a9ff73a77c56a1c83aadc4bae58d252ea74e6c0dc24c153c2126cfe4f83cc6` |
 
 `test/professionalSkillsMigration.test.js` covers exact scope/evidence/identity,
 canonical-vs-raw counts, protected empties, preserved metadata/media/order,

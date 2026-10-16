@@ -286,13 +286,15 @@ with `node scripts/migrate-education-skills.js --input <private-raw.json> --plan
 backup, deployment verification and an independent atomic CAS ledger.
 
 The separately reviewed [professional skill reduction](docs/professional-skills-migration.md)
-previews twelve industry/teaching roles from 194 tags to 57 (32 distinct labels).
+curates twelve industry/teaching roles from 194 tags to 57 (32 distinct labels).
 Only ten skill arrays change; Invertase and Covalen stay exact, including Covalen's
 empty skills. Five research roles and all education/project/research skills,
 duties, media, maps and other fields remain untouched. Its strict per-ID evidence
 rules and separate ledger need both hashes, exact backups and independent
 candidate confirmation before live apply. Publishing maintenance code alone does
-not apply the preview; no global aliases or API limits change.
+not apply a preview; no global aliases or API limits change. The independently
+confirmed candidate was applied once with exact raw/public readback, verified
+original backups and a zero-write repeat; see the guide's release evidence.
 
 ## Project Layout
 
