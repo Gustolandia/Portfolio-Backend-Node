@@ -296,6 +296,15 @@ not apply a preview; no global aliases or API limits change. The independently
 confirmed candidate was applied once with exact raw/public readback, verified
 original backups and a zero-write repeat; see the guide's release evidence.
 
+The separate [research/project skill reduction](docs/research-project-skills-migration.md)
+previews five research roles (78 to 26 tags) and fifteen projects (120 to 63).
+Four concise paper/manuscript records, all professional/teaching jobs and all
+education records remain exact. Only sixteen skill arrays change, with five
+record-evidenced broad project labels, an independent ledger, exact backups and
+source/candidate confirmation guards. Thesis, scientific wording, bylines,
+statuses, media order and every other field are preserved; deployment alone
+does not apply this plan or introduce runtime tag limits.
+
 ## Project Layout
 
 ```text
@@ -319,6 +328,7 @@ scripts/migrate-academic-review.js  Evidence-scoped academic review migration
 scripts/migrate-website-review.js   Separately guarded website editorial review
 scripts/migrate-education-skills.js Education-only reviewed skill reduction
 scripts/migrate-professional-skills.js Non-research role skill reduction only
+scripts/migrate-research-project-skills.js Research role/project skills only
 test/                              Node test suite
 ```
 

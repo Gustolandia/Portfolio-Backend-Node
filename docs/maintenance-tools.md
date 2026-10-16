@@ -20,6 +20,7 @@ contract are unchanged.
 | Website editorial copy and selections | `node scripts/migrate-website-review.js` | `website-review-2026-10-16-v1`; [guide](website-review-migration.md) |
 | Education skill reduction only | `node scripts/migrate-education-skills.js` | `education-skills-2026-10-16-v1`; [guide](education-skills-migration.md) |
 | Professional role skill reduction only | `node scripts/migrate-professional-skills.js` | `professional-skills-2026-10-16-v1`; [guide](professional-skills-migration.md) |
+| Research role/project skill reduction only | `node scripts/migrate-research-project-skills.js` | `research-project-skills-2026-10-16-v1`; [guide](research-project-skills-migration.md) |
 
 The general Redis payload-contract tool remains `npm run migrate:redis`; see
 the README before using it. It is not a replacement for a scoped content plan.
@@ -45,6 +46,7 @@ npm run migrate:role-descriptions -- --input private-content/backups/original.js
 node scripts/migrate-academic-review.js --input private-content/backups/original.json --plan private-content/academic-review-2026-10-15/plan.json --dry-run
 node scripts/migrate-education-skills.js --input private-content/backups/original.json --plan private-content/education-skills-2026-10-16/reviewed-plan.json --dry-run
 node scripts/migrate-professional-skills.js --input private-content/backups/original.json --plan private-content/professional-skills-2026-10-16/reviewed-plan.json --dry-run
+node scripts/migrate-research-project-skills.js --input private-content/backups/original.json --plan private-content/research-project-skills-2026-10-16/reviewed-plan.json --dry-run
 ```
 
 These historical planners have strict source identities/scopes. A source from
@@ -62,10 +64,12 @@ Read the complete raw Redis value with automatic deserialization disabled; the
 normalized public endpoint is useful for comparison, not a complete raw backup.
 
 Review the exact source SHA-256, full field diff and complete local original
-backup. Media/workplace/role-description/academic-review/education/professional-skill applies also enforce
-the exact reviewed candidate SHA-256. Research/LinkedIn prepared backups accept
+backup. Media/workplace/role-description/academic-review and all three scoped skill
+reduction applies also enforce the exact reviewed candidate SHA-256. The original
+research-content/LinkedIn prepared backups accept
 semantically identical JSON formatting for compatibility; the media, workplace
-academic-review and education/professional-skill wrappers require byte-identical prepared backups. Every
+academic-review and all three scoped skill reduction wrappers require byte-identical
+prepared backups. Every
 Redis original backup preserves exact source bytes regardless of local formatting.
 
 The common runner verifies deployment/backup, then one Lua CAS compares the
