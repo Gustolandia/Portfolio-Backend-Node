@@ -307,6 +307,14 @@ does not apply this plan or introduce runtime tag limits. The independently
 confirmed candidate was applied once; exact raw/public readback, complete
 original backups and a zero-extra-write repeat verified the scoped result.
 
+The separately reviewed [presentation copy update](docs/presentation-review-migration.md)
+targets only approved profile/page/research and seven project narrative fields.
+Home's `profile.summary` connects current research with the verified BoscaSports
+backend/live-data work; thesis aims and scientific caveats remain precise.
+All curated skills, courses, bylines/statuses, media/captions, maps and ordering
+stay exact. Its fresh independent ledger and source/candidate/backup guards never
+replay older content or run on deployment; paper figures require a separate review.
+
 ## Project Layout
 
 ```text
@@ -331,6 +339,7 @@ scripts/migrate-website-review.js   Separately guarded website editorial review
 scripts/migrate-education-skills.js Education-only reviewed skill reduction
 scripts/migrate-professional-skills.js Non-research role skill reduction only
 scripts/migrate-research-project-skills.js Research role/project skills only
+scripts/migrate-presentation-review.js Approved narrative copy only; no media
 test/                              Node test suite
 ```
 
