@@ -115,3 +115,39 @@ dry-run behavior, exact backups, candidate/source hashes, deployment failures,
 concurrent CAS rejection, ledger repeats and private CLI output. Redis is mocked;
 tests do not write live content. The committed local JSON remains a historical
 seed and is not used to replace or mass-rewrite the current portfolio.
+
+## Verified Application
+
+The reviewed reduction was applied on 2026-10-16 after production published
+maintenance commit `14ed07d`. All **233 backend tests**, **75 JavaScript syntax
+checks** and a full dependency audit passed; no dependencies or global aliases
+changed. Only the seven arrays in the table changed, from 174 to 41 occurrences.
+All jobs/projects skills and thesis content stayed exact. Global skill
+occurrences consequently changed from 566 to 433 and distinct labels from 214
+to 164; this is the authorized education-only reduction, not content loss in
+another section.
+
+The fresh complete raw/public snapshots matched the live source immediately
+before application. One Lua CAS atomically wrote the candidate, exact original
+Redis backup and independent ledger. Stored bytes matched the reviewed candidate;
+the local and Redis original backups matched every source byte. Complete raw and
+normalized public comparisons, masking only education skills, were identical.
+Dates, grades, statuses, maps, all media/metadata order, collections and the blank
+current-residence value remained unchanged.
+
+An immediate repeat returned `applied: false`, `alreadyApplied: true` and
+`changed: false`, made no extra CAS call, and preserved raw bytes and the ledger.
+Both uncached and ordinary public GET returned the verified normalized result.
+No ImageKit action, collection assignment, admin login or browser save was used.
+Private per-record mappings, full snapshots, backup references, CAS intent,
+ledger and readback/no-op receipts remain under ignored
+`private-content/education-skills-2026-10-16/` and outside deployment inputs.
+
+These are release-specific hashes, not assumptions for future changes:
+
+| Snapshot | SHA-256 |
+| --- | --- |
+| Original raw Redis | `0c43b50f8f45c25faa2eab91d57c3c58d827c4d2963665edc3aea0d7f1f82009` |
+| Stored reviewed candidate | `ebcf2dc7982de91fd68f75c448cb9a2c8f34f0e527ecc9693ec3a241661cb775` |
+| Original normalized public | `d0351d167df2ebe1eb743a0049379b2bc110fc98c26e74491aa11becd6e5e57d` |
+| Verified normalized public | `a15123348344cb9bb7bba6e2853236966511d602885d5c1907fefd18a226d8e7` |
