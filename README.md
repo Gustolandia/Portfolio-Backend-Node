@@ -348,6 +348,10 @@ Only `projects[].collections` may change. Categories, scientific claims, credits
 selection/order, all media tuples, skills and every other raw/public field stay
 exact. Source/candidate hashes, full original backup and deployment checks guard
 an explicitly approved apply. Publishing the tool alone does not write Redis.
+The exact independently approved candidate was applied once after successful
+publication, with complete byte-exact backups, collections-only raw/public
+readback and a zero-extra-write repeat. All fifteen projects now have the reviewed
+memberships; no other content or media changed.
 
 ## Project Layout
 

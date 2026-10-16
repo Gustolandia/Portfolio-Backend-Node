@@ -143,3 +143,42 @@ versions reported no deprecation notices; the unfiltered audit reported zero
 known vulnerabilities. No dependency/lockfile, runtime handler, authentication,
 CORS, CSRF, upload contract or default data changed. Independent candidate review
 confirmed the exact approved bytes and all-field collections-only preservation.
+
+## Verified Application
+
+After the owner-approved mapping and independent candidate proof, maintenance
+commit `f9c35c7` was published successfully through Netlify on 2026-10-16.
+Immediately before apply, complete raw/public reads still matched the reviewed
+source. A new complete original was saved and read back byte-for-byte before
+the single Lua CAS. It atomically wrote the approved candidate, exact original
+Redis backup and this migration's independent ledger. The saved candidate,
+local/Redis originals and ledger were independently read back and matched.
+
+Uncached and ordinary public GET both returned the exact normalized candidate
+and canonical hash above, with public wildcard CORS and no cookie. All fifteen
+projects now have the 28 approved memberships. Counts remain 17 jobs, 7 education
+and 15 projects, with categories unchanged. Full raw/public comparisons masked
+only collections; narrative, scientific limitations, credits/statuses, selection,
+record order, skills, maps, CV and thesis remained identical. Every existing
+image/file tuple and its order stayed exact, including all five previously
+completed context-photo records. No upload, listing, deletion, mass admin PUT
+or earlier migration replay occurred.
+
+The immediate wrapper repeat returned `applied: false`, `alreadyApplied: true`,
+`changed: false`, with zero additional CAS calls and unchanged data/ledger.
+Original snapshots, approved plan/candidates, independent preview, fresh preapply
+backup, durable apply intent, complete raw/public/Redis-original readbacks and
+application/no-op receipts remain private under ignored
+`private-content/project-collections-2026-10-16/`, excluded from Git/deployment.
+Frontend appearance/interaction verification is separate from this data proof.
+
+After application, 54 read-only live HTTP checks passed: the complete public
+payload/hash and no-cookie wildcard CORS, all four approved credentialed admin
+origins, all five admin preflights, blocked unapproved preflights, signed-out 401s,
+405 methods and all eight frontend routes. No login attempts, uploads or data
+writes occurred during these checks. In the owner's signed-in browser, a clean
+admin reload remained authenticated; the projects editor showed persisted labels
+beside the unchanged ordered media fields, with Draft up to date and Save disabled.
+The public Projects page rendered its existing seven non-research entries and
+collection choices, with loaded visible images and no horizontal overflow.
+The frontend's additional instrumentation visibility release is verified separately.
