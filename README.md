@@ -276,6 +276,15 @@ The later [workplace maps and building-photo update](docs/workplace-content-migr
 
 The separately authorized [website editorial review](docs/website-review-migration.md) applies confirmed academic facts, selected positions, programme grouping, shorter copy, role relationships and repeated-tag curation. It preserves every distinct skill, record, primary media URL, full image credit, byline and publication status. `node scripts/migrate-website-review.js` previews an explicitly reviewed private plan; applying requires both exact hashes, a full raw backup, deployed-schema verification and a fresh independent CAS ledger. It never runs on GET/PUT or during deployment.
 
+The later [education-only skill reduction](docs/education-skills-migration.md)
+curates the seven existing education skill arrays from 174 entries to 41 concise
+labels. Its separate planner permits only retained source labels or three
+evidence-backed broad summaries, without changing global aliases, courses,
+grades, dates, maps, media, collections or any other section's skills. Preview
+with `node scripts/migrate-education-skills.js --input <private-raw.json> --plan
+<reviewed-plan.json> --dry-run`; live apply needs both hashes, a complete exact
+backup, deployment verification and an independent atomic CAS ledger.
+
 ## Project Layout
 
 ```text
@@ -297,6 +306,7 @@ scripts/migrate-content.js          One-time research/skills migration
 scripts/migrate-linkedin-content.js Historical roles and duties-only migrations
 scripts/migrate-academic-review.js  Evidence-scoped academic review migration
 scripts/migrate-website-review.js   Separately guarded website editorial review
+scripts/migrate-education-skills.js Education-only reviewed skill reduction
 test/                              Node test suite
 ```
 
