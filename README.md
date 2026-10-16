@@ -297,13 +297,15 @@ confirmed candidate was applied once with exact raw/public readback, verified
 original backups and a zero-write repeat; see the guide's release evidence.
 
 The separate [research/project skill reduction](docs/research-project-skills-migration.md)
-previews five research roles (78 to 26 tags) and fifteen projects (120 to 63).
+curates five research roles (78 to 26 tags) and fifteen projects (120 to 63).
 Four concise paper/manuscript records, all professional/teaching jobs and all
 education records remain exact. Only sixteen skill arrays change, with five
-record-evidenced broad project labels, an independent ledger, exact backups and
+record-evidenced broad project label occurrences, an independent ledger, exact backups and
 source/candidate confirmation guards. Thesis, scientific wording, bylines,
 statuses, media order and every other field are preserved; deployment alone
-does not apply this plan or introduce runtime tag limits.
+does not apply this plan or introduce runtime tag limits. The independently
+confirmed candidate was applied once; exact raw/public readback, complete
+original backups and a zero-extra-write repeat verified the scoped result.
 
 ## Project Layout
 

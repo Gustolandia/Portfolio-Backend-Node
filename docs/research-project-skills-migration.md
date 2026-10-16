@@ -145,13 +145,49 @@ it must make zero extra CAS calls/writes and retain later edits/deletions. Reloa
 frontend memory and reset stale admin drafts, without an unnecessary admin save.
 No upload, asset deletion or collection assignment belongs to this operation.
 
-## Current Status And Tests
+## Verified Application
 
-The 2026-10-16 private preview has the exact counts and lists above, with raw/public
-scope proof, original backup readback and all protected records unchanged.
-Record counts stay 17 jobs, 7 education and 15 projects. This is preview evidence,
-not a claim of live application. Private artifacts remain under
-`private-content/research-project-skills-2026-10-16/`.
+The exact mapping, hashes, record-local evidence and full field-scope proof were
+independently confirmed before the live write. Maintenance commit `be57151` was
+published ready on 2026-10-16. All **263 backend tests**, **81 JavaScript syntax
+checks**, README contents/documentation links and whitespace checks passed.
+A clean dependency install produced no deprecation warnings; the full dependency
+audit reported zero known vulnerabilities and the installed tree was valid.
+No dependency or runtime API/security behavior changed.
+
+Immediately before applying, fresh complete raw/public reads still matched the
+confirmed source. A new complete original backup was saved and read back exactly.
+One Lua CAS atomically wrote the confirmed candidate, exact original Redis backup
+and separate ledger. Stored bytes matched the reviewed compact candidate; both
+local and Redis original backups matched every source byte. An immediate wrapper
+repeat returned `applied: false`, `alreadyApplied: true`, `changed: false`, made
+zero additional CAS calls and preserved stored bytes and the ledger exactly.
+
+Uncached and ordinary public GET both returned the exact normalized candidate:
+**78 to 26** research-role tags and **120 to 63** project tags, with 18 Research
+Experience, 16 Research Work and 23 other Projects filter choices. Full raw/public
+mask comparisons proved only the sixteen approved skill arrays differed. Entire
+twelve professional jobs, seven education records and four concise project
+records stayed exact. Scientific wording, thesis, bylines, publication status,
+descriptions, dates, media associations/order, collections and blank residence
+were untouched. Record counts stayed 17 jobs, 7 education and 15 projects.
+No ImageKit action, admin save, CV edit or previous migration replay occurred.
+
+Private plans, complete raw/public originals and candidates, fresh preapply
+backup, CAS intent, original Redis backup readback, ledger and application/no-op
+receipts remain under ignored `private-content/research-project-skills-2026-10-16/`
+and outside Git/deployment inputs. These are release-specific hashes, not a
+baseline to assume for any future change. Raw hashes cover exact UTF-8 Redis bytes;
+public hashes recursively sort object keys while preserving every array's order.
+
+| Snapshot | SHA-256 |
+| --- | --- |
+| Original raw Redis | `105f3bb75d00b5755e072b888a5b054ae26caccf7251bc19cc45bf4cb20a34f5` |
+| Stored reviewed candidate | `7b1884d6a9460fc1f1bf4a4cbbcf14df2328e226a298500cd108e8ddc61e568e` |
+| Original canonical public | `a6a9ff73a77c56a1c83aadc4bae58d252ea74e6c0dc24c153c2126cfe4f83cc6` |
+| Verified canonical public | `9b0754fa3426b3350e45543706d200e18d1846a0421cde659cd4d42c53b55c17` |
+
+## Tests
 
 `test/researchProjectSkillsMigration.test.js` covers all twenty identities,
 sixteen-array scope, unchanged scientific wording/bylines/status/media/order,
