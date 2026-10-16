@@ -162,10 +162,36 @@ payload unchanged: 17 jobs, 7 education records, 15 projects, 97 images, 25 link
 and 214 distinct skills across 566 occurrences. The session survived a clean
 reload; sign-out succeeded and a second reload remained signed out.
 
-Three tiny QA assets remain in ImageKit only. No library listing or deletion
-was performed, and the current frontend exposes upload URLs rather than file
+At the end of that test, three tiny QA assets remained in ImageKit only. No
+library listing or deletion was performed during testing, and the frontend
+exposes upload URLs rather than file
 IDs. Permanent cleanup is a separate authorized operation requiring exact
 successful-upload IDs; never infer IDs or delete assets by guessed names. All
 private fixtures, screenshots, backups and receipts remain ignored and excluded
 from commits and deployment inputs. These observations verify the tested flows,
 not every browser, future service state or untested upload format.
+
+### Authorized Test-Asset Cleanup
+
+The owner subsequently authorized removal of exactly those three latest QA
+uploads, not older test assets or real website media. A new complete raw/public
+backup preceded three exact-name lookups in their known folders, each limited
+to two results so ambiguity could block deletion. Returned IDs were verified
+against the receipt's exact path/name, upload creation window, original size,
+image dimensions, detail response and sole first version. Metadata, versions
+and the original fixture bytes were backed up privately before deletion.
+
+The complete Redis/public payload, both repositories' tracked and non-ignored
+source, seven live pages and six compiled assets contained no references to
+the three URLs, paths or basenames, including encoded/query/transformation
+variants. Each verified ID received one DELETE request returning 204 and a
+subsequent exact-ID details request returning 404. There was no broad library
+listing, guessed-ID deletion, retry, other asset deletion or cache purge.
+
+Raw Redis bytes and the entire public payload remained unchanged through all
+three deletions; no Redis write or media reassignment was performed. The
+per-ID intents/results and metadata/reference-check receipts are excluded from
+Git under `private-content/imagekit-cleanup-2026-10-16/`. Cached delivery URLs
+are not deletion proof: verify the exact provider ID, not a CDN response. See
+the [ImageKit API specification](https://raw.githubusercontent.com/imagekit-developer/sdk-generation/refs/heads/main/openapi/v1.0.0.yaml)
+for the permanent file-delete and file-details contracts.
