@@ -160,10 +160,19 @@ status, programme?, degree, institution, location, grade, start, end, imageUrls,
 Projects are normalized to these fields only:
 
 ```text
-id, category, featuredOrder?, outputType, status, contribution, relatedRoleIds, authors, name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
+id, category, collections, featuredOrder?, outputType, status, contribution, relatedRoleIds, authors, name, dateOfCompletion, description, imageUrls, imageTitles, imageDescriptions, imageBackupDescriptions, affiliations, collaborators, skills, links, linksTitles, linksDescriptions, linksBackupDescriptions
 ```
 
 Missing string fields become `""`, missing array fields become `[]`, and unsupported rich-item fields are discarded. Jobs and education are sorted by latest `end` date first, falling back to `start`. Projects are sorted by latest `dateOfCompletion` first.
+
+`projects[].collections` is an optional-input string array, returned as `[]` for
+legacy projects without assignments. Labels are trimmed; blank labels and exact
+duplicates are removed while case and first-occurrence order are preserved.
+Membership is explicit, independent of category, skills and featured positions.
+Older saves omitting the field retain stored labels by stable project ID;
+explicit `collections: []` clears them. No collection labels are assigned by
+deployment or GET. See [project collections](docs/project-collections.md) for
+validation, compatibility safeguards and the backend-first frontend rollout.
 
 The `?` above denotes an optional field, not part of its JSON key. Jobs/projects may carry a positive safe-integer `featuredOrder`; unset values are omitted from responses. It selects frontend featured subsets without changing the main chronological arrays. Education may carry a trimmed, nonempty `programme` to group periods visually without merging records. See [editorial metadata](docs/editorial-metadata.md) for older-client retention, exact education matching, and explicit clearing rules.
 

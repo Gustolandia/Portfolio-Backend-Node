@@ -62,6 +62,7 @@ export const EDUCATION_FIELDS = Object.freeze([
 export const PROJECT_FIELDS = Object.freeze([
   "id",
   "category",
+  "collections",
   "featuredOrder",
   "outputType",
   "status",
@@ -87,6 +88,7 @@ export const PROJECT_FIELDS = Object.freeze([
 const ARRAY_FIELDS = new Set([
   "authors",
   "affiliations",
+  "collections",
   "activities",
   "collaborators",
   "courses",
@@ -226,6 +228,8 @@ export function normalizeContentArray(value) {
  *
  * Optional editorial fields are omitted unless explicitly supported; null
  * featuredOrder is an input-only clear command, not a response value.
+ * Project collections default to [], trim labels, remove blank/duplicate exact
+ * labels, and preserve case and first-occurrence order without classification.
  *
  * @param {unknown} value Candidate rich portfolio item.
  * @param {readonly string[]} allowedFields Field names to keep.
@@ -244,6 +248,11 @@ export function normalizeRichItem(value, allowedFields) {
 
   if (allowedFields.includes("skills")) {
     normalizedItem.skills = normalizeSkills(source.skills);
+  }
+
+  if (allowedFields.includes("collections")) {
+    normalizedItem.collections = [...new Set(safeStringArray(source.collections)
+      .map((label) => label.trim()).filter(Boolean))];
   }
 
   if (allowedFields.includes("imageUrls") && allowedFields.includes("imageTitles")) {
@@ -470,6 +479,10 @@ function validateRichMetadata(value, key, errors) {
     }
 
     if (key === "projects") {
+      if (Object.hasOwn(item, "collections") &&
+          (!Array.isArray(item.collections) || !item.collections.every((label) => typeof label === "string"))) {
+        errors.push(`${path}.collections must be an array of strings.`);
+      }
       validateEnum(item, "outputType", PROJECT_OUTPUT_TYPES, path, errors);
       validateEnum(item, "status", PROJECT_STATUSES, path, errors);
       if (Object.hasOwn(item, "contribution") && typeof item.contribution !== "string") {
@@ -507,6 +520,8 @@ function validateRichMetadata(value, key, errors) {
  * discarded during normalization, preserving existing editing behavior.
  * Supplied featuredOrder must be a positive safe integer or an input-only null
  * clear command; education programme and profile editorial fields are strings.
+ * Optional project collections must be string arrays; explicit [] clears them.
+ * Normalization trims/deduplicates labels without inferring collection membership.
  *
  * @param {unknown} value Candidate request body.
  * @returns {{valid: boolean, errors: string[]}} Validation result and messages.

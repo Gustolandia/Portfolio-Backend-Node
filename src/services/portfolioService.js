@@ -56,6 +56,9 @@ export class PortfolioService {
    * null clears it. Omitted education programme retains a unique exact original
    * degree/institution/start/end match; explicit empty string clears it.
    * Editorial positions never change the main chronological array order.
+   * Omitted project collections retain stored labels by stable ID; explicit []
+   * clears them. If stored labels exist, an unmatched omission is rejected rather
+   * than silently discarding assignments. New records should send collections: [].
    *
    * @param {unknown} portfolioData Candidate portfolio payload from admin PUT.
    * @returns {Promise<ReturnType<typeof normalizePortfolioData>>} Saved payload.
@@ -72,6 +75,9 @@ export class PortfolioService {
     const omittedAuthors = Array.isArray(source.projects) && source.projects.some(
       (project) => project && typeof project === "object" && !Object.hasOwn(project, "authors")
     );
+    const omittedCollections = Array.isArray(source.projects) && source.projects.some(
+      (project) => isObject(project) && !Object.hasOwn(project, "collections")
+    );
     const omittedSupervisor = isObject(source.research) && !Object.hasOwn(source.research, "thesisSupervisor");
     const omittedProfileFields = isObject(source.profile)
       ? EDITORIAL_PROFILE_FIELDS.filter((field) => !Object.hasOwn(source.profile, field)) : [];
@@ -79,7 +85,7 @@ export class PortfolioService {
       source[section].some((row) => isObject(row) && !Object.hasOwn(row, "featuredOrder")));
     const omittedProgramme = Array.isArray(source.education) &&
       source.education.some((row) => isObject(row) && !Object.hasOwn(row, "programme"));
-    const needsStoredMetadata = omittedMetadata.length > 0 || omittedAuthors || omittedSupervisor ||
+    const needsStoredMetadata = omittedMetadata.length > 0 || omittedAuthors || omittedCollections || omittedSupervisor ||
       omittedProfileFields.length > 0 || omittedFeaturedOrder || omittedProgramme;
     if (needsStoredMetadata) {
       const current = await this.getPortfolioData();
@@ -124,6 +130,20 @@ export class PortfolioService {
             throw new PortfolioPayloadCompatibilityError("Ambiguous education programme identity. Reload with the updated admin editor.");
           }
           return matches.length ? { ...row, programme: matches[0] } : row;
+        });
+      }
+      if (omittedCollections) {
+        const collectionsById = new Map(current.projects.map((project) => [project.id, project.collections]));
+        const hasCollections = current.projects.some((project) => project.collections.length > 0);
+        source.projects = source.projects.map((project) => {
+          if (!isObject(project) || Object.hasOwn(project, "collections")) return project;
+          if (collectionsById.has(project.id)) {
+            return { ...project, collections: [...collectionsById.get(project.id)] };
+          }
+          if (hasCollections) {
+            throw new PortfolioPayloadCompatibilityError("Existing project collections require stable IDs when collections are omitted. Reload with the updated admin editor, or send collections explicitly.");
+          }
+          return project;
         });
       }
       if (omittedAuthors) {

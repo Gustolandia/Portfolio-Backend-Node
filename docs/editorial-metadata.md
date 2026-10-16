@@ -14,12 +14,18 @@ environment variables. Public GET remains unauthenticated and sends no cookie.
 | `profile.availability` | String | Empty by default; explicit `""` clears |
 | `jobs[].featuredOrder` | Optional positive safe integer | Omitted when unset; PUT `null` clears |
 | `projects[].featuredOrder` | Optional positive safe integer | Omitted when unset; PUT `null` clears |
+| `projects[].collections` | String array, optional on input | Default `[]`; explicit `[]` clears; matched legacy omissions retain labels |
 | `education[].programme` | Optional trimmed nonempty string | Omitted when unset; PUT `""` clears |
 
 These are public content fields, never derived from admin credentials. Academic
 status and availability require explicit approved copy; dates alone do not
 establish degree completion, graduation or availability. The existing thesis
 status and paper publication statuses remain independent of editorial selection.
+
+Project filter membership is separately defined by explicit
+[`collections`](project-collections.md). It is not inferred from category,
+featured positions, skills, titles or publication status. The frontend's
+"All projects" option is a view default, not a stored collection assignment.
 
 The following is a field illustration, **not a complete PUT body**:
 
