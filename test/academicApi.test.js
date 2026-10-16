@@ -91,6 +91,40 @@ test("academic PUT persists metadata and IDs, then public GET returns the saved 
   assert.equal(publicResponse.headers["Set-Cookie"], undefined);
 });
 
+test("clearing current residence persists without changing historical locations or other content", async () => {
+  const { admin, publicHandler, event, getStored } = await setup();
+  const initial = JSON.parse((await admin(event("GET"))).body);
+  initial.profile.location = "Example current residence";
+  initial.profile.availability = "Available for PhD opportunities";
+  initial.jobs[0].location = "Historical work location";
+  initial.jobs[0].mapLocation = "Historical work map context";
+  initial.jobs[0].imageUrls = ["/historical.gif"];
+  initial.jobs[0].imageDescriptions = ["Historical image"];
+  initial.jobs[0].imageBackupDescriptions = ["Historical alternative"];
+  initial.education = [{ institution: "Historical university", location: "Historical study location", mapLocation: "Historical campus context" }];
+  initial.research.thesisInstitution = "Explicit research institution";
+  const first = await admin(event("PUT", initial));
+  assert.equal(first.statusCode, 200);
+  const before = JSON.parse(first.body);
+  const expected = structuredClone(before);
+  expected.profile.location = "";
+
+  const cleared = await admin(event("PUT", expected));
+  assert.equal(cleared.statusCode, 200);
+  assert.deepEqual(JSON.parse(cleared.body), expected);
+  assert.deepEqual(getStored(), expected);
+  const publicResponse = await publicHandler({ httpMethod: "GET", headers: {} });
+  assert.deepEqual(JSON.parse(publicResponse.body), expected);
+  assert.equal(publicResponse.headers["Set-Cookie"], undefined);
+
+  const legacy = structuredClone(expected);
+  delete legacy.profile;
+  const repeated = await admin(event("PUT", legacy));
+  assert.equal(repeated.statusCode, 200);
+  assert.deepEqual(JSON.parse(repeated.body), expected);
+  assert.equal(normalizePortfolioData(getStored()).profile.location, "");
+});
+
 test("legacy saves preserve existing profile/research while explicit empties clear them", async () => {
   const { admin, event } = await setup();
   const body = JSON.parse((await admin(event("GET"))).body);

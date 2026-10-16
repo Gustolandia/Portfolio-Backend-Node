@@ -74,7 +74,7 @@ const METADATA_ARRAY_FIELDS = new Set([
  * @property {string} name Public display name.
  * @property {string} headline Public academic headline.
  * @property {string} summary Background and current interests.
- * @property {string} location Explicit public location, or empty.
+ * @property {string} location Optional current-residence label; empty hides it without changing historical record locations.
  * @property {string} email Explicit public contact address, or empty.
  * @property {string} cvUrl HTTP(S) or relative CV asset URL, or empty.
  * @property {string} portraitUrl Explicit HTTP(S) or relative portrait asset URL, or empty.

@@ -218,6 +218,12 @@ The thesis is early-stage work. Prediction is an aim; no achieved prediction res
 
 `profile.portraitUrl` is an optional string defaulting to `""`, using the same safe URL rules as `cvUrl`. The admin can explicitly select/upload an approved portrait and save the returned URL through the usual full payload PUT. There is no automatic fallback from `pages.home.imageUrl`; that legacy page photo remains stored separately. Explicitly clearing `portraitUrl` keeps it empty on subsequent reads and saves.
 
+`profile.location` is an optional public current-residence label. Save `""` to
+hide it; reads and later saves never infer it from jobs, education, research,
+maps or environment variables. This does not erase factual historical locations
+or institutional names in other records. Refresh old admin drafts after an
+approved content update so a stale full-payload save cannot reintroduce old text.
+
 `profile.academicStatus` and `profile.availability` are explicit public strings, defaulting to `""`. They are never inferred from degree dates or authentication settings. Their addition does not seed new claims, selected ranks or programme names into live Redis. Publishing code, applying an approved content plan and browser verification remain separate steps.
 
 Placement and output fields use these exact values:
