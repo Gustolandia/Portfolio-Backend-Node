@@ -180,6 +180,63 @@ test("normalizes portfolio data without duration fields and sorts latest entries
   assert.equal(Object.hasOwn(data.education[0], "duration"), false);
 });
 
+test("retains every shared-programme institution period and its own media tuples", () => {
+  const data = normalizePortfolioData({
+    education: [
+      {
+        programme: "Joint programme",
+        degree: "Coursework",
+        institution: "Institution A",
+        location: "City A",
+        start: "2013-09-01",
+        end: "2014-09-01",
+        imageUrls: ["https://example.com/a-campus.jpg"],
+        imageTitles: ["Institution A campus"],
+        imageDescriptions: ["Institution A campus"],
+        imageBackupDescriptions: ["Institution A campus"],
+      },
+      {
+        programme: "Joint programme",
+        degree: "Coursework",
+        institution: "Institution B",
+        location: "City B",
+        start: "2014-09-01",
+        end: "2015-09-01",
+        imageUrls: ["https://example.com/b-campus.jpg"],
+        imageTitles: ["Institution B campus"],
+        imageDescriptions: ["Institution B campus"],
+        imageBackupDescriptions: ["Institution B campus"],
+      },
+    ],
+  });
+
+  assert.deepEqual(
+    data.education.map(({ programme, institution, start, end, imageUrls }) => ({
+      programme,
+      institution,
+      start,
+      end,
+      imageUrls,
+    })),
+    [
+      {
+        programme: "Joint programme",
+        institution: "Institution B",
+        start: "2014-09-01",
+        end: "2015-09-01",
+        imageUrls: ["https://example.com/b-campus.jpg"],
+      },
+      {
+        programme: "Joint programme",
+        institution: "Institution A",
+        start: "2013-09-01",
+        end: "2014-09-01",
+        imageUrls: ["https://example.com/a-campus.jpg"],
+      },
+    ],
+  );
+});
+
 test("validates complete admin portfolio payloads", () => {
   const result = validateCompletePortfolioPayload({
     pages: Object.fromEntries(

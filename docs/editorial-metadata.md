@@ -62,9 +62,11 @@ risk silently removing a selection. Send stable IDs or explicitly supply a rank
 or `null`; never strip null clear commands before PUT serialization.
 
 Programme is a grouping label, not a merger or a credential. Matching labels
-may let the frontend display two institutional periods under one programme.
-Both records, individual dates, institutions, status, courses, activities, maps
-and media remain independent. No programme is guessed from a degree name.
+may let the frontend display two institutional periods as one ordinary timeline
+record, with an inclusive date range, every institution name and one existing
+media preview per period. Both records, individual dates, institutions, status,
+courses, activities, maps and ordered media tuples remain independent. No
+programme is guessed from a degree name.
 
 ## Older Editors And Clearing
 

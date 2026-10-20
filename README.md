@@ -174,7 +174,7 @@ explicit `collections: []` clears them. No collection labels are assigned by
 deployment or GET. See [project collections](docs/project-collections.md) for
 validation, compatibility safeguards and the backend-first frontend rollout.
 
-The `?` above denotes an optional field, not part of its JSON key. Jobs/projects may carry a positive safe-integer `featuredOrder`; unset values are omitted from responses. It selects frontend featured subsets without changing the main chronological arrays. Education may carry a trimmed, nonempty `programme` to group periods visually without merging records. See [editorial metadata](docs/editorial-metadata.md) for older-client retention, exact education matching, and explicit clearing rules.
+The `?` above denotes an optional field, not part of its JSON key. Jobs/projects may carry a positive safe-integer `featuredOrder`; unset values are omitted from responses. It selects frontend featured subsets without changing the main chronological arrays. Education may carry a trimmed, nonempty `programme` to group periods visually without merging records. A frontend may render matching periods as one normal timeline row: derive the inclusive date range from the individual records, show every institution, and use one existing media preview from each record. The backend keeps every period, map and ordered media tuple independent. See [editorial metadata](docs/editorial-metadata.md) for older-client retention, exact education matching, and explicit clearing rules.
 
 Image and file metadata is stored in ordered arrays. Order is the relationship:
 
