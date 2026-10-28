@@ -307,6 +307,13 @@ does not apply this plan or introduce runtime tag limits. The independently
 confirmed candidate was applied once; exact raw/public readback, complete
 original backups and a zero-extra-write repeat verified the scoped result.
 
+The [research-output split migration](docs/research-output-split-migration.md)
+replaces two superseded football research-output entries with current Articles A and
+B, then adds Article C as a separate in-preparation manuscript. Each record
+links to its owner-published current PDF in the public, PDF-only
+`Gustolandia/team-sports-papers` repository; it never makes the private source
+repository public or treats a manuscript as a preprint.
+
 The separately reviewed [presentation copy update](docs/presentation-review-migration.md)
 targets only approved profile/page/research and seven project narrative fields.
 Home's `profile.summary` connects current research with the verified BoscaSports
@@ -377,6 +384,7 @@ scripts/migrate-website-review.js   Separately guarded website editorial review
 scripts/migrate-education-skills.js Education-only reviewed skill reduction
 scripts/migrate-professional-skills.js Non-research role skill reduction only
 scripts/migrate-research-project-skills.js Research role/project skills only
+scripts/migrate-research-output-split.js Replaces two football outputs and adds Article C
 scripts/migrate-presentation-review.js Approved narrative copy only; no media
 scripts/migrate-scientific-figures.js Original figures/gallery tuples only
 scripts/migrate-photo-completion.js Five-target append-only context images
