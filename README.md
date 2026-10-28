@@ -5,6 +5,7 @@ Small Netlify Functions backend for a React academic portfolio website. It serve
 ## Table Of Contents
 
 - [Endpoint](#endpoint)
+- [Contact Message Endpoint](#contact-message-endpoint)
 - [Admin Endpoints](#admin-endpoints)
 - [Portfolio Payload Contract](#portfolio-payload-contract)
 - [Academic Metadata And Placement](#academic-metadata-and-placement)
@@ -24,6 +25,38 @@ GET /.netlify/functions/portfolio-data
 ```
 
 `GET` is public and sends no cookies. On this public route, non-GET requests are authenticated first with either `Authorization: Bearer <jwt>` or `X-API-Key: <key>`, then rejected with `405 Method Not Allowed`. Content writes use the separate cookie-authenticated admin endpoint below.
+
+## Contact Message Endpoint
+
+```text
+POST /.netlify/functions/contact-message
+```
+
+The public contact form sends JSON only:
+
+```json
+{
+  "subject": "Research question",
+  "email": "visitor@example.com",
+  "message": "Hello.",
+  "turnstileToken": "token-from-the-managed-widget"
+}
+```
+
+The backend accepts exactly those four string fields. `subject` is 1-200 characters, `email` is 3-320 characters and must have a basic address shape, `message` is 1-5,000 characters, and `turnstileToken` is 1-2,048 characters. Requests must use `Content-Type: application/json`; invalid input, unapproved origins, missing/expired/replayed/invalid Turnstile tokens, and hostname/action mismatches receive generic visitor-safe errors.
+
+CORS is limited to `CONTACT_ALLOWED_ORIGINS` plus the known portfolio origins; there is no wildcard response. Preflight permits only `POST` and `Content-Type`. The function applies an IP-only five-request/15-minute rate limit (Redis-backed when the existing Upstash variables are configured, otherwise per warm function instance). Message content is never used as a rate-limit key.
+
+Turnstile is verified server-side at Cloudflare Siteverify before the backend sends the compatible Postmail payload. `TURNSTILE_SECRET_KEY` and `POSTMAIL_ACCESS_TOKEN` are backend-only Netlify variables and are never returned to the browser or logged. Successful requests return `200 {"ok":true}`; rate limits return `429`, provider/delivery failures return a generic `502`, and incomplete backend configuration fails closed with a generic `503`.
+
+Cloudflare and Netlify setup is owner-controlled:
+
+1. In Cloudflare Turnstile, create a Free managed widget and add the exact frontend hostnames that may render it, including the production custom domains and the Netlify preview/production hostname used by the portfolio. Add `localhost` only for local testing.
+2. Configure the frontend widget action as `contact_message` and keep the backend `TURNSTILE_EXPECTED_ACTION` value identical. The backend requires an exact action and an exact hostname returned by Siteverify.
+3. Add these variables to the Netlify backend site, without committing them: `TURNSTILE_SECRET_KEY`, `TURNSTILE_EXPECTED_ACTION`, `TURNSTILE_ALLOWED_HOSTNAMES`, `POSTMAIL_ACCESS_TOKEN`, and `CONTACT_ALLOWED_ORIGINS`.
+4. After the frontend is migrated to this endpoint, remove `REACT_APP_ACCESS_TOKEN` from the frontend environment and rebuild. It must not remain in frontend-accessible configuration. The Cloudflare site key is public widget configuration; the Turnstile secret and Postmail access token are not.
+
+This repository does not create the Cloudflare account/widget or set Netlify secrets. The frontend migration should replace the direct `https://postmail.invotes.com/send` request with this endpoint, send the four JSON fields above, and treat any non-2xx response as a generic delivery failure.
 
 ## Admin Endpoints
 
@@ -408,6 +441,7 @@ Copy `.env.example` to `.env` for local development.
 
 ```text
 FRONTEND_ORIGIN=http://localhost:3000
+CONTACT_ALLOWED_ORIGINS=http://localhost:3000,https://gustavopedroricou.netlify.app,https://gustavopedroricou.com,https://www.gustavopedroricou.com
 ADMIN_FRONTEND_ORIGIN=http://localhost:3000
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD_HASH=replace-with-bcrypt-password-hash
@@ -424,9 +458,15 @@ IMAGEKIT_MEDIA_FOLDER=/Portfolio-Website
 IMAGEKIT_FILES_FOLDER=/Portfolio-Website
 IMAGEKIT_PHOTOS_FOLDER=/Portfolio-Website/Photos
 IMAGEKIT_SNIPPETS_FOLDER=/Portfolio-Website/Snippets
+TURNSTILE_SECRET_KEY=replace-with-cloudflare-turnstile-secret-key
+TURNSTILE_EXPECTED_ACTION=contact_message
+TURNSTILE_ALLOWED_HOSTNAMES=localhost,gustavopedroricou.netlify.app,gustavopedroricou.com,www.gustavopedroricou.com
+POSTMAIL_ACCESS_TOKEN=replace-with-postmail-access-token
 ```
 
 `FRONTEND_ORIGIN` controls CORS. If it is not set, the function returns `Access-Control-Allow-Origin: *`.
+
+`CONTACT_ALLOWED_ORIGINS` is a comma-separated allowlist used only by the public contact-message endpoint; it never falls back to a wildcard. `TURNSTILE_SECRET_KEY` and `POSTMAIL_ACCESS_TOKEN` are required backend-only secrets. `TURNSTILE_EXPECTED_ACTION` and `TURNSTILE_ALLOWED_HOSTNAMES` are required exact Siteverify expectations and must match the Cloudflare widget/dashboard setup. Do not expose any of these backend variables through the frontend build.
 
 `AUTH_JWT_SECRET` and `ADMIN_API_KEY` are not needed for public GET requests. They are used to protect future non-GET operations.
 
