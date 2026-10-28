@@ -6,6 +6,7 @@ Small Netlify Functions backend for a React academic portfolio website. It serve
 
 - [Endpoint](#endpoint)
 - [Contact Message Endpoint](#contact-message-endpoint)
+- [Contact Message Runbook](#contact-message-runbook)
 - [Admin Endpoints](#admin-endpoints)
 - [Portfolio Payload Contract](#portfolio-payload-contract)
 - [Academic Metadata And Placement](#academic-metadata-and-placement)
@@ -57,6 +58,15 @@ Cloudflare and Netlify setup is owner-controlled:
 4. After the frontend is migrated to this endpoint, remove `REACT_APP_ACCESS_TOKEN` from the frontend environment and rebuild. It must not remain in frontend-accessible configuration. The Cloudflare site key is public widget configuration; the Turnstile secret and Postmail access token are not.
 
 This repository does not create the Cloudflare account/widget or set Netlify secrets. The frontend migration should replace the direct `https://postmail.invotes.com/send` request with this endpoint, send the four JSON fields above, and treat any non-2xx response as a generic delivery failure.
+
+## Contact Message Runbook
+
+The [contact-message runbook](docs/contact-message.md) is the durable
+maintenance context for this flow. It records the frontend/backend migration
+boundary, exact validation and provider checks, owner-only Cloudflare/Netlify
+configuration, CORS and rate-limit invariants, and the controlled release
+sequence. Keep it aligned with the function and its mocked provider tests when
+changing this endpoint.
 
 ## Admin Endpoints
 
